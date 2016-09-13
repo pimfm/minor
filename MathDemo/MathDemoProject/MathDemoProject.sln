@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CF14F983-06B1-4AA7-B1B3-C7D42050E087}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7253042E-3515-4989-8472-31880868C7D9}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MathDemoProject", "src\MathDemoProject\MathDemoProject.xproj", "{CCD188D4-3BF3-4404-B708-934F9FEA8B73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCD188D4-3BF3-4404-B708-934F9FEA8B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCD188D4-3BF3-4404-B708-934F9FEA8B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCD188D4-3BF3-4404-B708-934F9FEA8B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCD188D4-3BF3-4404-B708-934F9FEA8B73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CCD188D4-3BF3-4404-B708-934F9FEA8B73} = {CF14F983-06B1-4AA7-B1B3-C7D42050E087}
+	EndGlobalSection
+EndGlobal
