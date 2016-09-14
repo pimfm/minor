@@ -3,6 +3,21 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
+      "dotnet-test-mstest/1.1.1-preview": {
+        "type": "package",
+        "dependencies": {
+          "MSTest.ObjectModel": "1.0.1-preview",
+          "MSTest.TestAdapter.Dotnet": "1.0.4-preview",
+          "Microsoft.Extensions.Testing.Abstractions": "1.0.0-preview2-003121",
+          "Microsoft.NETCore.App": "1.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-test-mstest.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-test-mstest.dll": {}
+        }
+      },
       "dotnet-test-xunit/2.2.0-preview2-build1029": {
         "type": "package",
         "dependencies": {
@@ -439,6 +454,39 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "MSTest.ObjectModel/1.0.1-preview": {
+        "type": "package",
+        "compile": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {}
+        }
+      },
+      "MSTest.TestAdapter.Dotnet/1.0.4-preview": {
+        "type": "package",
+        "compile": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll": {}
+        }
+      },
+      "MSTest.TestFramework/1.0.1-preview": {
+        "type": "package",
+        "compile": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.dll": {}
         }
       },
       "NETStandard.Library/1.6.0": {
@@ -2386,13 +2434,6 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "xunit/2.2.0-beta2-build3300": {
-        "type": "package",
-        "dependencies": {
-          "xunit.assert": "[2.2.0-beta2-build3300]",
-          "xunit.core": "[2.2.0-beta2-build3300]"
-        }
-      },
       "xunit.abstractions/2.0.1-rc2": {
         "type": "package",
         "dependencies": {
@@ -2406,51 +2447,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/xunit.abstractions.dll": {}
-        }
-      },
-      "xunit.assert/2.2.0-beta2-build3300": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0"
-        },
-        "compile": {
-          "lib/netstandard1.0/xunit.assert.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/xunit.assert.dll": {}
-        }
-      },
-      "xunit.core/2.2.0-beta2-build3300": {
-        "type": "package",
-        "dependencies": {
-          "xunit.extensibility.core": "[2.2.0-beta2-build3300]",
-          "xunit.extensibility.execution": "[2.2.0-beta2-build3300]"
-        }
-      },
-      "xunit.extensibility.core/2.2.0-beta2-build3300": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "xunit.abstractions": "2.0.1-rc2"
-        },
-        "compile": {
-          "lib/netstandard1.0/xunit.core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/xunit.core.dll": {}
-        }
-      },
-      "xunit.extensibility.execution/2.2.0-beta2-build3300": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "xunit.extensibility.core": "[2.2.0-beta2-build3300]"
-        },
-        "compile": {
-          "lib/netstandard1.0/xunit.execution.dotnet.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/xunit.execution.dotnet.dll": {}
         }
       },
       "xunit.runner.reporters/2.2.0-beta2-build3300": {
@@ -2496,6 +2492,18 @@
     }
   },
   "libraries": {
+    "dotnet-test-mstest/1.1.1-preview": {
+      "sha512": "qi+N+zPWs1qn5MZ+sUgWQIigupD6/thgucw3IFzoPhD9f4NEnrAlXlpnQeA47CAS6/D7pMm6VNbqKfNBwz4U3g==",
+      "type": "package",
+      "path": "dotnet-test-mstest/1.1.1-preview",
+      "files": [
+        "dotnet-test-mstest.1.1.1-preview.nupkg.sha512",
+        "dotnet-test-mstest.nuspec",
+        "lib/net451/dotnet-test-mstest.exe",
+        "lib/netcoreapp1.0/dotnet-test-mstest.dll",
+        "lib/netcoreapp1.0/dotnet-test-mstest.runtimeconfig.json"
+      ]
+    },
     "dotnet-test-xunit/2.2.0-preview2-build1029": {
       "sha512": "mPl4HHGcXsE4ljw3sHCOUvlyhXHDpfFO6qz0HbTQrhrFT8Tgm/HFLfz6TpMXUfch7rRL23kR8i0yjQPYdsl6EQ==",
       "type": "package",
@@ -2940,6 +2948,46 @@
         "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
         "runtimes/win/lib/netcore50/_._",
         "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll"
+      ]
+    },
+    "MSTest.ObjectModel/1.0.1-preview": {
+      "sha512": "p94x245t1kqcz1D2mxvYeUuUnn2rPKodhftkzeexk14gjJrXxbHatMLnI3MQRnpAH/C/biiluQRJM2TwvVb8jQ==",
+      "type": "package",
+      "path": "MSTest.ObjectModel/1.0.1-preview",
+      "files": [
+        "MSTest.ObjectModel.1.0.1-preview.nupkg.sha512",
+        "MSTest.ObjectModel.nuspec",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll",
+        "lib/net20/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll"
+      ]
+    },
+    "MSTest.TestAdapter.Dotnet/1.0.4-preview": {
+      "sha512": "bwxduMr9NUHIYMUZTvcnhRfX52SD4rkyaz6U8phCXMpXfms2E7A2W3TU2XZPgrdrv7S67OVivdSnkI9mFNzO/A==",
+      "type": "package",
+      "path": "MSTest.TestAdapter.Dotnet/1.0.4-preview",
+      "files": [
+        "MSTest.TestAdapter.Dotnet.1.0.4-preview.nupkg.sha512",
+        "MSTest.TestAdapter.Dotnet.nuspec",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
+        "lib/net451/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
+        "lib/net451/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll",
+        "lib/net451/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
+        "lib/net451/msdia140typelib_clr0200.dll"
+      ]
+    },
+    "MSTest.TestFramework/1.0.1-preview": {
+      "sha512": "mm97lXENm5weBwpTFjFVECQbqH2O7HJ3h1xy3vzqCSfN6vnk2TQPfEGHE13bE1f5x4iUlob/lZXnuP1HQKc3yQ==",
+      "type": "package",
+      "path": "MSTest.TestFramework/1.0.1-preview",
+      "files": [
+        "MSTest.TestFramework.1.0.1-preview.nupkg.sha512",
+        "MSTest.TestFramework.nuspec",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
+        "lib/net451/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
+        "lib/net451/Microsoft.VisualStudio.TestPlatform.TestFramework.dll"
       ]
     },
     "NETStandard.Library/1.6.0": {
@@ -7365,15 +7413,6 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "xunit/2.2.0-beta2-build3300": {
-      "sha512": "jUMf+Hrw8+XZN56TfO+JjoibR5L806/kgDIkwCg9OXLlfnA4li4JTmH342ifYj1QMR10is8hfYYFTyjHq0+aQg==",
-      "type": "package",
-      "path": "xunit/2.2.0-beta2-build3300",
-      "files": [
-        "xunit.2.2.0-beta2-build3300.nupkg.sha512",
-        "xunit.nuspec"
-      ]
-    },
     "xunit.abstractions/2.0.1-rc2": {
       "sha512": "iUHMlyMDaXJ8N8qozg19tRlW0QiZPJ47ZJyV1fnpppGWdmukyq89/pg4HqpxQ52Co3Leo8NmiiYkB/gN48pZ+A==",
       "type": "package",
@@ -7385,65 +7424,6 @@
         "lib/netstandard1.0/xunit.abstractions.xml",
         "xunit.abstractions.2.0.1-rc2.nupkg.sha512",
         "xunit.abstractions.nuspec"
-      ]
-    },
-    "xunit.assert/2.2.0-beta2-build3300": {
-      "sha512": "5zsV2UhRQV5Ldme1N/NDhIBvQQTYdxmK87FXWWou1x3z7qpsZwe1YOjb0CY4F+1oXag8i9uTh/nZwv8jM66onA==",
-      "type": "package",
-      "path": "xunit.assert/2.2.0-beta2-build3300",
-      "files": [
-        "lib/netstandard1.0/xunit.assert.dll",
-        "lib/netstandard1.0/xunit.assert.pdb",
-        "lib/netstandard1.0/xunit.assert.xml",
-        "xunit.assert.2.2.0-beta2-build3300.nupkg.sha512",
-        "xunit.assert.nuspec"
-      ]
-    },
-    "xunit.core/2.2.0-beta2-build3300": {
-      "sha512": "HgKP6+FUKcIcVFMDgoTCANRKOgGeEDvg2a2AL3mOyBHE//grWL1EO0KybxUw26S8fnNJrhmI5LBWyVUIsPxI5Q==",
-      "type": "package",
-      "path": "xunit.core/2.2.0-beta2-build3300",
-      "files": [
-        "build/_desktop/xunit.execution.desktop.dll",
-        "build/netstandard1.0/_._",
-        "build/uap10.0/xunit.core.props",
-        "build/win81/xunit.core.props",
-        "build/wpa81/xunit.core.props",
-        "xunit.core.2.2.0-beta2-build3300.nupkg.sha512",
-        "xunit.core.nuspec"
-      ]
-    },
-    "xunit.extensibility.core/2.2.0-beta2-build3300": {
-      "sha512": "d+UCqIL8Je3tSdhF7w6NZdzH2jYzNh2LhsMp0gUVAD3NgVEo2oK/3Xr7ZlYZM40Y6fJWoO46UntzrpNlix75mg==",
-      "type": "package",
-      "path": "xunit.extensibility.core/2.2.0-beta2-build3300",
-      "files": [
-        "lib/net45/xunit.core.dll",
-        "lib/net45/xunit.core.dll.tdnet",
-        "lib/net45/xunit.core.pdb",
-        "lib/net45/xunit.core.xml",
-        "lib/net45/xunit.runner.tdnet.dll",
-        "lib/net45/xunit.runner.utility.desktop.dll",
-        "lib/netstandard1.0/xunit.core.dll",
-        "lib/netstandard1.0/xunit.core.pdb",
-        "lib/netstandard1.0/xunit.core.xml",
-        "xunit.extensibility.core.2.2.0-beta2-build3300.nupkg.sha512",
-        "xunit.extensibility.core.nuspec"
-      ]
-    },
-    "xunit.extensibility.execution/2.2.0-beta2-build3300": {
-      "sha512": "z0DgzvWxQtXaj2qebFkW5f69ZItvY/YRWEbKwL0yIbvhiCViiuHlP+qvvloVlrlsOuo+Y/vfjQb/3Cz+ok/+5A==",
-      "type": "package",
-      "path": "xunit.extensibility.execution/2.2.0-beta2-build3300",
-      "files": [
-        "lib/net45/xunit.execution.desktop.dll",
-        "lib/net45/xunit.execution.desktop.pdb",
-        "lib/net45/xunit.execution.desktop.xml",
-        "lib/netstandard1.0/xunit.execution.dotnet.dll",
-        "lib/netstandard1.0/xunit.execution.dotnet.pdb",
-        "lib/netstandard1.0/xunit.execution.dotnet.xml",
-        "xunit.extensibility.execution.2.2.0-beta2-build3300.nupkg.sha512",
-        "xunit.extensibility.execution.nuspec"
       ]
     },
     "xunit.runner.reporters/2.2.0-beta2-build3300": {
@@ -7484,9 +7464,10 @@
   "projectFileDependencyGroups": {
     "": [
       "Demo >= 1.0.0-*",
+      "MSTest.TestFramework >= 1.0.1-preview",
       "Microsoft.NETCore.App >= 1.0.0",
-      "dotnet-test-xunit >= 2.2.0-preview2-build1029",
-      "xunit >= 2.2.0-beta2-build3300"
+      "dotnet-test-mstest >= 1.1.1-preview",
+      "dotnet-test-xunit >= 2.2.0-preview2-build1029"
     ],
     ".NETCoreApp,Version=v1.0": []
   },

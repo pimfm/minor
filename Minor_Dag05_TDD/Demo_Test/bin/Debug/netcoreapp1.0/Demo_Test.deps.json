@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "0ad7e6bea61eda227dce4291e23ccbc6e6fd1cb6"
+    "signature": "2f0e949bc9fa148f836b0d1f756ffebaed29c01b"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,11 +9,22 @@
       "Demo_Test/1.0.0": {
         "dependencies": {
           "Demo": "1.0.0",
-          "xunit": "2.2.0-beta2-build3300",
+          "dotnet-test-mstest": "1.1.1-preview",
+          "MSTest.TestFramework": "1.0.1-preview",
           "dotnet-test-xunit": "2.2.0-preview2-build1029"
         },
         "runtime": {
           "Demo_Test.dll": {}
+        }
+      },
+      "dotnet-test-mstest/1.1.1-preview": {
+        "dependencies": {
+          "MSTest.ObjectModel": "1.0.1-preview",
+          "MSTest.TestAdapter.Dotnet": "1.0.4-preview",
+          "Microsoft.Extensions.Testing.Abstractions": "1.0.0-preview2-003121"
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-test-mstest.dll": {}
         }
       },
       "dotnet-test-xunit/2.2.0-preview2-build1029": {
@@ -95,6 +106,24 @@
           "lib/netstandard1.6/Microsoft.Extensions.Testing.Abstractions.dll": {}
         }
       },
+      "MSTest.ObjectModel/1.0.1-preview": {
+        "runtime": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {}
+        }
+      },
+      "MSTest.TestAdapter.Dotnet/1.0.4-preview": {
+        "runtime": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll": {}
+        }
+      },
+      "MSTest.TestFramework/1.0.1-preview": {
+        "runtime": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.dll": {}
+        }
+      },
       "Newtonsoft.Json/9.0.1": {
         "dependencies": {
           "System.Runtime.Serialization.Primitives": "4.1.1"
@@ -160,42 +189,9 @@
           "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
-      "xunit/2.2.0-beta2-build3300": {
-        "dependencies": {
-          "xunit.assert": "2.2.0-beta2-build3300",
-          "xunit.core": "2.2.0-beta2-build3300"
-        }
-      },
       "xunit.abstractions/2.0.1-rc2": {
         "runtime": {
           "lib/netstandard1.0/xunit.abstractions.dll": {}
-        }
-      },
-      "xunit.assert/2.2.0-beta2-build3300": {
-        "runtime": {
-          "lib/netstandard1.0/xunit.assert.dll": {}
-        }
-      },
-      "xunit.core/2.2.0-beta2-build3300": {
-        "dependencies": {
-          "xunit.extensibility.core": "2.2.0-beta2-build3300",
-          "xunit.extensibility.execution": "2.2.0-beta2-build3300"
-        }
-      },
-      "xunit.extensibility.core/2.2.0-beta2-build3300": {
-        "dependencies": {
-          "xunit.abstractions": "2.0.1-rc2"
-        },
-        "runtime": {
-          "lib/netstandard1.0/xunit.core.dll": {}
-        }
-      },
-      "xunit.extensibility.execution/2.2.0-beta2-build3300": {
-        "dependencies": {
-          "xunit.extensibility.core": "2.2.0-beta2-build3300"
-        },
-        "runtime": {
-          "lib/netstandard1.0/xunit.execution.dotnet.dll": {}
         }
       },
       "xunit.runner.reporters/2.2.0-beta2-build3300": {
@@ -227,6 +223,11 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "dotnet-test-mstest/1.1.1-preview": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qi+N+zPWs1qn5MZ+sUgWQIigupD6/thgucw3IFzoPhD9f4NEnrAlXlpnQeA47CAS6/D7pMm6VNbqKfNBwz4U3g=="
     },
     "dotnet-test-xunit/2.2.0-preview2-build1029": {
       "type": "package",
@@ -262,6 +263,21 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-q3Uq07d6LbYr0NiX5Dz9GCbXJv4vkmSbUvFEmov3Vo4prZWjhFzF+byk2tWAEEqtZ6ereMYXBUt99wCTtANk6Q=="
+    },
+    "MSTest.ObjectModel/1.0.1-preview": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-p94x245t1kqcz1D2mxvYeUuUnn2rPKodhftkzeexk14gjJrXxbHatMLnI3MQRnpAH/C/biiluQRJM2TwvVb8jQ=="
+    },
+    "MSTest.TestAdapter.Dotnet/1.0.4-preview": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bwxduMr9NUHIYMUZTvcnhRfX52SD4rkyaz6U8phCXMpXfms2E7A2W3TU2XZPgrdrv7S67OVivdSnkI9mFNzO/A=="
+    },
+    "MSTest.TestFramework/1.0.1-preview": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mm97lXENm5weBwpTFjFVECQbqH2O7HJ3h1xy3vzqCSfN6vnk2TQPfEGHE13bE1f5x4iUlob/lZXnuP1HQKc3yQ=="
     },
     "Newtonsoft.Json/9.0.1": {
       "type": "package",
@@ -308,35 +324,10 @@
       "serviceable": true,
       "sha512": "sha512-HZ6Du5QrTG8MNJbf4e4qMO3JRAkIboGT5Fk804uZtg3Gq516S7hAqTm2UZKUHa7/6HUGdVy3AqMQKbns06G/cg=="
     },
-    "xunit/2.2.0-beta2-build3300": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-jUMf+Hrw8+XZN56TfO+JjoibR5L806/kgDIkwCg9OXLlfnA4li4JTmH342ifYj1QMR10is8hfYYFTyjHq0+aQg=="
-    },
     "xunit.abstractions/2.0.1-rc2": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-iUHMlyMDaXJ8N8qozg19tRlW0QiZPJ47ZJyV1fnpppGWdmukyq89/pg4HqpxQ52Co3Leo8NmiiYkB/gN48pZ+A=="
-    },
-    "xunit.assert/2.2.0-beta2-build3300": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-5zsV2UhRQV5Ldme1N/NDhIBvQQTYdxmK87FXWWou1x3z7qpsZwe1YOjb0CY4F+1oXag8i9uTh/nZwv8jM66onA=="
-    },
-    "xunit.core/2.2.0-beta2-build3300": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-HgKP6+FUKcIcVFMDgoTCANRKOgGeEDvg2a2AL3mOyBHE//grWL1EO0KybxUw26S8fnNJrhmI5LBWyVUIsPxI5Q=="
-    },
-    "xunit.extensibility.core/2.2.0-beta2-build3300": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-d+UCqIL8Je3tSdhF7w6NZdzH2jYzNh2LhsMp0gUVAD3NgVEo2oK/3Xr7ZlYZM40Y6fJWoO46UntzrpNlix75mg=="
-    },
-    "xunit.extensibility.execution/2.2.0-beta2-build3300": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-z0DgzvWxQtXaj2qebFkW5f69ZItvY/YRWEbKwL0yIbvhiCViiuHlP+qvvloVlrlsOuo+Y/vfjQb/3Cz+ok/+5A=="
     },
     "xunit.runner.reporters/2.2.0-beta2-build3300": {
       "type": "package",

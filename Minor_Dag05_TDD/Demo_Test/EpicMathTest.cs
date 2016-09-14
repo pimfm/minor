@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,9 +7,10 @@ using Xunit;
 
 namespace Demo_Test
 {
+    [TestClass]
     public class EpicMathTest
     {
-        [Fact]
+        [TestMethod]
         public void FactorialOneShouldEqualOne()
         {
             // Arrange
@@ -18,10 +20,10 @@ namespace Demo_Test
             int result = math.Fact(1);
 
             // Assert
-            Assert.Equal(1, result);
+            Assert.AreEqual(1, result);
         }
 
-        [Fact]
+        [TestMethod]
         public void FactorialThreeShouldEqualSix()
         {
             // Arrange
@@ -31,7 +33,7 @@ namespace Demo_Test
             int result = math.Fact(3);
 
             // Assert
-            Assert.Equal(6, result);
+            Assert.AreEqual(6, result);
         }
 
         //[fact]
