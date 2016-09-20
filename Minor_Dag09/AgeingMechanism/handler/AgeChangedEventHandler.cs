@@ -1,8 +1,10 @@
-﻿namespace AgeDemo
+﻿using System;
+
+namespace AgeDemo
 {
     public delegate void AgeChangedEventHandler(object sender, AgeChangedEventArgs arguments);
 
-    public class AgeChangedEventArgs
+    public class AgeChangedEventArgs : EventArgs
     {
         public string Name { get; private set; }
         public int OldAge { get; private set; }

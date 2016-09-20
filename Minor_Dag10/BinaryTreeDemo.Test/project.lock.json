@@ -464,6 +464,17 @@
           "lib/dotnet/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll": {}
         }
       },
+      "MSTest.TestFramework/1.0.3-preview": {
+        "type": "package",
+        "compile": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll": {},
+          "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.dll": {}
+        }
+      },
       "NETStandard.Library/1.6.0": {
         "type": "package",
         "dependencies": {
@@ -2409,24 +2420,17 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "AgeDemo/1.0.0": {
+      "BinaryTreeDemo/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.0"
         },
         "compile": {
-          "netstandard1.6/AgeDemo.dll": {}
+          "netstandard1.6/BinaryTreeDemo.dll": {}
         },
         "runtime": {
-          "netstandard1.6/AgeDemo.dll": {}
-        }
-      },
-      "AgeingMechanism/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0"
+          "netstandard1.6/BinaryTreeDemo.dll": {}
         }
       }
     }
@@ -2900,6 +2904,19 @@
         "lib/net451/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll",
         "lib/net451/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
         "lib/net451/msdia140typelib_clr0200.dll"
+      ]
+    },
+    "MSTest.TestFramework/1.0.3-preview": {
+      "sha512": "GY7MzAndNAXHc8ODzccJFXKcLof2aNcx6DqdVOKElV/kTlEI2muPQmFbZqxeetHSf3LZXKF/aTs5QPrncgRXLQ==",
+      "type": "package",
+      "path": "MSTest.TestFramework/1.0.3-preview",
+      "files": [
+        "MSTest.TestFramework.1.0.3-preview.nupkg.sha512",
+        "MSTest.TestFramework.nuspec",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
+        "lib/dotnet/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
+        "lib/net45/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
+        "lib/net45/Microsoft.VisualStudio.TestPlatform.TestFramework.dll"
       ]
     },
     "NETStandard.Library/1.6.0": {
@@ -7325,19 +7342,16 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "AgeDemo/1.0.0": {
+    "BinaryTreeDemo/1.0.0": {
       "type": "project",
-      "path": "../AgeingMechanism/project.json",
-      "msbuildProject": "../AgeingMechanism/AgeDemo.xproj"
-    },
-    "AgeingMechanism/1.0.0": {
-      "type": "project",
-      "path": "../AgeingMechanism/project.json"
+      "path": "../BinaryTreeDemo/project.json",
+      "msbuildProject": "../BinaryTreeDemo/BinaryTreeDemo.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "AgeingMechanism >= 1.0.0-*",
+      "BinaryTreeDemo >= 1.0.0-*",
+      "MSTest.TestFramework >= 1.0.3-preview",
       "Microsoft.NETCore.App >= 1.0.0",
       "dotnet-test-mstest >= 1.1.1-preview"
     ],

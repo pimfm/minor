@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BinaryTreeDemo.Test", "BinaryTreeDemo.Test\BinaryTreeDemo.Test.xproj", "{0D925A67-4A12-41D0-AAA2-93E456AA3C69}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BinaryTreeDemo", "BinaryTreeDemo\BinaryTreeDemo.xproj", "{D8DEA5FF-526E-4CD7-B6C4-20B9EC9F70FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FAF1C00E-AA82-4A53-872E-57A4E9515B37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{112C5F12-FDFB-481E-84E4-A6B364AA171B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D925A67-4A12-41D0-AAA2-93E456AA3C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D925A67-4A12-41D0-AAA2-93E456AA3C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D925A67-4A12-41D0-AAA2-93E456AA3C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D925A67-4A12-41D0-AAA2-93E456AA3C69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8DEA5FF-526E-4CD7-B6C4-20B9EC9F70FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8DEA5FF-526E-4CD7-B6C4-20B9EC9F70FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8DEA5FF-526E-4CD7-B6C4-20B9EC9F70FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8DEA5FF-526E-4CD7-B6C4-20B9EC9F70FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D925A67-4A12-41D0-AAA2-93E456AA3C69} = {112C5F12-FDFB-481E-84E4-A6B364AA171B}
+		{D8DEA5FF-526E-4CD7-B6C4-20B9EC9F70FD} = {FAF1C00E-AA82-4A53-872E-57A4E9515B37}
+	EndGlobalSection
+EndGlobal
