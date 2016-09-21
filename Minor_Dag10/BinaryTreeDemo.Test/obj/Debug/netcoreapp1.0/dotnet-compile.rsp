@@ -108,5 +108,5 @@
 --reference:C:\Users\pimg\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\pimg\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
 --reference:C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo\bin\Debug\netstandard1.6\BinaryTreeDemo.dll
-C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo.Test\BinaryTreeTest.cs
+C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo.Test\TreeTest.cs
 C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo.Test\Properties\AssemblyInfo.cs

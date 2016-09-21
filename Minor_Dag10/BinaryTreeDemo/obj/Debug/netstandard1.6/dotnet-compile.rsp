@@ -55,7 +55,8 @@
 --reference:C:\Users\pimg\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\pimg\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\pimg\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
-C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo\BinaryTree.cs
 C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo\Branch.cs
 C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo\EmptyTree.cs
+C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo\ItemNotFoundException.cs
+C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo\Tree.cs
 C:\TFS\PimG\Minor_Dag10\BinaryTreeDemo\Properties\AssemblyInfo.cs

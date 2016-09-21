@@ -1,23 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BinaryTreeDemo
 {
-    internal class EmptyTree<GenericType> : BinaryTree<GenericType>
-        where GenericType : IComparable
+    internal class EmptyTree<T> : Tree<T>
+        where T : IComparable
     {
-        public override BinaryTree<GenericType> Add(GenericType value)
+        private static Tree<T> _instance = new EmptyTree<T>();
+
+        public static Tree<T> Instance
         {
-            return new Branch<GenericType>(value);
+            get { return _instance; }
         }
 
-        public override int AmountOfBranchesAndLeaves()
+        public override int Count
         {
-            return 0;
+            get { return 0; }
+        } 
+
+        public override int Depth
+        {
+            get { return 0; }
+        }
+        
+        public static Tree<T> GetInstance()
+        {
+            return _instance;
         }
 
-        public override int DistanceToFurthestLeave()
+        public override Tree<T> Add(T value)
         {
-            return 0;
+            return new Branch<T>(value);
+        }
+
+        public override bool Contains(T value)
+        {
+            return false;
+        }
+
+        public override T this[int index]
+        {
+            get
+            {
+                throw new ItemNotFoundException();
+            }
+        }
+
+        public override T Find(T value)
+        {
+            throw new ItemNotFoundException();
+        }
+
+        public override IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

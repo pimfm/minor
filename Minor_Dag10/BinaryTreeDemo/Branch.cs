@@ -1,51 +1,91 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BinaryTreeDemo
 {
-    internal class Branch<GenericType> : BinaryTree<GenericType>
-        where GenericType : IComparable
+    internal class Branch<T> : Tree<T>
+        where T : IComparable
     {
-        public GenericType value;
-        public BinaryTree<GenericType> leftBranch;
-        public BinaryTree<GenericType> rightBranch;
+        private T _value;
+        private Tree<T> _leftBranch;
+        private Tree<T> _rightBranch;
 
-        public Branch(GenericType value)
+        public override int Count
         {
-            this.value = value;
-            leftBranch = PlantNewTree();
-            rightBranch = PlantNewTree();
+            get { return _leftBranch.Count + 1 + _rightBranch.Count; }
         }
 
-        public override BinaryTree<GenericType> Add(GenericType value)
+        public override int Depth
         {
-            int compared = this.value.CompareTo(value);
+            get { return 1 + Math.Max(_leftBranch.Depth, _rightBranch.Depth); }
+        }
+
+        public Branch(T value)
+        {
+            _value = value;
+            _leftBranch = Create();
+            _rightBranch = Create();
+        }
+
+        public override Tree<T> Add(T value)
+        {
+            int compared = _value.CompareTo(value);
 
             if (compared < 0)
             {
-                rightBranch = rightBranch.Add(value);
+                _rightBranch = _rightBranch.Add(value);
             } 
             else if (compared > 0)
             {
-                leftBranch = leftBranch.Add(value);
+                _leftBranch = _leftBranch.Add(value);
             }
 
             return this;
         }
 
-        public override int AmountOfBranchesAndLeaves()
+        public override bool Contains(T value)
         {
-            int amountLeft = leftBranch.AmountOfBranchesAndLeaves();
-            int amountRight = rightBranch.AmountOfBranchesAndLeaves();
+            int compared = _value.CompareTo(value);
 
-            return amountLeft + 1 + amountRight;
+            if (compared < 0)
+            {
+                return _rightBranch.Contains(value);
+            }
+            else if (compared > 0)
+            {
+                return _leftBranch.Contains(value);
+            }
+
+            return compared == 0;
         }
 
-        public override int DistanceToFurthestLeave()
+        public override T Find(T value)
         {
-            int furthestLeft = 1 + leftBranch.DistanceToFurthestLeave();
-            int furthestRight = 1 + rightBranch.DistanceToFurthestLeave();
+            int compared = _value.CompareTo(value);
 
-            return furthestLeft >= furthestRight ? furthestLeft : furthestRight;
+            if (compared < 0)
+            {
+                return _rightBranch.Find(value);
+            }
+            else if (compared > 0)
+            {
+                return _leftBranch.Find(value);
+            }
+
+            return _value;
+        }
+
+        public override T this[int index]
+        {
+            get
+            {
+                return default(T);
+            }
+        }
+        
+        public override IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
