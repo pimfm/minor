@@ -296,10 +296,10 @@ namespace BinaryTreeDemo.Test
         public void EmptyListIsReturnedByDefault()
         {
             // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
+            NameManager manager = new NameManager();
 
             // Act
-            IEnumerable<string> names = queryBuilder.ShorterThan(4).Without('Q').Build();
+            IEnumerable<string> names = manager.ShortestNamesWithout('R');
 
             // Assert
             Assert.AreEqual(0, names.Count());
@@ -309,13 +309,13 @@ namespace BinaryTreeDemo.Test
         public void AllShortNamesAreReturned()
         {
             // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
+            NameManager manager = new NameManager();
             IEnumerable<string> names = new List<string>() { "Pim", "Rob", "Wesley" };
             IEnumerable<string> expected = new List<string>() { "Pim", "Rob" };
 
             // Act
-            queryBuilder.AddNames(names);
-            IEnumerable<string> namesQuery = queryBuilder.ShorterThan(4).Without('Q').Build();
+            manager.AddNames(names);
+            IEnumerable<string> namesQuery = manager.ShortestNamesWithout('Q');
 
             // Assert
             CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
@@ -325,13 +325,13 @@ namespace BinaryTreeDemo.Test
         public void AllShortNamesWithoutAnRAreReturned()
         {
             // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
+            NameManager manager = new NameManager();
             IEnumerable<string> names = new List<string>() { "Pim", "Rob", "Wesley" };
             IEnumerable<string> expected = new List<string>() { "Pim" };
 
             // Act
-            queryBuilder.AddNames(names);
-            IEnumerable<string> namesQuery = queryBuilder.ShorterThan(4).Without('R').Build();
+            manager.AddNames(names);
+            IEnumerable<string> namesQuery = manager.ShortestNamesWithout('R');
 
             // Assert
             CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
@@ -341,13 +341,157 @@ namespace BinaryTreeDemo.Test
         public void AllShortNamesWithoutAnRAreReturnedInAlphabeticalOrder()
         {
             // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
+            NameManager manager = new NameManager();
             IEnumerable<string> names = new List<string>() { "Pim", "Rob", "Max", "Wesley" };
             IEnumerable<string> expected = new List<string>() { "Max", "Pim" };
 
             // Act
-            queryBuilder.AddNames(names);
-            IEnumerable<string> namesQuery = queryBuilder.ShorterThan(4).Without('R').Build();
+            manager.AddNames(names);
+            IEnumerable<string> namesQuery = manager.ShortestNamesWithout('R');
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void ShortestNameWithCharacterReturnsAnEmptyList()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Pim", "Rob", "Max", "Wesley" };
+            IEnumerable<string> expected = new List<string>();
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<string> namesQuery = manager.ShortestNamesWithout('R');
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void LettersFromAllNames()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Raad", "Raap", "Rijeas" };
+            IEnumerable<int> expected = new List<int>() { 6, 4, 4, 2 };
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<int> namesQuery = manager.LengthOfNamesWith('R');
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void LengthFromAllNamesThatStartWithAnR()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Jaad", "Raap", "Rijeas" };
+            IEnumerable<int> expected = new List<int>() { 6, 4, 2 };
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<int> namesQuery = manager.LengthOfNamesWith('R');
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void LengthFromAllNamesThatStartWithAnRInDecendingOrder()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Raasdssd", "Jaad", "Raap", "Rijeas" };
+            IEnumerable<int> expected = new List<int>() { 8, 6, 4, 2 }; 
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<int> namesQuery = manager.LengthOfNamesWith('R');
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void FirstletterFromAllNames()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Raasdssd", "Raad", "Raap", "Rijeas" };
+            IEnumerable<char> expected = new List<char>() { 'R', 'R', 'R', 'R', 'R' }; 
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<char> namesQuery = manager.FirstLetterOfNamesContaining('R');
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void FirstletterFromAllNamesThatHaveAnR()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Jaasdssd", "Jaad", "Raap", "Rijeas" };
+            IEnumerable<char> expected = new List<char>() { 'R', 'R', 'R' };
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<char> namesQuery = manager.FirstLetterOfNamesContaining('R');
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void FirstletterFromAllNamesThatHaveAnRCaseInsensitive()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Jaasrdssd", "Jaad", "Raap", "Rijeas" };
+            IEnumerable<char> expected = new List<char>() { 'R', 'J', 'R', 'R' };
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<char> namesQuery = manager.FirstLetterOfNamesContaining('R');
+
+            // Assert
+            CollectionAssert.AreEquivalent(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void AmountOfNamesWithLength()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Ea", "Es", "Th", "Vf" };
+            IEnumerable<int> expected = new List<int>() { 5 };
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<int> namesQuery = manager.AmountOfNamesPerLength();
+
+            // Assert
+            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
+        }
+
+        [TestMethod]
+        public void AmountOfNamesWithLengthMultipleLengths()
+        {
+            // Arrange
+            NameManager manager = new NameManager();
+            IEnumerable<string> names = new List<string>() { "Ra", "Eas", "Es", "Therdfdf", "Vf" };
+            IEnumerable<int> expected = new List<int>() { 3, 1, 1 };
+
+            // Act
+            manager.AddNames(names);
+            IEnumerable<int> namesQuery = manager.AmountOfNamesPerLength();
 
             // Assert
             CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
