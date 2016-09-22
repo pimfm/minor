@@ -79,41 +79,13 @@ namespace BinaryTreeDemo
         {
             get
             {
-                GuardIndexInRange(index);
-
-                foreach (T value in this)
-                {
-                    if (index-- == 0)
-                    {
-                        return value;
-                    }
-                }
-
-                throw new ItemNotFoundException();
+                return default(T);
             }
         }
-
+        
         public override IEnumerator<T> GetEnumerator()
         {
-            foreach (T value in _leftBranch)
-            {
-                yield return value;
-            }
-
-            yield return _value;
-
-            foreach (T value in _rightBranch)
-            {
-                yield return value;
-            }
-        }
-
-        private void GuardIndexInRange(int index)
-        {
-            if (index < 0 || index >= Count)
-            {
-                throw new IndexOutOfRangeException();
-            }
+            throw new NotImplementedException();
         }
     }
 }

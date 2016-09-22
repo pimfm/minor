@@ -53,7 +53,7 @@ namespace BinaryTreeDemo
 
         public override IEnumerator<T> GetEnumerator()
         {
-            yield break;
+            throw new NotImplementedException();
         }
     }
 }

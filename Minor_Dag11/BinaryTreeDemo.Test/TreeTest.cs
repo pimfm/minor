@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BinaryTreeDemo.Test
 {
@@ -236,34 +234,10 @@ namespace BinaryTreeDemo.Test
             tree = tree.Add(11);
             tree = tree.Add(13);
 
-            int firstItem = tree[0];
-            int secondItem = tree[1];
-            int thirdItem = tree[2];
+            int foundItem = tree[2];
 
             // Assert
-            Assert.AreEqual(10, firstItem);
-            Assert.AreEqual(11, secondItem);
-            Assert.AreEqual(12, thirdItem);
-        }
-
-        [TestMethod]
-        public void UsingTheIndexerWithAnIndexOutOfRangeThrowsAnException()
-        {
-            // Arrange
-            Tree<int> tree = Tree<int>.Create();
-
-            // Act
-            //              [10]
-            //                       [12]
-            //                  [11]      [13]
-            tree = tree.Add(10);
-            tree = tree.Add(12);
-            tree = tree.Add(11);
-            tree = tree.Add(13);
-
-            // Assert
-            Assert.ThrowsException<IndexOutOfRangeException>(() => tree[34]);
-            Assert.ThrowsException<IndexOutOfRangeException>(() => tree[-1]);
+            Assert.AreEqual(12, foundItem);
         }
 
         [TestMethod]
@@ -281,76 +255,15 @@ namespace BinaryTreeDemo.Test
             int sum = 0;
             int amount = 0;
 
-            foreach (int node in tree)
+            foreach (int item in tree)
             {
-                sum += node;
+                sum += item;
                 amount++;
             }
 
             // Assert
-            Assert.AreEqual(46, sum);
+            Assert.AreEqual(44, sum);
             Assert.AreEqual(4, amount);
-        }
-
-        [TestMethod]
-        public void EmptyListIsReturnedByDefault()
-        {
-            // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
-
-            // Act
-            IEnumerable<string> names = queryBuilder.ShorterThan(4).Without('Q').Build();
-
-            // Assert
-            Assert.AreEqual(0, names.Count());
-        }
-
-        [TestMethod]
-        public void AllShortNamesAreReturned()
-        {
-            // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
-            IEnumerable<string> names = new List<string>() { "Pim", "Rob", "Wesley" };
-            IEnumerable<string> expected = new List<string>() { "Pim", "Rob" };
-
-            // Act
-            queryBuilder.AddNames(names);
-            IEnumerable<string> namesQuery = queryBuilder.ShorterThan(4).Without('Q').Build();
-
-            // Assert
-            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
-        }
-
-        [TestMethod]
-        public void AllShortNamesWithoutAnRAreReturned()
-        {
-            // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
-            IEnumerable<string> names = new List<string>() { "Pim", "Rob", "Wesley" };
-            IEnumerable<string> expected = new List<string>() { "Pim" };
-
-            // Act
-            queryBuilder.AddNames(names);
-            IEnumerable<string> namesQuery = queryBuilder.ShorterThan(4).Without('R').Build();
-
-            // Assert
-            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
-        }
-
-        [TestMethod]
-        public void AllShortNamesWithoutAnRAreReturnedInAlphabeticalOrder()
-        {
-            // Arrange
-            NameQueryBuilder queryBuilder = new NameQueryBuilder();
-            IEnumerable<string> names = new List<string>() { "Pim", "Rob", "Max", "Wesley" };
-            IEnumerable<string> expected = new List<string>() { "Max", "Pim" };
-
-            // Act
-            queryBuilder.AddNames(names);
-            IEnumerable<string> namesQuery = queryBuilder.ShorterThan(4).Without('R').Build();
-
-            // Assert
-            CollectionAssert.AreEqual(expected.ToList(), namesQuery.ToList());
         }
     }
 }
