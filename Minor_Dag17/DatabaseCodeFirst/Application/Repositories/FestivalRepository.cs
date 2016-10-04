@@ -1,27 +1,23 @@
-﻿using DatabaseCodeFirst.Core.Entities;
+﻿using DatabaseCodeFirst.Application.Factories;
+using DatabaseCodeFirst.Core.Entities;
 using DatabaseCodeFirst.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Linq;
 
 namespace DatabaseCodeFirst.Application.Repositories
 {
-    public class FestivalRepository : PartyBaseRepository<Festival, int>
+    public class FestivalRepository : BaseRepository<Festival, ContextFactory<PartyContext>, PartyContext>, EntityFinder<Festival, int>
     {
-        public override Festival Find(int id)
+        public FestivalRepository(ContextFactory<PartyContext> factory) : base(factory)
         {
-            throw new NotImplementedException();
         }
 
-        public override IEnumerable<Festival> FindAll()
+        public Festival Find(int key)
         {
-            throw new NotImplementedException();
-        }
-
-        public override IEnumerable<Festival> FindBy(Expression<Func<Festival, bool>> File)
-        {
-            throw new NotImplementedException();
+            using (PartyContext context = new PartyContext())
+            {
+                return context.Festivals.FirstOrDefault(festival => festival.Id == key);
+            }
         }
 
         public override DbSet<Festival> ProvideDatabaseSet()

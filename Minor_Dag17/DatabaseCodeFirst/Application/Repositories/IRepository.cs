@@ -4,11 +4,10 @@ using System.Linq.Expressions;
 
 namespace DatabaseCodeFirst.Application.Repositories
 {
-    public interface IRepository<Entity, Key>
+    public interface IRepository<Entity>
     {
         IEnumerable<Entity> FindAll();
-        IEnumerable<Entity> FindBy(Expression<Func<Entity, bool>> filter); 
-        Entity Find(Key id);
+        IEnumerable<Entity> FindBy(Expression<Func<Entity, bool>> filter);
 
         int Count();
         void Insert(Entity item);

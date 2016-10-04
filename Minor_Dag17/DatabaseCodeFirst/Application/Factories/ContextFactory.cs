@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DatabaseCodeFirst.Infrastructure.Database;
 
-namespace Application.Factories
+namespace DatabaseCodeFirst.Application.Factories
 {
-    public interface ContextFactory<ContextType>
+    public class ContextFactory<TContext> : ManufacturesContext<TContext>
+        where TContext : new()
     {
-        ContextType MakeContext();
+        public TContext ManufactureContext()
+        {
+            return new TContext();
+        }
     }
 }
