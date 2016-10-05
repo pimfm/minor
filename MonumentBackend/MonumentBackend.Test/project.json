@@ -1,9 +1,6 @@
-﻿{
+{
   "version": "1.0.0-*",
   "testRunner": "mstest",
-  "buildOptions": {
-    "emitEntryPoint": true
-  },
 
   "dependencies": {
     "Microsoft.NETCore.App": {
@@ -11,7 +8,10 @@
       "version": "1.0.0"
     },
     "dotnet-test-mstest": "1.1.1-preview",
-    "MSTest.TestFramework": "1.0.4-preview"
+    "MSTest.TestFramework": "1.0.4-preview",
+    "Microsoft.EntityFrameworkCore": "1.0.1",
+    "MonumentBackend": "1.0.0-*",
+    "System.Linq.Expressions": "4.1.0"
   },
 
   "frameworks": {
