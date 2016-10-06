@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebAPIServiceLayer.Domain.Repositories;
 using WebAPIServiceLayer.Infrastructure.DataAccessLayer;
+using WebAPIServiceLayer.Infrastructure.Factories;
 using WebAPIServiceLayer.Infrastructure.Repositories;
-using WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks;
+using WebAPIServiceLayer.Infrastructure.Services;
 
 namespace WebAPIServiceLayer
 {
@@ -29,7 +31,15 @@ namespace WebAPIServiceLayer
         {
             // Add framework services.
             services.AddMvc();
-            services.AddScoped<IProductRepository, ProductRepositoryMock>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IManufacturesContext<SupermarketDbContext>, SupermarketDbContextFactory>();
+            services.AddScoped<IServiceLocator, ServiceLocator>();
+
+            services.AddEntityFrameworkInMemoryDatabase();
+
+            services.AddDbContext<SupermarketDbContext>(options => {
+                options.UseInMemoryDatabase();
+            }, ServiceLifetime.Transient);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +51,21 @@ namespace WebAPIServiceLayer
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "Products Overview",
+                    name: "Products overview",
                     template: "api/v1/products",
                     defaults: new { Controller = "Product", Action = "All" }
+                );
+
+                routes.MapRoute(
+                    name: "Product add",
+                    template: "api/v1/products/add/{Name}",
+                    defaults: new { Controller = "Product", Action = "Add" }
+                );
+
+                routes.MapRoute(
+                    name: "Product detail",
+                    template: "api/v1/product/{id}",
+                    defaults: new { Controller = "Product", Action = "Find" }
                 );
             });
         }

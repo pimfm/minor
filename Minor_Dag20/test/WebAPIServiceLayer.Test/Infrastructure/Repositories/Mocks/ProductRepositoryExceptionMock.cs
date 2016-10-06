@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using WebAPIServiceLayer.Domain.Entities;
 using WebAPIServiceLayer.Domain.Repositories;
-using WebAPIServiceLayer.Test.Infrastructure.DataAccessLayer;
 
 namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
 {
-    internal class ProductRepositoryMock : IProductRepository<InMemorySupermarketContext>
+    internal class ProductRepositoryExceptionMock : IProductRepository
     {
         public int Count()
         {
@@ -21,18 +20,12 @@ namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
 
         public Product Find(int key)
         {
-            throw new NotImplementedException();
+            throw new KeyNotFoundException();
         }
 
         public IEnumerable<Product> FindAll()
         {
-            List<Product> products = new List<Product>()
-            {
-                new Product("CLUB-MATE", 2.99M),
-                new Product("Green", 1.06M, "Lipton")
-            };
-
-            return products;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Product> FindBy(Expression<Func<Product, bool>> filter)

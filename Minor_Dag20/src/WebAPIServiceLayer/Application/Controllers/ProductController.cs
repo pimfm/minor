@@ -18,5 +18,17 @@ namespace WebAPIServiceLayer.Application.Controllers
         {
             return _repository.FindAll();
         }
+
+        public Product Find(int key)
+        {
+            return _repository.Find(key);
+        }
+
+        public void Add(string name)
+        {
+            Product newProduct = new Product(name, 0.00M);
+
+            _repository.Insert(newProduct);
+        }
     }
 }

@@ -10,25 +10,36 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
 {
     public abstract class BaseRepository<TEntity, TContext> : IRepository<TEntity>
         where TEntity : class
-        where TContext : IDisposable, new()
+        where TContext : DbContext, IDisposable
     {
-        private ContextFactory<TContext> _factory = new ContextFactory<TContext>();
+        private IManufacturesContext<TContext> _factory;
 
-        public abstract DbSet<TEntity> ProvideDatabaseSet();
+        public BaseRepository(IManufacturesContext<TContext> factory)
+        {
+            _factory = factory;
+        }
+
+        public virtual IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TContext context = _factory.ManufactureContext())
+            {
+                return context.Set<TEntity>().Where(filter).ToList();
+            }
+        }
+
+        public TEntity FindOneBy(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TContext context = _factory.ManufactureContext())
+            {
+                return context.Set<TEntity>().FirstOrDefault(filter);
+            }
+        }
 
         public virtual IEnumerable<TEntity> FindAll()
         {
             using (TContext context = _factory.ManufactureContext())
             {
-                return ProvideDatabaseSet().ToList();
-            }
-        }
-        
-        public virtual IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> filter)
-        {
-            using (TContext context = _factory.ManufactureContext())
-            {
-                return ProvideDatabaseSet().Where(filter).ToList();
+                return context.Set<TEntity>().ToList();
             }
         }
 
@@ -36,7 +47,7 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
         {
             using (TContext context = _factory.ManufactureContext())
             {
-                return ProvideDatabaseSet().Count();
+                return context.Set<TEntity>().Count();
             }
         }
 
@@ -44,7 +55,8 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
         {
             using (TContext context = _factory.ManufactureContext())
             {
-                ProvideDatabaseSet().Add(item);
+                context.Set<TEntity>().Add(item);
+                context.SaveChanges();
             }
         }
 
@@ -52,7 +64,8 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
         {
             using (TContext context = _factory.ManufactureContext())
             {
-                ProvideDatabaseSet().Update(item);
+                context.Set<TEntity>().Update(item);
+                context.SaveChanges();
             }
         }
 
@@ -60,7 +73,8 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
         {
             using (TContext context = _factory.ManufactureContext())
             {
-                ProvideDatabaseSet().Remove(item);
+                context.Set<TEntity>().Remove(item);
+                context.SaveChanges();
             }
         }
     }
