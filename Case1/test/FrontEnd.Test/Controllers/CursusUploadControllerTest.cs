@@ -39,7 +39,7 @@ namespace FrontEnd.Test.Controllers
         public void ItIsAnInstanceOfController()
         {
             // Arrange
-            CursisUploadController controller = new CursisUploadController(_environment);
+            CursusUploadController controller = new CursisUploadController(_environment);
 
             // Assert
             Assert.IsInstanceOfType(controller, typeof(Controller));
@@ -49,7 +49,7 @@ namespace FrontEnd.Test.Controllers
         public void SavingASingleFile()
         {
             // Arrange
-            CursisUploadController controller = new CursisUploadController(_environment);
+            CursusUploadController controller = new CursisUploadController(_environment);
             FormFileMock file = _file.First() as FormFileMock;
 
             // Act
@@ -64,7 +64,7 @@ namespace FrontEnd.Test.Controllers
         public void SavingMultipleFiles()
         {
             // Arrange
-            CursisUploadController controller = new CursisUploadController(_environment);
+            CursusUploadController controller = new CursisUploadController(_environment);
 
             // Act
             controller.Upload(_files);
