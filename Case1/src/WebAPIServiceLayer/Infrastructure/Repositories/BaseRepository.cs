@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using BackendService.Domain.Repositories;
+using BackendService.Domain.Contracts;
 using BackendService.Infrastructure.Factories;
 
 namespace BackendService.Infrastructure.Repositories
@@ -74,6 +74,15 @@ namespace BackendService.Infrastructure.Repositories
             using (TContext context = _factory.ManufactureContext())
             {
                 context.Set<TEntity>().Remove(item);
+                context.SaveChanges();
+            }
+        }
+
+        public void InsertRange(IEnumerable<TEntity> entities)
+        {
+            using (TContext context = _factory.ManufactureContext())
+            {
+                context.Set<TEntity>().AddRange(entities);
                 context.SaveChanges();
             }
         }

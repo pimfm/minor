@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using BackendService.Domain.Repositories;
+using BackendService.Domain.Contracts;
 using BackendService.Infrastructure.DataAccessLayer;
 using BackendService.Infrastructure.Factories;
 using BackendService.Infrastructure.Repositories;
 using BackendService.Infrastructure.Services;
+using Swashbuckle.Swagger.Model;
 
 namespace BackendService
 {
@@ -31,15 +32,27 @@ namespace BackendService
         {
             // Add framework services.
             services.AddMvc();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IManufacturesContext<SupermarketDbContext>, SupermarketDbContextFactory>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IManufacturesContext<CourseAdministrationDbContext>, CourseAdministrationDbContextFactory>();
             services.AddScoped<IServiceLocator, ServiceLocator>();
 
             services.AddEntityFrameworkInMemoryDatabase();
 
-            services.AddDbContext<SupermarketDbContext>(options => {
+            services.AddDbContext<CourseAdministrationDbContext>(options => {
                 options.UseInMemoryDatabase();
             }, ServiceLifetime.Transient);
+
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "Course Administration Service",
+                    Description = "A RESTfull service for course administration",
+                    TermsOfService = "None"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,26 +61,10 @@ namespace BackendService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "Products overview",
-                    template: "api/v1/products",
-                    defaults: new { Controller = "Product", Action = "All" }
-                );
+            app.UseMvc();
 
-                routes.MapRoute(
-                    name: "Product add",
-                    template: "api/v1/products/add/{Name}",
-                    defaults: new { Controller = "Product", Action = "Add" }
-                );
-
-                routes.MapRoute(
-                    name: "Product detail",
-                    template: "api/v1/product/{id}",
-                    defaults: new { Controller = "Product", Action = "Find" }
-                );
-            });
+            app.UseSwagger();
+            app.UseSwaggerUi();
         }
     }
 }

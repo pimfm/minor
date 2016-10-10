@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace BackendService.Domain.Repositories
+namespace BackendService.Domain.Contracts
 {
     public interface IRepository<TEntity>
     {
@@ -11,8 +11,9 @@ namespace BackendService.Domain.Repositories
         TEntity FindOneBy(Expression<Func<TEntity, bool>> filter);
 
         int Count();
-        void Insert(TEntity item);
-        void Update(TEntity item);
-        void Delete(TEntity item);
+        void Insert(TEntity entity);
+        void InsertRange(IEnumerable<TEntity> entities);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
     }
 }
