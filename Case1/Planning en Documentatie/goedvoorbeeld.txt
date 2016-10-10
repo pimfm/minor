@@ -1,0 +1,25 @@
+Titel: C# Programmeren
+Cursuscode: CNETIN
+Duur: 5 dagen
+Startdatum: 13/10/2014
+
+Titel: C# Programmeren
+Cursuscode: CNETIN
+Duur: 5 dagen
+Startdatum: 20/10/2014
+
+Titel: Advanced C#
+Cursuscode: ADCSB
+Duur: 2 dagen
+Startdatum: 20/10/2014
+
+Titel: Advanced C#
+Cursuscode: ADCSB
+Duur: 2 dagen
+Startdatum: 13/10/2014
+
+Titel: C# Programmeren
+Cursuscode: CNETIN
+Duur: 5 dagen
+Startdatum: 13/10/2014
+

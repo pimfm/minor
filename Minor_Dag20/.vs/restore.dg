@@ -1,4 +1,2 @@
-#:C:\dev\repo\minor\Minor_Dag20\test\WebAPIServiceLayer.Test\WebAPIServiceLayer.Test.xproj
-C:\dev\repo\minor\Minor_Dag20\test\WebAPIServiceLayer.Test\WebAPIServiceLayer.Test.xproj|C:\dev\repo\minor\Minor_Dag20\src\WebAPIServiceLayer\WebAPIServiceLayer.xproj
-#:C:\dev\repo\minor\Minor_Dag20\test\WebAPIServiceLayer.Test.Integration\WebAPIServiceLayer.Test.Integration.xproj
-C:\dev\repo\minor\Minor_Dag20\test\WebAPIServiceLayer.Test.Integration\WebAPIServiceLayer.Test.Integration.xproj|C:\dev\repo\minor\Minor_Dag20\src\WebAPIServiceLayer\WebAPIServiceLayer.xproj
+#:C:\tfs\PimG\Minor_Dag20\test\WebAPIServiceLayer.Test\WebAPIServiceLayer.Test.xproj
+C:\tfs\PimG\Minor_Dag20\test\WebAPIServiceLayer.Test\WebAPIServiceLayer.Test.xproj|C:\tfs\PimG\Minor_Dag20\src\WebAPIServiceLayer\WebAPIServiceLayer.xproj
