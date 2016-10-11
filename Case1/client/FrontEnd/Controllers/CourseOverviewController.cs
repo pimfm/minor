@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FrontEnd.Agents.CourseAgent;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 using FrontEnd.Services;
 using Frontend.Agents.Models;
-using Frontend.Exceptions;
 
 namespace Frontend.Controllers
 {

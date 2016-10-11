@@ -8,6 +8,6 @@ namespace FrontEnd.Services
     public interface IFileService<TEntity>
     {
         void Validate(IFormFile file);
-        IEnumerable<TEntity> Produce(DateTime from, DateTime to);
+        IEnumerable<TEntity> Produce(DateTime? from, DateTime? to);
     }
 }

@@ -28,33 +28,28 @@ namespace Frontend.Controllers
         }
 
         [HttpPost]
-        public ViewResult Upload(ICollection<IFormFile> files, DateTime from, DateTime to)
+        public ViewResult Upload(ICollection<IFormFile> files, DateTime? from = null, DateTime? to = null)
         {
-            List<Course> uploadedCourses = new List<Course>();
+            List<UploadReport> reports = new List<UploadReport>();
 
             foreach (IFormFile file in files)
             {
                 try
                 {
                     _service.Validate(file);
+                    List<Course> courses = (List<Course>)_service.Produce(from, to);
+                    UploadReport report = _agent.SaveCourses(courses);
+
+                    report.FileName = file.FileName;
+                    reports.Add(report);
                 } catch (InvalidLineException exception)
                 {
-                    return View("Index", $"Fout gevonden in {file.FileName}. {exception.Message}");
+                    UploadReport errorReport = new UploadReport("danger", exception.Message, file.FileName);
+                    reports.Add(errorReport);
                 }
-
-                IEnumerable<Course> courses = _service.Produce(from, to);
-
-                uploadedCourses.AddRange(courses);
             }
 
-            if (uploadedCourses.Count == 0)
-            {
-                return View("Index", $"Er zijn geen cursussen gevonden in de geimporteerde bestanden. Probeer een ander bestand.");
-            }
-
-            string message = _agent.SaveCourses(uploadedCourses);
-
-            return View("Index", message);
+            return View("Index", reports);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace FrontEnd.Agents.CourseAgent
             return _service.ApiV1CoursesGet();
         }
 
-        public string SaveCourses(IList<Course> courses)
+        public UploadReport SaveCourses(IList<Course> courses)
         {
             return _service.ApiV1CoursesPost(courses);
         }

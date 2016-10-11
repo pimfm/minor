@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using WebAPIServiceLayer.Domain.Comparer;
 using System;
+using WebAPIServiceLayer.Application.Services;
 
 namespace WebAPIServiceLayer.Application.Controllers
 {
@@ -26,8 +27,8 @@ namespace WebAPIServiceLayer.Application.Controllers
         }
         
         [HttpPost]
-        [ProducesResponseType(typeof(string), 200)]
-        public string AddRange([FromBody] IEnumerable<Course> courses)
+        [ProducesResponseType(typeof(UploadReport), 200)]
+        public UploadReport AddRange([FromBody] IEnumerable<Course> courses)
         {
             IEnumerable<Course> newCourses = courses.Except(All(), new CourseComparer());
             int newCoursesCount = newCourses.Count();
@@ -36,29 +37,7 @@ namespace WebAPIServiceLayer.Application.Controllers
                 _repository.InsertRange(newCourses);
             }
 
-            return ProvideInsertionReport(newCoursesCount, courses.Count());
-        }
-
-        private string ProvideInsertionReport(int insertedCount, int allCount)
-        {
-            int duplicateCount = allCount - insertedCount;
-
-            if (allCount == 0)
-            {
-                return "Dit bestand bevat geen cursussen, controleer of het goede bestand is geselecteerd.";
-            }
-
-            if (insertedCount == 0)
-            {
-                return $"Geen nieuwe cursussen gevonden. Alle {allCount} cursussen waren al aanwezig. Controleer of het goede bestand is geselecteerd.";
-            }
-
-            if (duplicateCount == 0)
-            {
-                return $"Alle {insertedCount} cursussen zijn nieuw toegevoegd!";
-            }
-
-            return $"{insertedCount} cursussen toegevoegd! {duplicateCount} cursussen niet toegevoegd, omdat ze al aanwezig waren.";
+            return new UploadReport(newCoursesCount, courses.Count());
         }
     }
 }

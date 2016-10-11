@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model List<Frontend.Agents.Models.UploadReport>
 @{
     ViewData["Title"] = "Cursussen importeren";
 }
@@ -25,6 +25,14 @@
 
     @if (Model != null)
     {
-        <div class="alert alert-info" role="alert">@Html.DisplayFor(model => model)</div>
+        @foreach (var report in Model)
+        {
+            <div class="panel panel-@report.Label">
+                <div class="panel-heading">@report.FileName</div>
+                <div class="panel-body">
+                    @report.Message
+                </div>
+            </div>
+        }
     }
 </form>

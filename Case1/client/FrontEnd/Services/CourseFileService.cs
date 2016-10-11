@@ -18,9 +18,20 @@ namespace FrontEnd.Services
         {
             _courses = new List<Course>();
         }
-        
-        public IEnumerable<Course> Produce(DateTime from, DateTime to)
+
+        public IEnumerable<Course> Produce(DateTime? from, DateTime? to)
         {
+            if (from == null && to == null)
+            {
+                return _courses;
+            } else if (from == null)
+            {
+                return _courses.Where(course => course.StartDate <= to);
+            } else if (to == null)
+            {
+                return _courses.Where(course => course.StartDate >= from);
+            }
+
             return _courses.Where(course => from <= course.StartDate && course.StartDate <= to);
         }
 

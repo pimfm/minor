@@ -6,6 +6,7 @@ using WebAPIServiceLayer.Domain.Entities;
 using WebAPIServiceLayer.Domain.Contracts;
 using WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks;
 using System;
+using WebAPIServiceLayer.Application.Services;
 
 namespace WebAPIServiceLayer.Test.Application.Controllers
 {
@@ -56,11 +57,10 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             IEnumerable<Course> courses = new List<Course>();
 
             // Act
-            string report = controller.AddRange(courses);
+            UploadReport report = controller.AddRange(courses);
 
             // Assert
             Assert.AreEqual(0, repository.Count());
-            Assert.AreEqual("Dit bestand bevat geen cursussen, controleer of het goede bestand is geselecteerd.", report);
         }
 
         [TestMethod]
@@ -76,11 +76,10 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             };
 
             // Act
-            string report = controller.AddRange(courses);
+            UploadReport report = controller.AddRange(courses);
 
             // Assert
             Assert.AreEqual(2, repository.Count());
-            Assert.AreEqual("Alle 2 cursussen zijn nieuw toegevoegd!", report);
         }
 
         [TestMethod]
@@ -96,11 +95,10 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             };
 
             // Act
-            string report = controller.AddRange(courses);
+            UploadReport report = controller.AddRange(courses);
 
             // Assert
             Assert.AreEqual(0, repository.Count());
-            Assert.AreEqual("Geen nieuwe cursussen gevonden. Alle 2 cursussen waren al aanwezig. Controleer of het goede bestand is geselecteerd.", report);
         }
 
         [TestMethod]
@@ -118,11 +116,11 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             };
 
             // Act
-            string report = controller.AddRange(courses);
+            UploadReport report = controller.AddRange(courses);
 
             // Assert
             Assert.AreEqual(2, repository.Count());
-            Assert.AreEqual("2 cursussen toegevoegd! 2 cursussen niet toegevoegd, omdat ze al aanwezig waren.", report);
+            Assert.AreEqual("2 cursussen toegevoegd! 2 cursussen niet toegevoegd, omdat ze al aanwezig waren.", report.Message);
         }
     }
 }

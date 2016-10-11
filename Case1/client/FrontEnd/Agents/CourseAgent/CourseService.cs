@@ -256,7 +256,7 @@ namespace Frontend.Agents
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<string>> ApiV1CoursesPostWithHttpMessagesAsync(IList<Course> courses = default(IList<Course>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<UploadReport>> ApiV1CoursesPostWithHttpMessagesAsync(IList<Course> courses = default(IList<Course>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -330,7 +330,7 @@ namespace Frontend.Agents
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<string>();
+            var _result = new HttpOperationResponse<UploadReport>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -339,7 +339,7 @@ namespace Frontend.Agents
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = _responseContent;
+                    _result.Body = SafeJsonConvert.DeserializeObject<UploadReport>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

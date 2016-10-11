@@ -39,7 +39,8 @@ namespace WebAPIServiceLayer
             services.AddEntityFrameworkInMemoryDatabase();
 
             services.AddDbContext<CourseAdministrationDbContext>(options => {
-                options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CourseAdministration;Trusted_Connection=True;");
+                options.UseInMemoryDatabase();
+                //options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CourseAdministration;Trusted_Connection=True;");
             }, ServiceLifetime.Transient);
 
             services.AddSwaggerGen();

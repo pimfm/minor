@@ -44,7 +44,7 @@ namespace Frontend.Agents
             /// </param>
             /// <param name='courses'>
             /// </param>
-            public static string ApiV1CoursesPost(this ICourseService operations, IList<Course> courses = default(IList<Course>))
+            public static UploadReport ApiV1CoursesPost(this ICourseService operations, IList<Course> courses = default(IList<Course>))
             {
                 return Task.Factory.StartNew(s => ((ICourseService)s).ApiV1CoursesPostAsync(courses), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -57,7 +57,7 @@ namespace Frontend.Agents
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> ApiV1CoursesPostAsync(this ICourseService operations, IList<Course> courses = default(IList<Course>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<UploadReport> ApiV1CoursesPostAsync(this ICourseService operations, IList<Course> courses = default(IList<Course>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ApiV1CoursesPostWithHttpMessagesAsync(courses, null, cancellationToken).ConfigureAwait(false))
                 {

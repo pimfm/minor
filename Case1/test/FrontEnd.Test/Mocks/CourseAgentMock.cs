@@ -21,12 +21,12 @@ namespace FrontEnd.Test.Mocks
             };
         }
 
-        public string SaveCourses(IList<Course> courses)
+        public UploadReport SaveCourses(IList<Course> courses)
         {
             SaveCoursesCalled = true;
             SaveCoursesParameter = courses;
 
-            return "";
+            return new UploadReport(0, 0);
         }
     }
 }
