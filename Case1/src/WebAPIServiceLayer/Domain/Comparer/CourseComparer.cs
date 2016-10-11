@@ -1,8 +1,8 @@
-﻿using BackendService.Domain.Entities;
+﻿using WebAPIServiceLayer.Domain.Entities;
 using System.Collections.Generic;
 using System;
 
-namespace BackendService.Domain.Comparer
+namespace WebAPIServiceLayer.Domain.Comparer
 {
     public class CourseComparer : IEqualityComparer<Course>
     {

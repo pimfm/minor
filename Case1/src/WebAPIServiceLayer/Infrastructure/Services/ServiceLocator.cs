@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BackendService.Infrastructure.Services
+namespace WebAPIServiceLayer.Infrastructure.Services
 {
     public class ServiceLocator : IServiceLocator
     {

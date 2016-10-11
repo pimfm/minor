@@ -1,10 +1,10 @@
-﻿using BackendService.Domain.Entities;
-using BackendService.Domain.Contracts;
-using BackendService.Infrastructure.DataAccessLayer;
-using BackendService.Infrastructure.Factories;
+﻿using WebAPIServiceLayer.Domain.Entities;
+using WebAPIServiceLayer.Domain.Contracts;
+using WebAPIServiceLayer.Infrastructure.DataAccessLayer;
+using WebAPIServiceLayer.Infrastructure.Factories;
 using System.Collections.Generic;
 
-namespace BackendService.Infrastructure.Repositories
+namespace WebAPIServiceLayer.Infrastructure.Repositories
 {
     public class CourseRepository : BaseRepository<Course, CourseAdministrationDbContext>, ICourseRepository
     {

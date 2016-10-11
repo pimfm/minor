@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DE2B340B-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{21325DAB-F0E2-44A3-B30D-35E57218959E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BackendService", "src\WebAPIServiceLayer\BackendService.xproj", "{FEE2D0C1-0553-4FF5-A5C7-EB8E935DFEC7}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebAPIServiceLayer", "src\WebAPIServiceLayer\WebAPIServiceLayer.xproj", "{FEE2D0C1-0553-4FF5-A5C7-EB8E935DFEC7}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BackendService.Test", "test\WebAPIServiceLayer.Test\BackendService.Test.xproj", "{C499DFCA-1A17-4742-9636-B7F7D7BABDC6}"
 EndProject

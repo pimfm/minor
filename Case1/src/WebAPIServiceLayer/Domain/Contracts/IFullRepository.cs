@@ -1,4 +1,4 @@
-﻿namespace BackendService.Domain.Contracts
+﻿namespace WebAPIServiceLayer.Domain.Contracts
 {
     public interface IFullRepository<TEntity, TKey> : IRepository<TEntity>
     {

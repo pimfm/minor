@@ -1,7 +1,7 @@
-﻿using BackendService.Infrastructure.DataAccessLayer;
-using BackendService.Infrastructure.Services;
+﻿using WebAPIServiceLayer.Infrastructure.DataAccessLayer;
+using WebAPIServiceLayer.Infrastructure.Services;
 
-namespace BackendService.Infrastructure.Factories
+namespace WebAPIServiceLayer.Infrastructure.Factories
 {
     public class CourseAdministrationDbContextFactory : IManufacturesContext<CourseAdministrationDbContext>
     {

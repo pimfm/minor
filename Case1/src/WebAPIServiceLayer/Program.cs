@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 
-namespace BackendService
+namespace WebAPIServiceLayer
 {
     public class Program
     {

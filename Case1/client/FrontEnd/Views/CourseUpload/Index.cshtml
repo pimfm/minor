@@ -1,0 +1,18 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Cursussen importeren";
+}
+<br />
+<form method="post" asp-action="Upload" asp-controller="CourseUpload" enctype="multipart/form-data">
+    <h1>Cursussen Importeren</h1>
+    <input type="file" name="files" multiple />
+    <br />
+    <input class="btn-success" type="submit" value="Importeren" />
+    <br />
+    <br />
+
+    @if (Model != null)
+    {
+        <div class="alert alert-info" role="alert">@Html.DisplayFor(model => model)</div>
+    }
+</form>

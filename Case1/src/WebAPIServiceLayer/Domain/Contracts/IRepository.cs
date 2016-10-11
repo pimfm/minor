@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace BackendService.Domain.Contracts
+namespace WebAPIServiceLayer.Domain.Contracts
 {
     public interface IRepository<TEntity>
     {

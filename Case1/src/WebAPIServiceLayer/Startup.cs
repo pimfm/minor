@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using BackendService.Domain.Contracts;
-using BackendService.Infrastructure.DataAccessLayer;
-using BackendService.Infrastructure.Factories;
-using BackendService.Infrastructure.Repositories;
-using BackendService.Infrastructure.Services;
+using WebAPIServiceLayer.Domain.Contracts;
+using WebAPIServiceLayer.Infrastructure.DataAccessLayer;
+using WebAPIServiceLayer.Infrastructure.Factories;
+using WebAPIServiceLayer.Infrastructure.Repositories;
+using WebAPIServiceLayer.Infrastructure.Services;
 using Swashbuckle.Swagger.Model;
 
-namespace BackendService
+namespace WebAPIServiceLayer
 {
     public class Startup
     {
@@ -39,7 +39,7 @@ namespace BackendService
             services.AddEntityFrameworkInMemoryDatabase();
 
             services.AddDbContext<CourseAdministrationDbContext>(options => {
-                options.UseInMemoryDatabase();
+                options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CourseAdministration;Trusted_Connection=True;");
             }, ServiceLifetime.Transient);
 
             services.AddSwaggerGen();

@@ -1,6 +1,6 @@
-﻿using BackendService.Domain.Entities;
+﻿using WebAPIServiceLayer.Domain.Entities;
 
-namespace BackendService.Domain.Contracts
+namespace WebAPIServiceLayer.Domain.Contracts
 {
     public interface ICourseRepository : IFullRepository<Course, int>
     {

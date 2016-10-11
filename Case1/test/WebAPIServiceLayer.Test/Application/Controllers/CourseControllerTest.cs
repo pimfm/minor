@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using BackendService.Application.Controllers;
-using BackendService.Domain.Entities;
-using BackendService.Domain.Contracts;
-using BackendService.Test.Infrastructure.Repositories.Mocks;
+using WebAPIServiceLayer.Application.Controllers;
+using WebAPIServiceLayer.Domain.Entities;
+using WebAPIServiceLayer.Domain.Contracts;
+using WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks;
 
-namespace BackendService.Test.Application.Controllers
+namespace WebAPIServiceLayer.Test.Application.Controllers
 {
     [TestClass]
     public class CourseControllerTest
@@ -33,10 +33,10 @@ namespace BackendService.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("C# leren programmeren"),
-                new Course("Whitespace leren programmeren"),
-                new Course("Golang leren programmeren"),
-                new Course("Brainfuck leren programmeren"),
+                new Course("C# leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Whitespace leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Golang leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Brainfuck leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
             };
 
             // Act
@@ -59,7 +59,7 @@ namespace BackendService.Test.Application.Controllers
 
             // Assert
             Assert.AreEqual(0, repository.Count());
-            Assert.AreEqual("No courses provided, please check if your file contains courses", report);
+            Assert.AreEqual("Dit bestand bevat geen cursussen, controleer of het goede bestand is geselecteerd.", report);
         }
 
         [TestMethod]
@@ -70,8 +70,8 @@ namespace BackendService.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("C# leren programmeren"),
-                new Course("Golang leren programmeren"),
+                new Course("C# leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Golang leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
             };
 
             // Act
@@ -79,7 +79,7 @@ namespace BackendService.Test.Application.Controllers
 
             // Assert
             Assert.AreEqual(2, repository.Count());
-            Assert.AreEqual("All 2 courses were newly inserted, no duplicated!", report);
+            Assert.AreEqual("Alle 2 cursussen zijn nieuw toegevoegd!", report);
         }
 
         [TestMethod]
@@ -90,8 +90,8 @@ namespace BackendService.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("PHP leren programmeren"),
-                new Course("Java leren programmeren"),
+                new Course("PHP leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Java leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
             };
 
             // Act
@@ -99,7 +99,7 @@ namespace BackendService.Test.Application.Controllers
 
             // Assert
             Assert.AreEqual(0, repository.Count());
-            Assert.AreEqual("All 2 courses were duplicates, no new courses inserted.", report);
+            Assert.AreEqual("Geen nieuwe cursussen gevonden. Alle 2 cursussen waren al aanwezig. Controleer of het goede bestand is geselecteerd.", report);
         }
 
         [TestMethod]
@@ -110,10 +110,10 @@ namespace BackendService.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("PHP leren programmeren"),
-                new Course("Golang leren programmeren"),
-                new Course("Java leren programmeren"),
-                new Course("C# leren programmeren"),
+                new Course("PHP leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Golang leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Java leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("C# leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
             };
 
             // Act
@@ -121,7 +121,7 @@ namespace BackendService.Test.Application.Controllers
 
             // Assert
             Assert.AreEqual(2, repository.Count());
-            Assert.AreEqual("2 courses inserted! 2 not inserted, due to duplication.", report);
+            Assert.AreEqual("2 cursussen toegevoegd! 2 cursussen niet toegevoegd, omdat ze al aanwezig waren.", report);
         }
     }
 }

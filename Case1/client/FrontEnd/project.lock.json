@@ -1557,6 +1557,35 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
+      "Microsoft.Rest.ClientRuntime/2.3.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Newtonsoft.Json": "[9.0.1, 10.0.0)",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Diagnostics.Tools": "4.0.1",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Linq": "4.1.0",
+          "System.Linq.Expressions": "4.1.0",
+          "System.Net.Http": "4.1.0",
+          "System.Net.Primitives": "4.0.11",
+          "System.ObjectModel": "4.0.12",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11",
+          "System.Xml.ReaderWriter": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.5/Microsoft.Rest.ClientRuntime.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/Microsoft.Rest.ClientRuntime.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.1": {
         "type": "package",
         "dependencies": {
@@ -5079,6 +5108,18 @@
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.json"
+      ]
+    },
+    "Microsoft.Rest.ClientRuntime/2.3.2": {
+      "sha512": "qrPBemfdOfD7/LcSa7Hqi01KqLwCZbJ+/GSLN9BnL058/gMU9lvU+Ww19oZbjXh9jr2WzNXPhMJ/YkX9bwQCfw==",
+      "type": "package",
+      "path": "Microsoft.Rest.ClientRuntime/2.3.2",
+      "files": [
+        "Microsoft.Rest.ClientRuntime.2.3.2.nupkg.sha512",
+        "Microsoft.Rest.ClientRuntime.nuspec",
+        "lib/net45/Microsoft.Rest.ClientRuntime.dll",
+        "lib/netstandard1.1/Microsoft.Rest.ClientRuntime.dll",
+        "lib/netstandard1.5/Microsoft.Rest.ClientRuntime.dll"
       ]
     },
     "Microsoft.VisualBasic/10.0.1": {
@@ -10003,6 +10044,7 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.1",
+      "Microsoft.Rest.ClientRuntime >= 2.3.2",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0"
     ],
     ".NETCoreApp,Version=v1.0": []

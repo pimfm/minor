@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using BackendService.Domain.Contracts;
-using BackendService.Infrastructure.Factories;
+using WebAPIServiceLayer.Domain.Contracts;
+using WebAPIServiceLayer.Infrastructure.Factories;
 
-namespace BackendService.Infrastructure.Repositories
+namespace WebAPIServiceLayer.Infrastructure.Repositories
 {
     public abstract class BaseRepository<TEntity, TContext> : IRepository<TEntity>
         where TEntity : class

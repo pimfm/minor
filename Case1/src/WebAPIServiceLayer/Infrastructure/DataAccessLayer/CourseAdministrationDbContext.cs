@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BackendService.Domain.Entities;
+using WebAPIServiceLayer.Domain.Entities;
 
-namespace BackendService.Infrastructure.DataAccessLayer
+namespace WebAPIServiceLayer.Infrastructure.DataAccessLayer
 {
     public class CourseAdministrationDbContext : DbContext
     {
@@ -9,6 +9,7 @@ namespace BackendService.Infrastructure.DataAccessLayer
 
         public CourseAdministrationDbContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

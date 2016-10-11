@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using BackendService.Domain.Entities;
-using BackendService.Domain.Contracts;
+using WebAPIServiceLayer.Domain.Entities;
+using WebAPIServiceLayer.Domain.Contracts;
 using System.Linq;
 
-namespace BackendService.Test.Infrastructure.Repositories.Mocks
+namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
 {
     internal class CourseRepositoryMock : ICourseRepository
     {
@@ -33,8 +33,8 @@ namespace BackendService.Test.Infrastructure.Repositories.Mocks
         {
             List<Course> courses = new List<Course>()
             {
-                new Course("PHP leren programmeren"),
-                new Course("Java leren programmeren")
+                new Course("PHP leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("Java leren programmeren", "CNETIN", "5 dagen", "12/04/1995")
             };
 
             return courses;

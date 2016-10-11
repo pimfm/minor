@@ -1,4 +1,4 @@
-﻿namespace BackendService.Infrastructure.Services
+﻿namespace WebAPIServiceLayer.Infrastructure.Services
 {
     public interface IServiceLocator
     {
