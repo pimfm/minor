@@ -7,8 +7,8 @@ namespace WebAPIServiceLayer.Domain.Entities
         public int ID { get; set; }
         public string Title { get; set; }
         public string Code { get; set; }
-        public string DurationInDays { get; set; }
-        public string Date { get; set; }
+        public int DurationInDays { get; set; }
+        public DateTime StartDate { get; set; }
 
         /// <summary>
         /// Required for entity framework,
@@ -20,12 +20,12 @@ namespace WebAPIServiceLayer.Domain.Entities
             Title = "Unknown";
         }
 
-        public Course(string title, string code, string durationInDays, string date)
+        public Course(string title, string code, int durationInDays, DateTime startDate)
         {
             Title = title;
             Code = code;
             DurationInDays = durationInDays;
-            Date = date;
+            StartDate = startDate;
         }
 
         public bool Equals(Course other)
@@ -33,12 +33,12 @@ namespace WebAPIServiceLayer.Domain.Entities
             return Title == other.Title
                 && Code == other.Code
                 && DurationInDays == other.DurationInDays
-                && Date == other.Date;
+                && StartDate == other.StartDate;
         }
 
         public override int GetHashCode()
         {
-            return Title.GetHashCode() | Code.GetHashCode() | DurationInDays.GetHashCode() | Date.GetHashCode();
+            return Title.GetHashCode() | Code.GetHashCode() | DurationInDays.GetHashCode() | StartDate.GetHashCode();
         }
     }
 }

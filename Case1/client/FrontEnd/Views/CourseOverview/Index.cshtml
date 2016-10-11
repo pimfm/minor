@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Frontend.Agents.Models.Course>
+@{
+    ViewData["Title"] = "Cursussen";
+}
+<br />
+<h1>Cursus overzicht</h1>
+@if (Model.Count() == 0)
+{
+    <p>Nog geen cursussen toegevoegd. <a asp-area="" asp-controller="CourseUpload" asp-action="Index">Importeer ze hier!</a></p>
+} else { 
+    <table class="table">
+        <thead>
+            <th>Datum</th>
+            <th>Duur in dagen</th>
+            <th>Titel</th>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.Date</td>
+                    <td>@course.DurationInDays</td>
+                    <td>@course.Title</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -21,10 +21,12 @@ namespace FrontEnd.Test.Mocks
             };
         }
 
-        public void SaveCourses(IList<Course> courses)
+        public string SaveCourses(IList<Course> courses)
         {
             SaveCoursesCalled = true;
             SaveCoursesParameter = courses;
+
+            return "";
         }
     }
 }

@@ -5,6 +5,7 @@ using WebAPIServiceLayer.Application.Controllers;
 using WebAPIServiceLayer.Domain.Entities;
 using WebAPIServiceLayer.Domain.Contracts;
 using WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks;
+using System;
 
 namespace WebAPIServiceLayer.Test.Application.Controllers
 {
@@ -33,10 +34,10 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("C# leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Whitespace leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Golang leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Brainfuck leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("C# leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Whitespace leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Golang leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Brainfuck leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12))
             };
 
             // Act
@@ -70,8 +71,8 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("C# leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Golang leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("C# leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Golang leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
             };
 
             // Act
@@ -90,8 +91,8 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("PHP leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Java leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("PHP leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Java leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
             };
 
             // Act
@@ -110,10 +111,10 @@ namespace WebAPIServiceLayer.Test.Application.Controllers
             CoursesController controller = new CoursesController(repository);
             IEnumerable<Course> courses = new List<Course>()
             {
-                new Course("PHP leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Golang leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Java leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("C# leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
+                new Course("PHP leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Golang leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Java leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("C# leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
             };
 
             // Act

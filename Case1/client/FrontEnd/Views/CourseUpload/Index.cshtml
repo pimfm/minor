@@ -5,7 +5,19 @@
 <br />
 <form method="post" asp-action="Upload" asp-controller="CourseUpload" enctype="multipart/form-data">
     <h1>Cursussen Importeren</h1>
-    <input type="file" name="files" multiple />
+    <input type="file" name="files" multiple required />
+    <br />
+    <div style="display: inline-block">
+        Importeer vanaf:
+        <br />
+        Importeer tot:
+    </div>
+    <div style="display: inline-block">
+        <input type="date" name="from" />
+        <br />
+        <input type="date" name="to" />
+    </div>
+    <br />
     <br />
     <input class="btn-success" type="submit" value="Importeren" />
     <br />

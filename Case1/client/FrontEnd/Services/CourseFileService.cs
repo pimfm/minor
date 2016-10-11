@@ -5,46 +5,23 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Frontend.Exceptions;
 using System.Linq;
+using System;
 
 namespace FrontEnd.Services
 {
     public class CourseFileService : IFileService<Course>
     {
-        private List<Course> _courses;
-        private int _lineNumber = 0;
-
-        private Regex _titlePattern;
-        private Regex _codePattern;
-        private Regex _daysPattern;
-        private Regex _startDatePattern;
-
-        private string _titleExample;
-        private string _codeExample;
-        private string _daysExample;
-        private string _startDateExample;
-        private Regex _whiteSpacePattern;
-        private string _whiteSpaceExample;
+        private List<Course> _courses = new List<Course>();
+        private int _lineNumber;
 
         public CourseFileService()
         {
             _courses = new List<Course>();
-
-            _titlePattern = new Regex(@"^Titel: (.+)$");
-            _codePattern = new Regex(@"^Cursuscode: ([A-Z]+)$");
-            _daysPattern = new Regex(@"^Duur: (\d+) dagen$");
-            _startDatePattern = new Regex(@"^Startdatum: (\d{2}\/\d{2}\/\d{4})$");
-            _whiteSpacePattern = new Regex(@"^\s*$");
-
-            _titleExample = "Titel: C# leren programmeren";
-            _codeExample = "Cursuscode: CNETIN";
-            _daysExample = "Duur: 5 dagen";
-            _startDateExample = "Startdatum: 20/10/2014";
-            _whiteSpaceExample = "Plaat een witregel na elke cursus";
         }
         
-        public IEnumerable<Course> Produce()
+        public IEnumerable<Course> Produce(DateTime from, DateTime to)
         {
-            return _courses;
+            return _courses.Where(course => from <= course.StartDate && course.StartDate <= to);
         }
 
         public void Validate(IFormFile file)
@@ -56,12 +33,12 @@ namespace FrontEnd.Services
             {
                 while(reader.Peek() > 0)
                 {
-                    string title = Validate(reader.ReadLine(), _titlePattern, _titleExample);
-                    string code = Validate(reader.ReadLine(), _codePattern, _codeExample);
-                    string days = Validate(reader.ReadLine(), _daysPattern, _daysExample);
-                    string startDate = Validate(reader.ReadLine(), _startDatePattern, _startDateExample);
+                    string title = ValidateTitle(reader.ReadLine());
+                    string code = ValidateCode(reader.ReadLine());
+                    int days = ValidateDays(reader.ReadLine());
+                    DateTime startDate = ValidateStartDate(reader.ReadLine());
 
-                    Validate(reader.ReadLine(), _whiteSpacePattern, _whiteSpaceExample);
+                    BaseValidate(reader.ReadLine(), new Regex(@"^\s*$"), "Plaat een witregel na elke cursus");
 
                     Course course = new Course(null, title, code, days, startDate);
 
@@ -69,21 +46,62 @@ namespace FrontEnd.Services
                 }
             }
         }
+        private string ValidateTitle(string line)
+        {
+            Regex pattern = new Regex(@"^Titel: (.+)$");
+            string example = "Titel: C# leren programmeren";
+
+            BaseValidate(line, pattern, example);
+
+            return pattern.Match(line).Groups[1].Value;
+        }
+
+        private string ValidateCode(string line)
+        {
+            Regex pattern = new Regex(@"^Cursuscode: ([A-Z]+)$");
+            string example = "Cursuscode: CNETIN";
+
+            BaseValidate(line, pattern, example);
+
+            return pattern.Match(line).Groups[1].Value;
+        }
+
+        private int ValidateDays(string line)
+        {
+            Regex pattern = new Regex(@"^Duur: (\d+) dagen$");
+            string example = "Duur: 5 dagen";
+
+            BaseValidate(line, pattern, example);
+
+            string match = pattern.Match(line).Groups[1].Value;
+
+            return int.Parse(match);
+        }
+
+        private DateTime ValidateStartDate(string line)
+        {
+            Regex pattern = new Regex(@"^Startdatum: (\d{2})\/(\d{2})\/(\d{4})$");
+            string example = "Startdatum: 20/10/2014";
+
+            BaseValidate(line, pattern, example);
+
+            int day = int.Parse(pattern.Match(line).Groups[1].Value);
+            int month = int.Parse(pattern.Match(line).Groups[2].Value);
+            int year = int.Parse(pattern.Match(line).Groups[3].Value);
+
+            return new DateTime(year, month, day);
+        }
 
         /// <exception cref="InvalidLineException"></exception>
         /// <returns></returns>
-        private string Validate(string line, Regex pattern, string correctExample)
+        private void BaseValidate(string line, Regex pattern, string correctExample)
         {
             _lineNumber++;
 
             if (pattern.IsMatch(line) == false)
             {
                 throw new InvalidLineException($"De waarde op regel {_lineNumber} is niet valide. Gevonden waarde: {line}, probeer de regel op dit voorbeeld te laten lijken: {correctExample}.");
-            }
-
-            string match = pattern.Match(line).Groups[0].Value;
-
-            return match;
+            };
         }
     }
 }

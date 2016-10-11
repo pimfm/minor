@@ -206,6 +206,7 @@ C:\tfs\PimG\Case1\client\FrontEnd\Agents\CourseAgent\CourseServiceExtensions.cs
 C:\tfs\PimG\Case1\client\FrontEnd\Agents\CourseAgent\ICourseAgent.cs
 C:\tfs\PimG\Case1\client\FrontEnd\Agents\CourseAgent\ICourseService.cs
 C:\tfs\PimG\Case1\client\FrontEnd\Agents\CourseAgent\Models\Course.cs
+C:\tfs\PimG\Case1\client\FrontEnd\Controllers\CourseOverviewController.cs
 C:\tfs\PimG\Case1\client\FrontEnd\Controllers\CourseUploadController.cs
 C:\tfs\PimG\Case1\client\FrontEnd\Exceptions\InvalidLineException.cs
 C:\tfs\PimG\Case1\client\FrontEnd\Services\CourseFileService.cs

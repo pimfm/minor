@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using FrontEnd.Services;
 using Frontend.Agents.Models;
 using Frontend.Exceptions;
+using System;
 
 namespace Frontend.Controllers
 {
@@ -27,7 +28,7 @@ namespace Frontend.Controllers
         }
 
         [HttpPost]
-        public ViewResult Upload(ICollection<IFormFile> files)
+        public ViewResult Upload(ICollection<IFormFile> files, DateTime from, DateTime to)
         {
             List<Course> uploadedCourses = new List<Course>();
 
@@ -41,7 +42,7 @@ namespace Frontend.Controllers
                     return View("Index", $"Fout gevonden in {file.FileName}. {exception.Message}");
                 }
 
-                IEnumerable<Course> courses = _service.Produce();
+                IEnumerable<Course> courses = _service.Produce(from, to);
 
                 uploadedCourses.AddRange(courses);
             }

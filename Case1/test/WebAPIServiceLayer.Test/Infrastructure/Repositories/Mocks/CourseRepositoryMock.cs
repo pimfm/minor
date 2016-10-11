@@ -33,8 +33,8 @@ namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
         {
             List<Course> courses = new List<Course>()
             {
-                new Course("PHP leren programmeren", "CNETIN", "5 dagen", "12/04/1995"),
-                new Course("Java leren programmeren", "CNETIN", "5 dagen", "12/04/1995")
+                new Course("PHP leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
+                new Course("Java leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12))
             };
 
             return courses;

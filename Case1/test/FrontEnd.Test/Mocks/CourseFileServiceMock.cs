@@ -10,7 +10,7 @@ namespace FrontEnd.Test.Mocks
 {
     public class CourseFileServiceMock : IFileService<Course>
     {
-        public IEnumerable<Course> Produce()
+        public IEnumerable<Course> Produce(DateTime from, DateTime to)
         {
             return new List<Course>()
             {
