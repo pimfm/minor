@@ -8,9 +8,14 @@
 {
     <p>Nog geen cursussen toegevoegd. <a asp-area="" asp-controller="CourseUpload" asp-action="Index">Importeer ze hier!</a></p>
 } else { 
+    <div id="week-navigation">
+        <i style="float:left" class="glyphicon glyphicon-chevron-left"></i>
+        <h2 style="text-align:center">Week: 12</h2>
+        <i style="float:right" class="glyphicon glyphicon-chevron-right"></i>
+    </div>
     <table class="table">
         <thead>
-            <th>Datum</th>
+            <th>Startdatum</th>
             <th>Duur in dagen</th>
             <th>Titel</th>
         </thead>
@@ -18,7 +23,7 @@
             @foreach (var course in Model)
             {
                 <tr>
-                    <td>@course.Date</td>
+                    <td>@course.StartDate</td>
                     <td>@course.DurationInDays</td>
                     <td>@course.Title</td>
                 </tr>
