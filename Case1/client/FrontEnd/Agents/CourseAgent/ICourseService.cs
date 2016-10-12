@@ -40,7 +40,7 @@ namespace Frontend.Agents
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<Course>>> ApiV1CoursesGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<Course>>> FindAllCoursesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='courses'>
         /// </param>
@@ -50,7 +50,19 @@ namespace Frontend.Agents
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<UploadReport>> ApiV1CoursesPostWithHttpMessagesAsync(IList<Course> courses = default(IList<Course>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<UploadReport>> AddMultipleCoursesWithHttpMessagesAsync(IList<Course> courses = default(IList<Course>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='week'>
+        /// </param>
+        /// <param name='year'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<Course>>> FindCoursesInWeekWithHttpMessagesAsync(int week, int year, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

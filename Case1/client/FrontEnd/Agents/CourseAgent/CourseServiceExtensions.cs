@@ -20,9 +20,9 @@ namespace Frontend.Agents
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IList<Course> ApiV1CoursesGet(this ICourseService operations)
+            public static IList<Course> FindAllCourses(this ICourseService operations)
             {
-                return Task.Factory.StartNew(s => ((ICourseService)s).ApiV1CoursesGetAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ICourseService)s).FindAllCoursesAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -31,9 +31,9 @@ namespace Frontend.Agents
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<Course>> ApiV1CoursesGetAsync(this ICourseService operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<Course>> FindAllCoursesAsync(this ICourseService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApiV1CoursesGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.FindAllCoursesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -44,9 +44,9 @@ namespace Frontend.Agents
             /// </param>
             /// <param name='courses'>
             /// </param>
-            public static UploadReport ApiV1CoursesPost(this ICourseService operations, IList<Course> courses = default(IList<Course>))
+            public static UploadReport AddMultipleCourses(this ICourseService operations, IList<Course> courses = default(IList<Course>))
             {
-                return Task.Factory.StartNew(s => ((ICourseService)s).ApiV1CoursesPostAsync(courses), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ICourseService)s).AddMultipleCoursesAsync(courses), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -57,9 +57,39 @@ namespace Frontend.Agents
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<UploadReport> ApiV1CoursesPostAsync(this ICourseService operations, IList<Course> courses = default(IList<Course>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<UploadReport> AddMultipleCoursesAsync(this ICourseService operations, IList<Course> courses = default(IList<Course>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApiV1CoursesPostWithHttpMessagesAsync(courses, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.AddMultipleCoursesWithHttpMessagesAsync(courses, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='week'>
+            /// </param>
+            /// <param name='year'>
+            /// </param>
+            public static IList<Course> FindCoursesInWeek(this ICourseService operations, int week, int year)
+            {
+                return Task.Factory.StartNew(s => ((ICourseService)s).FindCoursesInWeekAsync(week, year), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='week'>
+            /// </param>
+            /// <param name='year'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<Course>> FindCoursesInWeekAsync(this ICourseService operations, int week, int year, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.FindCoursesInWeekWithHttpMessagesAsync(week, year, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

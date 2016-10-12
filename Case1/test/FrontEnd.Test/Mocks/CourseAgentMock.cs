@@ -1,6 +1,7 @@
 ﻿using FrontEnd.Agents.CourseAgent;
 using System.Collections.Generic;
 using Frontend.Agents.Models;
+using System;
 
 namespace FrontEnd.Test.Mocks
 {
@@ -10,7 +11,7 @@ namespace FrontEnd.Test.Mocks
         public bool SaveCoursesCalled { get; private set; }
         public IList<Course> SaveCoursesParameter { get; private set; }
 
-        public IEnumerable<Course> FindAllCourses()
+        public IEnumerable<Course> FindAll()
         {
             FindAllCoursesCalled = true;
            
@@ -21,12 +22,17 @@ namespace FrontEnd.Test.Mocks
             };
         }
 
-        public UploadReport SaveCourses(IList<Course> courses)
+        public IEnumerable<Course> FindInWeek(int week, int year)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UploadReport Save(IList<Course> courses)
         {
             SaveCoursesCalled = true;
             SaveCoursesParameter = courses;
 
-            return new UploadReport(0, 0);
+            return new UploadReport();
         }
     }
 }

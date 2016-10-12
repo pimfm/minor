@@ -33,14 +33,19 @@ namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
         {
             List<Course> courses = new List<Course>()
             {
-                new Course("PHP leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
-                new Course("Java leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12))
+                new Course("PHP leren programmeren", "CNETIN", 5),
+                new Course("Java leren programmeren", "CNETIN", 5)
             };
 
             return courses;
         }
 
         public IEnumerable<Course> FindBy(Expression<Func<Course, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Course> FindByWeek(int week, int year)
         {
             throw new NotImplementedException();
         }

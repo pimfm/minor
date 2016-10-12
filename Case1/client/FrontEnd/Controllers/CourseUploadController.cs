@@ -9,7 +9,7 @@ using System;
 
 namespace Frontend.Controllers
 {
-    [Route("cursussen/importeren")]
+    [Route("importeren")]
     public class CourseUploadController : Controller
     {
         private ICourseAgent _agent;
@@ -36,9 +36,8 @@ namespace Frontend.Controllers
             {
                 try
                 {
-                    _service.Validate(file);
-                    List<Course> courses = (List<Course>)_service.Produce(from, to);
-                    UploadReport report = _agent.SaveCourses(courses);
+                    IList<Course> courses = _service.ReadFile(file, from, to);
+                    UploadReport report = _agent.Save(courses);
 
                     report.FileName = file.FileName;
                     reports.Add(report);

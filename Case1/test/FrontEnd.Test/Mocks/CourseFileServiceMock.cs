@@ -10,18 +10,9 @@ namespace FrontEnd.Test.Mocks
 {
     public class CourseFileServiceMock : IFileService<Course>
     {
-        public IEnumerable<Course> Produce(DateTime? from, DateTime? to)
+        public IList<Course> ReadFile(IFormFile file, DateTime? from, DateTime? to)
         {
-            return new List<Course>()
-            {
-                new Course(null, "Title"),
-                new Course(null, "Kitle"),
-            };
-        }
-
-        public void Validate(IFormFile file)
-        {
-            // Uber valid
+            return new List<Course>();
         }
     }
 }

@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "cursussen/importeren",
+      "launchUrl": "cursussen",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

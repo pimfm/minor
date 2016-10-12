@@ -6,39 +6,38 @@ using System.Text.RegularExpressions;
 using Frontend.Exceptions;
 using System.Linq;
 using System;
+using FrontEnd.Factories;
 
 namespace FrontEnd.Services
 {
     public class CourseFileService : IFileService<Course>
     {
-        private List<Course> _courses = new List<Course>();
         private int _lineNumber;
-
-        public CourseFileService()
-        {
-            _courses = new List<Course>();
-        }
-
-        public IEnumerable<Course> Produce(DateTime? from, DateTime? to)
+        private CourseFactory _factory = new CourseFactory();
+        
+        private bool DateInRange(DateTime startDate, DateTime endDate, DateTime? from, DateTime? to)
         {
             if (from == null && to == null)
             {
-                return _courses;
+                return true;
             } else if (from == null)
             {
-                return _courses.Where(course => course.StartDate <= to);
+                return startDate < to || endDate < to;
             } else if (to == null)
             {
-                return _courses.Where(course => course.StartDate >= from);
+                return startDate >= from || endDate >= from;
             }
 
-            return _courses.Where(course => from <= course.StartDate && course.StartDate <= to);
+            bool startDateInRange = startDate >= from && startDate < to;
+            bool endDateInRange = endDate >= from && endDate < to;
+
+            return startDateInRange || endDateInRange;
         }
 
-        public void Validate(IFormFile file)
+        public IList<Course> ReadFile(IFormFile file, DateTime? from, DateTime? to)
         {
             _lineNumber = 0;
-            _courses = new List<Course>();
+            List<Course> courses = new List<Course>();
 
             using (StreamReader reader = new StreamReader(file.OpenReadStream()))
             {
@@ -49,13 +48,18 @@ namespace FrontEnd.Services
                     int days = ValidateDays(reader.ReadLine());
                     DateTime startDate = ValidateStartDate(reader.ReadLine());
 
-                    BaseValidate(reader.ReadLine(), new Regex(@"^\s*$"), "Plaat een witregel na elke cursus");
+                    BaseValidate(reader.ReadLine(), new Regex(@"^\s*$"), "Plaats een witregel na elke cursus");
 
-                    Course course = new Course(null, title, code, days, startDate);
+                    if (DateInRange(startDate, startDate.AddDays(days), from, to))
+                    {
+                        Course course = _factory.ManufactureCourse(title, code, days, startDate);
 
-                    _courses.Add(course);
+                        courses.Add(course);
+                    }
                 }
             }
+
+            return courses;
         }
         private string ValidateTitle(string line)
         {

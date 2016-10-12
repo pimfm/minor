@@ -1,6 +1,6 @@
 ﻿
 
-namespace WebAPIServiceLayer.Application.Services
+namespace WebAPIServiceLayer.Domain.Entities
 {
     public class UploadReport
     {
