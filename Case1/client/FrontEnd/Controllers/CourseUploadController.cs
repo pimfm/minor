@@ -37,14 +37,15 @@ namespace Frontend.Controllers
             {
                 try
                 {
-                    IList<CourseMoment> courses = _service.ReadFile(file, from, to);
+                    IList<CourseMoment> courses = _service.ExtractCoursesFromFile(file, from, to);
+
                     UploadReport report = _agent.Upload(courses);
                     UploadReportViewModel reportViewModel = UploadReportViewModel.fromUploadReport(file.FileName, report);
 
                     reports.Add(reportViewModel);
                 } catch (InvalidLineException exception)
                 {
-                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromException(file.FileName, exception);
+                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromException(exception);
 
                     reports.Add(reportViewModel);
                 }

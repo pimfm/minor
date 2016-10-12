@@ -4,7 +4,7 @@ using System;
 
 namespace FrontEnd.Factories
 {
-    public class CourseMomentFactory
+    public class CourseMomentFactory : ICourseMomentFactory
     {
         public CourseMoment MakeCourseMoment(string title, string code, int duration, DateTime startDate)
         {

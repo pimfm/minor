@@ -7,6 +7,6 @@ namespace FrontEnd.Services
 {
     public interface IFileService<TEntity>
     {
-        IList<TEntity> ReadFile(IFormFile file, DateTime? from, DateTime? to);
+        IList<TEntity> ExtractCoursesFromFile(IFormFile file, DateTime? from, DateTime? to);
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using Frontend.Agents.Models;
+using Frontend.Exceptions;
 using System;
 
 namespace FrontEnd.ViewModel
@@ -39,9 +40,9 @@ namespace FrontEnd.ViewModel
             return new UploadReportViewModel(fileName, label, message);
         }
 
-        public static UploadReportViewModel fromException(string fileName, Exception exception)
+        public static UploadReportViewModel fromException(InvalidLineException exception)
         {
-            return new UploadReportViewModel(fileName, "danger", exception.Message);
+            return new UploadReportViewModel(exception.FileName, "danger", exception.Message);
         }
     }
 }

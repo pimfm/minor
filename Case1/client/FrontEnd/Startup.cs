@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using FrontEnd.Agents.CourseAgent;
 using FrontEnd.Services;
 using Frontend.Agents.Models;
+using Services;
+using FrontEnd.Factories;
 
 namespace FrontEnd
 {
@@ -37,6 +39,8 @@ namespace FrontEnd
 
             services.AddScoped<ICourseAgent, CourseAgent>();
             services.AddScoped<IFileService<CourseMoment>, CourseFileService>();
+            services.AddScoped<ICourseValidator, CourseValidator>();
+            services.AddScoped<ICourseMomentFactory, CourseMomentFactory>();
 
             services.AddMvc();
         }
