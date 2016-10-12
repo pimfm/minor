@@ -6,9 +6,7 @@ namespace Domain.Entities
     public class CourseMoment
     {
         public int ID { get; set; }
-        public int CourseID { get; set; }
-
-        public virtual Course Course { get; set; }
+        
         public DateTime StartDate { get; set; }
 
         /// <summary>
@@ -21,9 +19,8 @@ namespace Domain.Entities
 
         }
 
-        public CourseMoment(Course course, DateTime startDate)
+        public CourseMoment(DateTime startDate)
         {
-            Course = course;
             StartDate = startDate;
         }
     }

@@ -42,7 +42,7 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
         {
             using (var context = _factory.ManufactureContext())
             {
-                return context.CourseMoments.Where(moment => IsInWeek(moment, week, year)).Select(moment => moment.Course);
+                return context.CourseMoments.Where(moment => IsInWeek(moment, week, year));
             }
         }
         

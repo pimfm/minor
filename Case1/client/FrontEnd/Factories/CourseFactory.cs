@@ -7,25 +7,14 @@ namespace FrontEnd.Factories
 {
     public class CourseFactory
     {
-        public Course ManufactureCourse(string title, string code, int duration)
+        public Course MakeCourse(string title, string code, int duration, DateTime? startDate)
         {
+            if (startDate != null)
+            {
+                IList<CourseMoment> moments = new CourseMoment(null, null, startDate);
+                return new Course(null, title, code, duration, moments);
+            }
             return new Course(null, title, code, duration);
-        }
-
-        public CourseMoment ManufactureCourseMoment(Course course, DateTime startDate)
-        {
-            return new CourseMoment(null, null, course, startDate);
-        }
-
-        public Course ManufactureCourse(string title, string code, int duration, DateTime startDate)
-        {
-            Course course = ManufactureCourse(title, code, duration);
-            CourseMoment moment = ManufactureCourseMoment(course, startDate);
-
-            course.Moments = new List<CourseMoment>();
-            course.Moments.Add(moment);
-
-            return course;
         }
     }
 }

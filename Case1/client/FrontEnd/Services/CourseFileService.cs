@@ -52,7 +52,7 @@ namespace FrontEnd.Services
 
                     if (DateInRange(startDate, startDate.AddDays(days), from, to))
                     {
-                        Course course = _factory.ManufactureCourse(title, code, days, startDate);
+                        Course course = _factory.MakeCourse(title, code, days, startDate);
 
                         courses.Add(course);
                     }

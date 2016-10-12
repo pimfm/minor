@@ -34,7 +34,7 @@ namespace WebAPIServiceLayer.Domain.Entities
 
         public void AddMoment(DateTime startDate)
         {
-            Moments.Add(new CourseMoment(this, startDate));
+            Moments.Add(new CourseMoment(startDate));
         }
 
         public bool Equals(Course other)
