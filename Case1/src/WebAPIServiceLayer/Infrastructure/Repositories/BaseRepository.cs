@@ -27,7 +27,7 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
             }
         }
 
-        public TEntity FindOneBy(Expression<Func<TEntity, bool>> filter)
+        public virtual TEntity FindOneBy(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext context = _factory.ManufactureContext())
             {
@@ -78,7 +78,7 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
             }
         }
 
-        public void InsertRange(IEnumerable<TEntity> entities)
+        public virtual void InsertRange(IEnumerable<TEntity> entities)
         {
             using (TContext context = _factory.ManufactureContext())
             {

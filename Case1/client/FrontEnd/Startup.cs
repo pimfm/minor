@@ -36,7 +36,7 @@ namespace FrontEnd
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddScoped<ICourseAgent, CourseAgent>();
-            services.AddScoped<IFileService<Course>, CourseFileService>();
+            services.AddScoped<IFileService<CourseMoment>, CourseFileService>();
 
             services.AddMvc();
         }

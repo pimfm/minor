@@ -5,8 +5,8 @@ namespace FrontEnd.Agents.CourseAgent
 {
     public interface ICourseAgent
     {
-        IEnumerable<Course> FindAll();
-        IEnumerable<Course> FindInWeek(int week, int year);
-        UploadReport Save(IList<Course> courses);
+        IEnumerable<CourseMoment> FindAll();
+        IEnumerable<CourseMoment> FindInWeek(int week, int year);
+        UploadReport Upload(IList<CourseMoment> courses);
     }
 }

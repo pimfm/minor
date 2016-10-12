@@ -150,7 +150,7 @@ namespace Frontend.Agents
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<IList<Course>>> FindAllCoursesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<CourseMoment>>> FindAllCourseMomentsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -160,7 +160,7 @@ namespace Frontend.Agents
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "FindAllCourses", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "FindAllCourseMoments", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
@@ -217,7 +217,7 @@ namespace Frontend.Agents
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<IList<Course>>();
+            var _result = new HttpOperationResponse<IList<CourseMoment>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -226,7 +226,7 @@ namespace Frontend.Agents
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Course>>(_responseContent, this.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<CourseMoment>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -245,7 +245,7 @@ namespace Frontend.Agents
             return _result;
         }
 
-        /// <param name='courses'>
+        /// <param name='courseMoments'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -256,7 +256,7 @@ namespace Frontend.Agents
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<UploadReport>> AddMultipleCoursesWithHttpMessagesAsync(IList<Course> courses = default(IList<Course>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<UploadReport>> AddMultipleCourseMomentsWithHttpMessagesAsync(IList<CourseMoment> courseMoments = default(IList<CourseMoment>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -265,9 +265,9 @@ namespace Frontend.Agents
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("courses", courses);
+                tracingParameters.Add("courseMoments", courseMoments);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "AddMultipleCourses", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "AddMultipleCourseMoments", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
@@ -292,9 +292,9 @@ namespace Frontend.Agents
 
             // Serialize Request
             string _requestContent = null;
-            if(courses != null)
+            if(courseMoments != null)
             {
-                _requestContent = SafeJsonConvert.SerializeObject(courses, this.SerializationSettings);
+                _requestContent = SafeJsonConvert.SerializeObject(courseMoments, this.SerializationSettings);
                 _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
@@ -371,7 +371,7 @@ namespace Frontend.Agents
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<IList<Course>>> FindCoursesInWeekWithHttpMessagesAsync(int week, int year, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<CourseMoment>>> FindCourseMomentsInWeekWithHttpMessagesAsync(int week, int year, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -383,7 +383,7 @@ namespace Frontend.Agents
                 tracingParameters.Add("week", week);
                 tracingParameters.Add("year", year);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "FindCoursesInWeek", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "FindCourseMomentsInWeek", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
@@ -442,7 +442,7 @@ namespace Frontend.Agents
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<IList<Course>>();
+            var _result = new HttpOperationResponse<IList<CourseMoment>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -451,7 +451,7 @@ namespace Frontend.Agents
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Course>>(_responseContent, this.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<CourseMoment>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

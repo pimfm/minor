@@ -15,19 +15,19 @@ namespace FrontEnd.Agents.CourseAgent
             _service.BaseUri = new Uri(@"http://localhost:2829/");
         }
 
-        public IEnumerable<Course> FindAll()
+        public IEnumerable<CourseMoment> FindAll()
         {
-            return _service.FindAllCourses();
+            return _service.FindAllCourseMoments();
         }
 
-        public IEnumerable<Course> FindInWeek(int week, int year)
+        public IEnumerable<CourseMoment> FindInWeek(int week, int year)
         {
-            return _service.FindCoursesInWeek(week, year);
+            return _service.FindCourseMomentsInWeek(week, year);
         }
 
-        public UploadReport Save(IList<Course> courses)
+        public UploadReport Upload(IList<CourseMoment> coursesMoments)
         {
-            return _service.AddMultipleCourses(courses);
+            return _service.AddMultipleCourseMoments(coursesMoments);
         }
     }
 }

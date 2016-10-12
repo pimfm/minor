@@ -10,10 +10,10 @@ using FrontEnd.Factories;
 
 namespace FrontEnd.Services
 {
-    public class CourseFileService : IFileService<Course>
+    public class CourseFileService : IFileService<CourseMoment>
     {
         private int _lineNumber;
-        private CourseFactory _factory = new CourseFactory();
+        private CourseMomentFactory _factory = new CourseMomentFactory();
         
         private bool DateInRange(DateTime startDate, DateTime endDate, DateTime? from, DateTime? to)
         {
@@ -34,10 +34,10 @@ namespace FrontEnd.Services
             return startDateInRange || endDateInRange;
         }
 
-        public IList<Course> ReadFile(IFormFile file, DateTime? from, DateTime? to)
+        public IList<CourseMoment> ReadFile(IFormFile file, DateTime? from, DateTime? to)
         {
             _lineNumber = 0;
-            List<Course> courses = new List<Course>();
+            List<CourseMoment> coursesMoments = new List<CourseMoment>();
 
             using (StreamReader reader = new StreamReader(file.OpenReadStream()))
             {
@@ -52,14 +52,14 @@ namespace FrontEnd.Services
 
                     if (DateInRange(startDate, startDate.AddDays(days), from, to))
                     {
-                        Course course = _factory.MakeCourse(title, code, days, startDate);
+                        CourseMoment course = _factory.MakeCourseMoment(title, code, days, startDate);
 
-                        courses.Add(course);
+                        coursesMoments.Add(course);
                     }
                 }
             }
 
-            return courses;
+            return coursesMoments;
         }
         private string ValidateTitle(string line)
         {

@@ -4,13 +4,13 @@ using WebAPIServiceLayer.Infrastructure.DataAccessLayer;
 using WebAPIServiceLayer.Infrastructure.Factories;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Entities;
 using System.Globalization;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPIServiceLayer.Infrastructure.Repositories
 {
-    public class CourseRepository : BaseRepository<Course, CourseAdministrationDbContext>, ICourseRepository
+    public class CourseRepository : BaseRepository<CourseMoment, CourseAdministrationDbContext>, ICourseRepository
     {
         private Calendar _calendar;
         private IManufacturesContext<CourseAdministrationDbContext> _factory;
@@ -26,19 +26,27 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
             _calendar = _info.Calendar;
         }
 
-        public Course Find(int key)
+        public CourseMoment Find(int key)
         {
-            Course course = FindOneBy(c => c.ID == key);
+            CourseMoment courseMoment = FindOneBy(c => c.ID == key);
 
-            if (course == null)
+            if (courseMoment == null)
             {
                 throw new KeyNotFoundException();
             }
 
-            return course;
+            return courseMoment;
         }
 
-        public IEnumerable<Course> FindByWeek(int week, int year)
+        public override IEnumerable<CourseMoment> FindAll()
+        {
+            using (var context = _factory.ManufactureContext())
+            {
+                return context.CourseMoments.Include(courseMoment => courseMoment.Course).ToList();
+            }
+        }
+
+        public IEnumerable<CourseMoment> FindByWeek(int week, int year)
         {
             using (var context = _factory.ManufactureContext())
             {

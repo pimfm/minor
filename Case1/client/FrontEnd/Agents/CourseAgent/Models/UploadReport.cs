@@ -21,22 +21,28 @@ namespace Frontend.Agents.Models
         /// <summary>
         /// Initializes a new instance of the UploadReport class.
         /// </summary>
-        public UploadReport(string label = default(string), string message = default(string), string fileName = default(string))
+        public UploadReport(int? amountInserted = default(int?), int? amountTotal = default(int?), int? amountOfDuplicates = default(int?), string fileName = default(string))
         {
-            Label = label;
-            Message = message;
+            AmountInserted = amountInserted;
+            AmountTotal = amountTotal;
+            AmountOfDuplicates = amountOfDuplicates;
             FileName = fileName;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "label")]
-        public string Label { get; set; }
+        [JsonProperty(PropertyName = "amountInserted")]
+        public int? AmountInserted { get; private set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [JsonProperty(PropertyName = "amountTotal")]
+        public int? AmountTotal { get; private set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "amountOfDuplicates")]
+        public int? AmountOfDuplicates { get; private set; }
 
         /// <summary>
         /// </summary>

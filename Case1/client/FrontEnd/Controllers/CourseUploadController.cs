@@ -6,6 +6,7 @@ using FrontEnd.Services;
 using Frontend.Agents.Models;
 using Frontend.Exceptions;
 using System;
+using FrontEnd.ViewModel;
 
 namespace Frontend.Controllers
 {
@@ -13,9 +14,9 @@ namespace Frontend.Controllers
     public class CourseUploadController : Controller
     {
         private ICourseAgent _agent;
-        private IFileService<Course> _service;
+        private IFileService<CourseMoment> _service;
 
-        public CourseUploadController(ICourseAgent agent, IFileService<Course> courseFileService)
+        public CourseUploadController(ICourseAgent agent, IFileService<CourseMoment> courseFileService)
         {
             _agent = agent;
             _service = courseFileService;
@@ -30,21 +31,22 @@ namespace Frontend.Controllers
         [HttpPost]
         public ViewResult Upload(ICollection<IFormFile> files, DateTime? from = null, DateTime? to = null)
         {
-            List<UploadReport> reports = new List<UploadReport>();
+            List<UploadReportViewModel> reports = new List<UploadReportViewModel>();
 
             foreach (IFormFile file in files)
             {
                 try
                 {
-                    IList<Course> courses = _service.ReadFile(file, from, to);
-                    UploadReport report = _agent.Save(courses);
+                    IList<CourseMoment> courses = _service.ReadFile(file, from, to);
+                    UploadReport report = _agent.Upload(courses);
+                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromUploadReport(file.FileName, report);
 
-                    report.FileName = file.FileName;
-                    reports.Add(report);
+                    reports.Add(reportViewModel);
                 } catch (InvalidLineException exception)
                 {
-                    UploadReport errorReport = new UploadReport("danger", exception.Message, file.FileName);
-                    reports.Add(errorReport);
+                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromException(file.FileName, exception);
+
+                    reports.Add(reportViewModel);
                 }
             }
 

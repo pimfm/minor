@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using WebAPIServiceLayer.Domain.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using WebAPIServiceLayer.Domain.Comparer;
 using System;
 using System.Globalization;
 using Swashbuckle.SwaggerGen.Annotations;
-using Domain.Entities;
+using WebAPIServiceLayer.Domain.Comparer;
 
 namespace WebAPIServiceLayer.Application.Controllers
 {
@@ -29,34 +28,34 @@ namespace WebAPIServiceLayer.Application.Controllers
         }
 
         [HttpGet]
-        [SwaggerOperation("FindAllCourses")]
-        [ProducesResponseType(typeof(IEnumerable<Course>), 200)]
-        public IEnumerable<Course> FindAll()
+        [SwaggerOperation("FindAllCourseMoments")]
+        [ProducesResponseType(typeof(IEnumerable<CourseMoment>), 200)]
+        public IEnumerable<CourseMoment> FindAll()
         {
             return _repository.FindAll();
         }
 
         [HttpGet("week/{week}/year/{year}")]
-        [SwaggerOperation("FindCoursesInWeek")]
-        [ProducesResponseType(typeof(IEnumerable<Course>), 200)]
-        public IEnumerable<Course> FindInWeek(int week, int year)
+        [SwaggerOperation("FindCourseMomentsInWeek")]
+        [ProducesResponseType(typeof(IEnumerable<CourseMoment>), 200)]
+        public IEnumerable<CourseMoment> FindInWeek(int week, int year)
         {
             return _repository.FindByWeek(week, year);
         }
 
         [HttpPost]
-        [SwaggerOperation("AddMultipleCourses")]
+        [SwaggerOperation("AddMultipleCourseMoments")]
         [ProducesResponseType(typeof(UploadReport), 200)]
-        public UploadReport AddRange([FromBody] IEnumerable<Course> courses)
+        public UploadReport AddMultipleCourseMoments([FromBody] IEnumerable<CourseMoment> courseMoments)
         {
-            IEnumerable<Course> newCourses = courses.Except(FindAll(), new CourseComparer());
-            int newCoursesCount = newCourses.Count();
+            IEnumerable<CourseMoment> newCourseMoments = courseMoments.Except(FindAll(), new CourseMomentComparer());
+            int newCoursesCount = newCourseMoments.Count();
 
             if (newCoursesCount > 0) {
-                _repository.InsertRange(newCourses);
+                _repository.InsertRange(newCourseMoments);
             }
 
-            return new UploadReport(newCoursesCount, courses.Count());
+            return new UploadReport(newCoursesCount, courseMoments.Count());
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace WebAPIServiceLayer.Domain.Entities
 {
@@ -11,8 +9,6 @@ namespace WebAPIServiceLayer.Domain.Entities
         public string Code { get; set; }
         public int DurationInDays { get; set; }
 
-        public virtual ICollection<CourseMoment> Moments { get; set; }
-
         /// <summary>
         /// Required for entity framework,
         /// Use the parameterized constructor,
@@ -21,7 +17,6 @@ namespace WebAPIServiceLayer.Domain.Entities
         public Course()
         {
             Title = "Unknown";
-            Moments = new List<CourseMoment>();
         }
 
         public Course(string title, string code, int durationInDays)
@@ -29,12 +24,6 @@ namespace WebAPIServiceLayer.Domain.Entities
             Title = title;
             Code = code;
             DurationInDays = durationInDays;
-            Moments = new List<CourseMoment>();
-        }
-
-        public void AddMoment(DateTime startDate)
-        {
-            Moments.Add(new CourseMoment(startDate));
         }
 
         public bool Equals(Course other)
@@ -46,7 +35,7 @@ namespace WebAPIServiceLayer.Domain.Entities
 
         public override int GetHashCode()
         {
-            return Title.GetHashCode() | Code.GetHashCode() | DurationInDays.GetHashCode();
+            return Title.GetHashCode() ^ Code.GetHashCode() ^ DurationInDays.GetHashCode();
         }
     }
 }

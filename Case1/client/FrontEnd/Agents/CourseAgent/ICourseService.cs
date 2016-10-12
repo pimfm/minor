@@ -40,9 +40,9 @@ namespace Frontend.Agents
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<Course>>> FindAllCoursesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<CourseMoment>>> FindAllCourseMomentsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        /// <param name='courses'>
+        /// <param name='courseMoments'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -50,7 +50,7 @@ namespace Frontend.Agents
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<UploadReport>> AddMultipleCoursesWithHttpMessagesAsync(IList<Course> courses = default(IList<Course>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<UploadReport>> AddMultipleCourseMomentsWithHttpMessagesAsync(IList<CourseMoment> courseMoments = default(IList<CourseMoment>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='week'>
         /// </param>
@@ -62,7 +62,7 @@ namespace Frontend.Agents
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<IList<Course>>> FindCoursesInWeekWithHttpMessagesAsync(int week, int year, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<CourseMoment>>> FindCourseMomentsInWeekWithHttpMessagesAsync(int week, int year, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }
