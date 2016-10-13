@@ -7,16 +7,14 @@ namespace FrontEnd.Factories
 {
     public class CourseMomentFactory : ICourseMomentFactory
     {
-        private ICourseAgent _agent;
-
-        public CourseMomentFactory(ICourseAgent agent)
+        public Course Manufacture(string title, string code, int duration)
         {
-            _agent = agent;
+            return new Course(null, title, code, duration);
         }
 
         public CourseMoment Manufacture(string title, string code, int duration, DateTime startDate)
         {
-            Course course = _agent.FindOrCreateCourse(title, code, duration);
+            Course course = Manufacture(title, code, duration);
 
             return new CourseMoment(null, null, course, startDate);
         }

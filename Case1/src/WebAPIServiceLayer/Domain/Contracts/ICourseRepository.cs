@@ -7,6 +7,5 @@ namespace WebAPIServiceLayer.Domain.Contracts
     {
         IEnumerable<CourseMoment> FindByWeek(int week, int year);
         Course FindCourse(string code);
-        void InsertCourse(Course course);
     }
 }

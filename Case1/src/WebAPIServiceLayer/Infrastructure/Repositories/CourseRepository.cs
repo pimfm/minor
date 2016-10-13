@@ -59,14 +59,5 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
                         .Include(courseMoment => courseMoment.Course);
             }
         }
-
-        public void InsertCourse(Course course)
-        {
-            using (var context = _factory.ManufactureContext())
-            {
-                context.Courses.Add(course);
-                context.SaveChanges();
-            }
-        }
     }
 }

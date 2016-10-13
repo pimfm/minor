@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIServiceLayer.Domain.Entities
 {
     public class Course : IEquatable<Course>
     {
-        public int ID { get; set; }
         public string Title { get; set; }
+        [Key]
         public string Code { get; set; }
         public int DurationInDays { get; set; }
 
