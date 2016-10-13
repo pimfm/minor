@@ -1,75 +1,113 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq.Expressions;
-//using WebAPIServiceLayer.Domain.Entities;
-//using WebAPIServiceLayer.Domain.Contracts;
-//using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using WebAPIServiceLayer.Domain.Entities;
+using WebAPIServiceLayer.Domain.Contracts;
+using System.Linq;
 
-//namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
-//{
-//    internal class CourseRepositoryMock : ICourseRepository
-//    {
-//        private int _count;
+namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
+{
+    internal class CourseRepositoryMock : ICourseRepository
+    {
+        public bool CountIsCalled { get; private set; }
+        public bool DeleteIsCalled { get; private set; }
+        public CourseMoment DeleteParameter { get; private set; }
+        public bool FindAllIsCalled { get; private set; }
+        public bool FindByIsCalled { get; private set; }
+        public Expression<Func<CourseMoment, bool>> FindByParameter { get; private set; }
+        public bool FindByWeekIsCalled { get; private set; }
+        public int FindByWeekParameterWeek { get; private set; }
+        public int FindByWeekParameterYear { get; private set; }
+        public bool FindCourseIsCalled { get; private set; }
+        public string FindCourseParameter { get; private set; }
+        public bool FindIsCalled { get; private set; }
+        public bool FindOneByIsCalled { get; private set; }
+        public Expression<Func<CourseMoment, bool>> FindOneByParameter { get; private set; }
+        public int FindParameter { get; private set; }
+        public bool InsertIsCalled { get; private set; }
+        public CourseMoment InsertParameter { get; private set; }
+        public bool InsertRangeIsCalled { get; private set; }
+        public IEnumerable<CourseMoment> InsertRangeParameter { get; private set; }
+        public bool UpdateIsCalled { get; private set; }
+        public CourseMoment UpdateParameter { get; private set; }
 
-//        public Course InsertParameter { get; private set; }
-//        public IEnumerable<Course> InsertRangeParameter { get; private set; }
+        public int Count()
+        {
+            CountIsCalled = true;
 
-//        public int Count()
-//        {
-//            return _count;
-//        }
+            return 0;
+        }
 
-//        public void Delete(Course item)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public void Delete(CourseMoment entity)
+        {
+            DeleteIsCalled = true;
+            DeleteParameter = entity;
+        }
 
-//        public Course Find(int key)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public CourseMoment Find(int key)
+        {
+            FindIsCalled = true;
+            FindParameter = key;
 
-//        public IEnumerable<Course> FindAll()
-//        {
-//            List<Course> courses = new List<Course>()
-//            {
-//                new Course("PHP leren programmeren", "CNETIN", 5),
-//                new Course("Java leren programmeren", "CNETIN", 5)
-//            };
+            return null;
+        }
 
-//            return courses;
-//        }
+        public IEnumerable<CourseMoment> FindAll()
+        {
+            FindAllIsCalled = true;
 
-//        public IEnumerable<Course> FindBy(Expression<Func<Course, bool>> filter)
-//        {
-//            throw new NotImplementedException();
-//        }
+            return new List<CourseMoment>();
+        }
 
-//        public IEnumerable<Course> FindByWeek(int week, int year)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public IEnumerable<CourseMoment> FindBy(Expression<Func<CourseMoment, bool>> filter)
+        {
+            FindByIsCalled = true;
+            FindByParameter = filter;
 
-//        public Course FindOneBy(Expression<Func<Course, bool>> filter)
-//        {
-//            throw new NotImplementedException();
-//        }
+            return null;
+        }
 
-//        public void Insert(Course item)
-//        {
-//            InsertParameter = item;
-//            _count++;
-//        }
+        public IEnumerable<CourseMoment> FindByWeek(int week, int year)
+        {
+            FindByWeekIsCalled = true;
+            FindByWeekParameterWeek = week;
+            FindByWeekParameterYear = year;
 
-//        public void InsertRange(IEnumerable<Course> entities)
-//        {
-//            InsertRangeParameter = entities;
-//            _count += entities.Count();
-//        }
+            return null;
+        }
 
-//        public void Update(Course item)
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-//}
+        public Course FindCourse(string code)
+        {
+            FindCourseIsCalled = true;
+            FindCourseParameter = code;
+
+            return null;
+        }
+
+        public CourseMoment FindOneBy(Expression<Func<CourseMoment, bool>> filter)
+        {
+            FindOneByIsCalled = true;
+            FindOneByParameter = filter;
+
+            return null;
+        }
+
+        public void Insert(CourseMoment entity)
+        {
+            InsertIsCalled = true;
+            InsertParameter = entity;
+        }
+
+        public void InsertRange(IEnumerable<CourseMoment> entities)
+        {
+            InsertRangeIsCalled = true;
+            InsertRangeParameter = entities;
+        }
+
+        public void Update(CourseMoment entity)
+        {
+            UpdateIsCalled = true;
+            UpdateParameter = entity;
+        }
+    }
+}

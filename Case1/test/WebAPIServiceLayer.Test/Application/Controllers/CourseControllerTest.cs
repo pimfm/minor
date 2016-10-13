@@ -1,125 +1,77 @@
-﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using System.Collections.Generic;
-//using System.Linq;
-//using WebAPIServiceLayer.Application.Controllers;
-//using WebAPIServiceLayer.Domain.Entities;
-//using WebAPIServiceLayer.Domain.Contracts;
-//using WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks;
-//using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using WebAPIServiceLayer.Application.Controllers;
+using WebAPIServiceLayer.Domain.Contracts;
+using WebAPIServiceLayer.Domain.Entities;
+using WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks;
 
-//namespace WebAPIServiceLayer.Test.Application.Controllers
-//{
-//    [TestClass]
-//    public class CourseControllerTest
-//    {
-//        [TestMethod]
-//        public void All()
-//        {
-//            Arrange
-//           ICourseRepository repository = new CourseRepositoryMock();
-//            CoursesController controller = new CoursesController(repository);
+namespace WebAPIServiceLayer.Test.Application.Controllers
+{
+    [TestClass]
+    public class CourseControllerTest
+    {
+        [TestMethod]
+        public void FindAll()
+        {
+            // Arrange
+            CourseRepositoryMock repository = new CourseRepositoryMock();
+            CoursesController controller = new CoursesController(repository);
 
-//            Act
-//            IEnumerable<Course> courses = controller.FindAll();
+            // Act
+            IEnumerable<CourseMoment> courses = controller.FindAll();
 
-//            Assert
-//            Assert.AreEqual(2, courses.Count());
-//        }
+            // Arrange
+            Assert.IsTrue(repository.FindAllIsCalled);
+        }
 
-//        [TestMethod]
-//        public void AddRange()
-//        {
-//            Arrange
-//           CourseRepositoryMock repository = new CourseRepositoryMock();
-//            CoursesController controller = new CoursesController(repository);
-//            IEnumerable<Course> courses = new List<Course>()
-//            {
-//                new Course("C# leren programmeren", "CNETIN", 5),
-//                new Course("Whitespace leren programmeren", "CNETIN", 5),
-//                new Course("Golang leren programmeren", "CNETIN", 5),
-//                new Course("Brainfuck leren programmeren", "CNETIN", 5)
-//            };
+        [TestMethod]
+        public void FindInWeek()
+        {
+            // Arrange
+            CourseRepositoryMock repository = new CourseRepositoryMock();
+            CoursesController controller = new CoursesController(repository);
 
-//            Act
-//            controller.AddRange(courses);
+            // Act
+            IEnumerable<CourseMoment> courses = controller.FindInWeek(11, 2016);
 
-//            Assert
-//            Assert.AreEqual(4, repository.Count());
-//        }
+            // Arrange
+            Assert.IsTrue(repository.FindByWeekIsCalled);
+            Assert.AreEqual(11, repository.FindByWeekParameterWeek);
+            Assert.AreEqual(2016, repository.FindByWeekParameterYear);
+        }
 
-//        [TestMethod]
-//        public void AddRangeEmptyList()
-//        {
-//            Arrange
-//           CourseRepositoryMock repository = new CourseRepositoryMock();
-//            CoursesController controller = new CoursesController(repository);
-//            IEnumerable<Course> courses = new List<Course>();
+        [TestMethod]
+        public void AddMultipleCourseMoments()
+        {
+            // Arrange
+            CourseRepositoryMock repository = new CourseRepositoryMock();
+            CoursesController controller = new CoursesController(repository);
 
-//            Act
-//           UploadReport report = controller.AddRange(courses);
+            // Act
+            List<CourseMoment> moments = new List<CourseMoment>()
+            {
+                new CourseMoment(new Course("", "", 0), DateTime.Now)
+            };
+            UploadReport report = controller.AddMultipleCourseMoments(moments);
 
-//            Assert
-//            Assert.AreEqual(0, repository.Count());
-//        }
+            // Arrange
+            Assert.IsTrue(repository.InsertRangeIsCalled);
+        }
 
-//        [TestMethod]
-//        public void AddRangeAllInserted()
-//        {
-//            Arrange
-//           CourseRepositoryMock repository = new CourseRepositoryMock();
-//            CoursesController controller = new CoursesController(repository);
-//            IEnumerable<Course> courses = new List<Course>()
-//            {
-//                new Course("C# leren programmeren", "CNETIN", 5),
-//                new Course("Golang leren programmeren", "CNETIN", 5),
-//            };
+        [TestMethod]
+        public void AddMultipleCourseMomentsNoNewCourseMoments()
+        {
+            // Arrange
+            CourseRepositoryMock repository = new CourseRepositoryMock();
+            CoursesController controller = new CoursesController(repository);
 
-//            Act
-//           UploadReport report = controller.AddRange(courses);
+            // Act
+            UploadReport report = controller.AddMultipleCourseMoments(new List<CourseMoment>());
 
-//            Assert
-//            Assert.AreEqual(2, repository.Count());
-//        }
-
-//        [TestMethod]
-//        public void AddRangeAllDuplicates()
-//        {
-//            Arrange
-//           CourseRepositoryMock repository = new CourseRepositoryMock();
-//            CoursesController controller = new CoursesController(repository);
-//            IEnumerable<Course> courses = new List<Course>()
-//            {
-//                new Course("PHP leren programmeren", "CNETIN", 5),
-//                new Course("Java leren programmeren", "CNETIN", 5),
-//            };
-
-//            Act
-//           UploadReport report = controller.AddRange(courses);
-
-//            Assert
-//            Assert.AreEqual(0, repository.Count());
-//        }
-
-//        [TestMethod]
-//        public void AddRangeSomeInsertedSomeDuplicates()
-//        {
-//            Arrange
-//           CourseRepositoryMock repository = new CourseRepositoryMock();
-//            CoursesController controller = new CoursesController(repository);
-//            IEnumerable<Course> courses = new List<Course>()
-//            {
-//                new Course("PHP leren programmeren", "CNETIN", 5),
-//                new Course("Golang leren programmeren", "CNETIN", 5),
-//                new Course("Java leren programmeren", "CNETIN", 5),
-//                new Course("C# leren programmeren", "CNETIN", 5),
-//            };
-
-//            Act
-//           UploadReport report = controller.AddRange(courses);
-
-//            Assert
-//            Assert.AreEqual(2, repository.Count());
-//            Assert.AreEqual("2 cursussen toegevoegd! 2 cursussen niet toegevoegd, omdat ze al aanwezig waren.", report.Message);
-//        }
-//    }
-//}
+            // Arrange
+            Assert.IsFalse(repository.InsertRangeIsCalled);
+        }
+    }
+}
