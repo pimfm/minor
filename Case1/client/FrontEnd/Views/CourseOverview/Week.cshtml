@@ -42,7 +42,6 @@
                 <th>Startdatum</th>
                 <th>Duur in dagen</th>
                 <th>Titel</th>
-                <th>Cursisten</th>
             </thead>
             <tbody>
                 @foreach (var courseMoment in Model)
@@ -51,7 +50,6 @@
                         <td>@courseMoment.StartDate</td>
                         <td>@courseMoment.Course.DurationInDays</td>
                         <td>@courseMoment.Course.Title</td>
-                        <td>10 cursisten</td>
                     </tr>
                 }
             </tbody>

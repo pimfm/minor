@@ -52,7 +52,7 @@ namespace FrontEnd.Test.Services
             // Arrange
             IDateScheduler scheduler = new DateScheduler();
             DateTime now = DateTime.Now;
-            int expectedYear = _calendar.GetWeekOfYear(now, _format.CalendarWeekRule, _format.FirstDayOfWeek);
+            int expectedYear = _calendar.GetYear(now);
 
             // Act
             int actualYear = scheduler.Year(now);

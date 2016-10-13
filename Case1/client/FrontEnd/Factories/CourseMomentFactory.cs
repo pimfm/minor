@@ -9,7 +9,7 @@ namespace FrontEnd.Factories
     {
         public Course Manufacture(string title, string code, int duration)
         {
-            return new Course(null, title, code, duration);
+            return new Course(title, code, duration);
         }
 
         public CourseMoment Manufacture(string title, string code, int duration, DateTime startDate)

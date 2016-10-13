@@ -24,7 +24,7 @@ namespace FrontEnd.Services
 
         public int Year(DateTime date)
         {
-            return _calendar.GetWeekOfYear(date, _format.CalendarWeekRule, _format.FirstDayOfWeek);
+            return _calendar.GetYear(date);
         }
 
         public bool CanScheduleEvent(DateTime startDate, int durationInDays, DateTime? from = null, DateTime? to = null)

@@ -55,8 +55,9 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
             using (var context = _factory.ManufactureContext())
             {
                 return context.CourseMoments
+                        .Include(courseMoment => courseMoment.Course)
                         .Where(moment => _scheduler.IsInWeek(moment.StartDate, week, year))
-                        .Include(courseMoment => courseMoment.Course);
+                        .ToList();
             }
         }
     }
