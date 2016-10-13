@@ -6,6 +6,7 @@ using FrontEnd.Services;
 using Frontend.Agents.Models;
 using Frontend.Exceptions;
 using System;
+using System.Linq;
 using FrontEnd.ViewModel;
 
 namespace Frontend.Controllers
@@ -16,10 +17,10 @@ namespace Frontend.Controllers
         private ICourseAgent _agent;
         private IFileService<CourseMoment> _service;
 
-        public CourseUploadController(ICourseAgent agent, IFileService<CourseMoment> courseFileService)
+        public CourseUploadController(ICourseAgent agent, IFileService<CourseMoment> fileService)
         {
             _agent = agent;
-            _service = courseFileService;
+            _service = fileService;
         }
 
         [HttpGet]
@@ -37,10 +38,11 @@ namespace Frontend.Controllers
             {
                 try
                 {
-                    IList<CourseMoment> courses = _service.ExtractCoursesFromFile(file, from, to);
+                    IList<CourseMoment> extractedCourses = _service.ExtractCoursesFromFile(file, from, to);
 
-                    UploadReport report = _agent.Upload(courses);
-                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromUploadReport(file.FileName, report);
+                    UploadReport report = _agent.Upload(extractedCourses);
+                    report.FileName = file.FileName;
+                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromUploadReport(report);
 
                     reports.Add(reportViewModel);
                 } catch (InvalidLineException exception)

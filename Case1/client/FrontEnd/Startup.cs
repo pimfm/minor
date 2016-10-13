@@ -41,6 +41,7 @@ namespace FrontEnd
             services.AddScoped<IFileService<CourseMoment>, CourseFileService>();
             services.AddScoped<ICourseValidator, CourseValidator>();
             services.AddScoped<ICourseMomentFactory, CourseMomentFactory>();
+            services.AddScoped<IDateScheduler, DateScheduler>();
 
             services.AddMvc();
         }

@@ -35,6 +35,24 @@ namespace WebAPIServiceLayer.Application.Controllers
             return _repository.FindAll();
         }
 
+        [HttpGet]
+        [SwaggerOperation("FindOrCreateCourse")]
+        [ProducesResponseType(typeof(IEnumerable<Course>), 200)]
+        public Course FindOrCreateCourse(string title, string code, int duration)
+        {
+            Course course = _repository.FindCourse(code);
+
+            if (course != null)
+            {
+                return course;
+            }
+
+            Course newCourse = new Course(title, code, duration);
+            _repository.InsertCourse(newCourse);
+
+            return newCourse;
+        }
+
         [HttpGet("week/{week}/year/{year}")]
         [SwaggerOperation("FindCourseMomentsInWeek")]
         [ProducesResponseType(typeof(IEnumerable<CourseMoment>), 200)]

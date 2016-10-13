@@ -1,15 +1,24 @@
 ﻿
 using Frontend.Agents.Models;
+using FrontEnd.Agents.CourseAgent;
 using System;
 
 namespace FrontEnd.Factories
 {
     public class CourseMomentFactory : ICourseMomentFactory
     {
-        public CourseMoment MakeCourseMoment(string title, string code, int duration, DateTime startDate)
+        private ICourseAgent _agent;
+
+        public CourseMomentFactory(ICourseAgent agent)
         {
-            Course course = new Course(null, title, code, duration);
-            return new CourseMoment(null, course, startDate);
+            _agent = agent;
+        }
+
+        public CourseMoment Manufacture(string title, string code, int duration, DateTime startDate)
+        {
+            Course course = _agent.FindOrCreateCourse(title, code, duration);
+
+            return new CourseMoment(null, null, course, startDate);
         }
     }
 }

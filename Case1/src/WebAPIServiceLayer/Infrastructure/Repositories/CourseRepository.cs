@@ -4,38 +4,42 @@ using WebAPIServiceLayer.Infrastructure.DataAccessLayer;
 using WebAPIServiceLayer.Infrastructure.Factories;
 using System.Collections.Generic;
 using System.Linq;
-using System.Globalization;
-using System;
 using Microsoft.EntityFrameworkCore;
+using WebAPIServiceLayer.Infrastructure.Services;
+using System;
 
 namespace WebAPIServiceLayer.Infrastructure.Repositories
 {
     public class CourseRepository : BaseRepository<CourseMoment, CourseAdministrationDbContext>, ICourseRepository
     {
-        private Calendar _calendar;
         private IManufacturesContext<CourseAdministrationDbContext> _factory;
-        private DateTimeFormatInfo _info;
+        private IDateScheduler _scheduler;
 
-        public CourseRepository(IManufacturesContext<CourseAdministrationDbContext> factory) : base(factory)
+        public CourseRepository(IManufacturesContext<CourseAdministrationDbContext> factory, IDateScheduler scheduler) : base(factory)
         {
             _factory = factory;
-
-            _info = new DateTimeFormatInfo();
-            _info.FirstDayOfWeek = DayOfWeek.Monday;
-
-            _calendar = _info.Calendar;
+            _scheduler = scheduler;
         }
 
         public CourseMoment Find(int key)
         {
-            CourseMoment courseMoment = FindOneBy(c => c.ID == key);
-
-            if (courseMoment == null)
+            using (var context = _factory.ManufactureContext())
             {
-                throw new KeyNotFoundException();
+                return context.CourseMoments
+                            .Where(c => c.ID == key)
+                            .FirstOrDefault();
             }
+        }
 
-            return courseMoment;
+        public Course FindCourse(string code)
+        {
+            using (var context = _factory.ManufactureContext())
+            {
+                return context.CourseMoments
+                            .Where(c => c.Course.Code == code)
+                            .Select(c => c.Course)
+                            .FirstOrDefault();
+            }
         }
 
         public override IEnumerable<CourseMoment> FindAll()
@@ -50,16 +54,19 @@ namespace WebAPIServiceLayer.Infrastructure.Repositories
         {
             using (var context = _factory.ManufactureContext())
             {
-                return context.CourseMoments.Where(moment => IsInWeek(moment, week, year)).Include(courseMoment => courseMoment.Course);
+                return context.CourseMoments
+                        .Where(moment => _scheduler.IsInWeek(moment.StartDate, week, year))
+                        .Include(courseMoment => courseMoment.Course);
             }
         }
-        
-        private bool IsInWeek(CourseMoment moment, int week, int year)
-        {
-            int courseWeek = _calendar.GetWeekOfYear(moment.StartDate, _info.CalendarWeekRule, _info.FirstDayOfWeek);
-            int courseYear = _calendar.GetYear(moment.StartDate);
 
-            return courseWeek == week && courseYear == year;
+        public void InsertCourse(Course course)
+        {
+            using (var context = _factory.ManufactureContext())
+            {
+                context.Courses.Add(course);
+                context.SaveChanges();
+            }
         }
     }
 }

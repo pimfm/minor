@@ -9,6 +9,5 @@ namespace Services
         int ValidateDuration(string line);
         DateTime ValidateStartDate(string line);
         string ValidateEmptyLine(string line);
-        bool ValidateDateInRange(DateTime startDate, DateTime endDate, DateTime? from, DateTime? to);
     }
 }
