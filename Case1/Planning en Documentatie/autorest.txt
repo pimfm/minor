@@ -1,1 +1,0 @@
-AutoRest.exe -Input "http://localhost:2829/swagger/v1/swagger.json" -OutputDirectory "CourseAgent" -ClientName "CourseService"  -Namespace "Frontend.Agents" -CodeGenerator CSharp -Modeler Swagger

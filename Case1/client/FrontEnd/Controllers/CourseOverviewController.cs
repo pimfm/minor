@@ -3,6 +3,7 @@ using FrontEnd.Agents.CourseAgent;
 using System;
 using System.Globalization;
 using FrontEnd.Services;
+using System.Linq;
 
 namespace Frontend.Controllers
 {
@@ -39,7 +40,7 @@ namespace Frontend.Controllers
                 week = 1;
             }
 
-            return View(_agent.FindInWeek(week, year));
+            return View(_agent.FindInWeek(week, year).OrderBy(moment => moment.StartDate));
         }
     }
 }
