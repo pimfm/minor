@@ -1,29 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FrontEnd.Agents.CourseAgent;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
+using System;
+using System.Globalization;
 using FrontEnd.Services;
-using Frontend.Agents.Models;
-using Frontend.Exceptions;
+using System.Linq;
 
 namespace Frontend.Controllers
 {
-    [Route("cursussen/overzicht")]
+    [Route("cursussen")]
     public class CourseOverviewController : Controller
     {
         private ICourseAgent _agent;
-        private IFileService<Course> _service;
+        private IDateScheduler _scheduler;
 
-        public CourseOverviewController(ICourseAgent agent, IFileService<Course> courseFileService)
+        public CourseOverviewController(ICourseAgent agent, IDateScheduler scheduler)
         {
             _agent = agent;
-            _service = courseFileService;
+            _scheduler = scheduler;
         }
 
         [HttpGet]
-        public ViewResult Index()
+        public RedirectToActionResult Index()
         {
-            return View(_agent.FindAllCourses());
+            DateTime now = DateTime.Now;
+
+            var routeParameters = new {
+                week = _scheduler.Week(now),
+                year = _scheduler.Year(now)
+            };
+
+            return RedirectToAction("Week", "CourseOverview", routeParameters);
+        }
+
+        [HttpGet("week/{week}/jaar/{year}")]
+        public ViewResult Week(int week, int year)
+        {
+            if (week > 52 || week < 1)
+            {
+                week = 1;
+            }
+
+            return View(_agent.FindInWeek(week, year).OrderBy(moment => moment.StartDate));
         }
     }
 }

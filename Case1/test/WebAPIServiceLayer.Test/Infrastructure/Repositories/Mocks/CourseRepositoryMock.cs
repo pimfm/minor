@@ -9,62 +9,105 @@ namespace WebAPIServiceLayer.Test.Infrastructure.Repositories.Mocks
 {
     internal class CourseRepositoryMock : ICourseRepository
     {
-        private int _count;
-
-        public Course InsertParameter { get; private set; }
-        public IEnumerable<Course> InsertRangeParameter { get; private set; }
+        public bool CountIsCalled { get; private set; }
+        public bool DeleteIsCalled { get; private set; }
+        public CourseMoment DeleteParameter { get; private set; }
+        public bool FindAllIsCalled { get; private set; }
+        public bool FindByIsCalled { get; private set; }
+        public Expression<Func<CourseMoment, bool>> FindByParameter { get; private set; }
+        public bool FindByWeekIsCalled { get; private set; }
+        public int FindByWeekParameterWeek { get; private set; }
+        public int FindByWeekParameterYear { get; private set; }
+        public bool FindCourseIsCalled { get; private set; }
+        public string FindCourseParameter { get; private set; }
+        public bool FindIsCalled { get; private set; }
+        public bool FindOneByIsCalled { get; private set; }
+        public Expression<Func<CourseMoment, bool>> FindOneByParameter { get; private set; }
+        public int FindParameter { get; private set; }
+        public bool InsertIsCalled { get; private set; }
+        public CourseMoment InsertParameter { get; private set; }
+        public bool InsertRangeIsCalled { get; private set; }
+        public IEnumerable<CourseMoment> InsertRangeParameter { get; private set; }
+        public bool UpdateIsCalled { get; private set; }
+        public CourseMoment UpdateParameter { get; private set; }
 
         public int Count()
         {
-            return _count;
+            CountIsCalled = true;
+
+            return 0;
         }
 
-        public void Delete(Course item)
+        public void Delete(CourseMoment entity)
         {
-            throw new NotImplementedException();
+            DeleteIsCalled = true;
+            DeleteParameter = entity;
         }
 
-        public Course Find(int key)
+        public CourseMoment Find(int key)
         {
-            throw new NotImplementedException();
+            FindIsCalled = true;
+            FindParameter = key;
+
+            return null;
         }
 
-        public IEnumerable<Course> FindAll()
+        public IEnumerable<CourseMoment> FindAll()
         {
-            List<Course> courses = new List<Course>()
-            {
-                new Course("PHP leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12)),
-                new Course("Java leren programmeren", "CNETIN", 5, new DateTime(1995, 04, 12))
-            };
+            FindAllIsCalled = true;
 
-            return courses;
+            return new List<CourseMoment>();
         }
 
-        public IEnumerable<Course> FindBy(Expression<Func<Course, bool>> filter)
+        public IEnumerable<CourseMoment> FindBy(Expression<Func<CourseMoment, bool>> filter)
         {
-            throw new NotImplementedException();
+            FindByIsCalled = true;
+            FindByParameter = filter;
+
+            return null;
         }
 
-        public Course FindOneBy(Expression<Func<Course, bool>> filter)
+        public IEnumerable<CourseMoment> FindByWeek(int week, int year)
         {
-            throw new NotImplementedException();
+            FindByWeekIsCalled = true;
+            FindByWeekParameterWeek = week;
+            FindByWeekParameterYear = year;
+
+            return null;
         }
 
-        public void Insert(Course item)
+        public Course FindCourse(string code)
         {
-            InsertParameter = item;
-            _count++;
+            FindCourseIsCalled = true;
+            FindCourseParameter = code;
+
+            return null;
         }
 
-        public void InsertRange(IEnumerable<Course> entities)
+        public CourseMoment FindOneBy(Expression<Func<CourseMoment, bool>> filter)
         {
+            FindOneByIsCalled = true;
+            FindOneByParameter = filter;
+
+            return null;
+        }
+
+        public void Insert(CourseMoment entity)
+        {
+            InsertIsCalled = true;
+            InsertParameter = entity;
+        }
+
+        public void InsertRange(IEnumerable<CourseMoment> entities)
+        {
+            InsertRangeIsCalled = true;
             InsertRangeParameter = entities;
-            _count += entities.Count();
         }
 
-        public void Update(Course item)
+        public void Update(CourseMoment entity)
         {
-            throw new NotImplementedException();
+            UpdateIsCalled = true;
+            UpdateParameter = entity;
         }
     }
 }

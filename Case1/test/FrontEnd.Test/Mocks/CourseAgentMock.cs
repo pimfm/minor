@@ -1,32 +1,41 @@
 ﻿using FrontEnd.Agents.CourseAgent;
 using System.Collections.Generic;
 using Frontend.Agents.Models;
+using System;
 
 namespace FrontEnd.Test.Mocks
 {
     public class CourseAgentMock : ICourseAgent
     {
-        public bool FindAllCoursesCalled { get; private set; }
-        public bool SaveCoursesCalled { get; private set; }
-        public IList<Course> SaveCoursesParameter { get; private set; }
+        public bool FindAllCalled { get; private set; }
+        public bool FindInWeekCalled { get; private set; }
+        public int FindParameterWeek { get; private set; }
+        public int FindParameterYear { get; private set; }
+        public bool UploadCalled { get; private set; }
+        public IList<CourseMoment> UploadParameter { get; private set; }
 
-        public IEnumerable<Course> FindAllCourses()
+        public IEnumerable<CourseMoment> FindAll()
         {
-            FindAllCoursesCalled = true;
-           
-            return new List<Course>()
-            {
-                new Course(12, "Title"),
-                new Course(13, "Kitle"),
-            };
+            FindAllCalled = true;
+
+            return null;
         }
 
-        public string SaveCourses(IList<Course> courses)
+        public IEnumerable<CourseMoment> FindInWeek(int week, int year)
         {
-            SaveCoursesCalled = true;
-            SaveCoursesParameter = courses;
+            FindInWeekCalled = true;
+            FindParameterWeek = week;
+            FindParameterYear = year;
 
-            return "";
+            return null;
+        }
+
+        public UploadReport Upload(IList<CourseMoment> courseMoments)
+        {
+            UploadCalled = true;
+            UploadParameter = courseMoments;
+
+            return null;
         }
     }
 }

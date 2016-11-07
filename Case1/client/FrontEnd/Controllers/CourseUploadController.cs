@@ -6,19 +6,21 @@ using FrontEnd.Services;
 using Frontend.Agents.Models;
 using Frontend.Exceptions;
 using System;
+using System.Linq;
+using FrontEnd.ViewModel;
 
 namespace Frontend.Controllers
 {
-    [Route("cursussen/importeren")]
+    [Route("importeren")]
     public class CourseUploadController : Controller
     {
         private ICourseAgent _agent;
-        private IFileService<Course> _service;
+        private IFileService<CourseMoment> _service;
 
-        public CourseUploadController(ICourseAgent agent, IFileService<Course> courseFileService)
+        public CourseUploadController(ICourseAgent agent, IFileService<CourseMoment> fileService)
         {
             _agent = agent;
-            _service = courseFileService;
+            _service = fileService;
         }
 
         [HttpGet]
@@ -28,33 +30,30 @@ namespace Frontend.Controllers
         }
 
         [HttpPost]
-        public ViewResult Upload(ICollection<IFormFile> files, DateTime from, DateTime to)
+        public ViewResult Upload(ICollection<IFormFile> files, DateTime? from = null, DateTime? to = null)
         {
-            List<Course> uploadedCourses = new List<Course>();
+            List<UploadReportViewModel> reports = new List<UploadReportViewModel>();
 
             foreach (IFormFile file in files)
             {
                 try
                 {
-                    _service.Validate(file);
+                    IList<CourseMoment> extractedCourses = _service.ExtractCoursesFromFile(file, from, to);
+
+                    UploadReport report = _agent.Upload(extractedCourses);
+                    report.FileName = file.FileName;
+                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromUploadReport(report);
+
+                    reports.Add(reportViewModel);
                 } catch (InvalidLineException exception)
                 {
-                    return View("Index", $"Fout gevonden in {file.FileName}. {exception.Message}");
+                    UploadReportViewModel reportViewModel = UploadReportViewModel.fromException(exception);
+
+                    reports.Add(reportViewModel);
                 }
-
-                IEnumerable<Course> courses = _service.Produce(from, to);
-
-                uploadedCourses.AddRange(courses);
             }
 
-            if (uploadedCourses.Count == 0)
-            {
-                return View("Index", $"Er zijn geen cursussen gevonden in de geimporteerde bestanden. Probeer een ander bestand.");
-            }
-
-            string message = _agent.SaveCourses(uploadedCourses);
-
-            return View("Index", message);
+            return View("Index", reports);
         }
     }
 }

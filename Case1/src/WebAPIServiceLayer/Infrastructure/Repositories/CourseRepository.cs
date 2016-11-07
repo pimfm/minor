@@ -3,28 +3,62 @@ using WebAPIServiceLayer.Domain.Contracts;
 using WebAPIServiceLayer.Infrastructure.DataAccessLayer;
 using WebAPIServiceLayer.Infrastructure.Factories;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using WebAPIServiceLayer.Infrastructure.Services;
+using System;
 
 namespace WebAPIServiceLayer.Infrastructure.Repositories
 {
-    public class CourseRepository : BaseRepository<Course, CourseAdministrationDbContext>, ICourseRepository
+    public class CourseRepository : BaseRepository<CourseMoment, CourseAdministrationDbContext>, ICourseRepository
     {
         private IManufacturesContext<CourseAdministrationDbContext> _factory;
+        private IDateScheduler _scheduler;
 
-        public CourseRepository(IManufacturesContext<CourseAdministrationDbContext> factory) : base(factory)
+        public CourseRepository(IManufacturesContext<CourseAdministrationDbContext> factory, IDateScheduler scheduler) : base(factory)
         {
             _factory = factory;
+            _scheduler = scheduler;
         }
 
-        public Course Find(int key)
+        public CourseMoment Find(int key)
         {
-            Course course = FindOneBy(c => c.ID == key);
-
-            if (course == null)
+            using (var context = _factory.ManufactureContext())
             {
-                throw new KeyNotFoundException();
+                return context.CourseMoments
+                            .Where(c => c.ID == key)
+                            .FirstOrDefault();
             }
+        }
 
-            return course;
+        public Course FindCourse(string code)
+        {
+            using (var context = _factory.ManufactureContext())
+            {
+                return context.CourseMoments
+                            .Where(c => c.Course.Code == code)
+                            .Select(c => c.Course)
+                            .FirstOrDefault();
+            }
+        }
+
+        public override IEnumerable<CourseMoment> FindAll()
+        {
+            using (var context = _factory.ManufactureContext())
+            {
+                return context.CourseMoments.Include(courseMoment => courseMoment.Course).ToList();
+            }
+        }
+
+        public IEnumerable<CourseMoment> FindByWeek(int week, int year)
+        {
+            using (var context = _factory.ManufactureContext())
+            {
+                return context.CourseMoments
+                        .Include(courseMoment => courseMoment.Course)
+                        .Where(moment => _scheduler.IsInWeek(moment.StartDate, week, year))
+                        .ToList();
+            }
         }
     }
 }

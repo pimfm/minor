@@ -1,14 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIServiceLayer.Domain.Entities
 {
     public class Course : IEquatable<Course>
     {
-        public int ID { get; set; }
         public string Title { get; set; }
+        [Key]
         public string Code { get; set; }
         public int DurationInDays { get; set; }
-        public DateTime StartDate { get; set; }
 
         /// <summary>
         /// Required for entity framework,
@@ -20,25 +20,21 @@ namespace WebAPIServiceLayer.Domain.Entities
             Title = "Unknown";
         }
 
-        public Course(string title, string code, int durationInDays, DateTime startDate)
+        public Course(string title, string code, int durationInDays)
         {
             Title = title;
             Code = code;
             DurationInDays = durationInDays;
-            StartDate = startDate;
         }
 
         public bool Equals(Course other)
         {
-            return Title == other.Title
-                && Code == other.Code
-                && DurationInDays == other.DurationInDays
-                && StartDate == other.StartDate;
+            return Code == other.Code;
         }
 
         public override int GetHashCode()
         {
-            return Title.GetHashCode() | Code.GetHashCode() | DurationInDays.GetHashCode() | StartDate.GetHashCode();
+            return Code.GetHashCode();
         }
     }
 }

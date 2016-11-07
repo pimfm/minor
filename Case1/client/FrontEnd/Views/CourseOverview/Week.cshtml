@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Frontend.Agents.Models.CourseMoment>
+@{
+    ViewData["Title"] = "Cursussen";
+
+    int week = int.Parse(ViewContext.RouteData.Values["week"].ToString());
+    int year = int.Parse(ViewContext.RouteData.Values["year"].ToString());
+
+    year = (week == 53) ? year + 1 : year;
+    week = (week > 52) ? 1 : week;
+
+    year = (week == 0) ? year - 1 : year;
+    week = (week < 1) ? 52 : week;
+
+    int nextWeek = week + 1;
+    int nextYear = year + 1;
+    int previousWeek = week - 1;
+    int previousYear = year - 1;
+}
+<br />
+<div class="container">
+    <div class="jumbotron">
+        <h1>Cursussen in week @week van @year</h1>
+        <br />
+        <ul class="pager">
+            <li class="previous"><a href="/cursussen/week/@week/jaar/@previousYear"><span aria-hidden="true">&larr;</span> @previousYear</a></li>
+            <li><a href="/cursussen/week/@previousWeek/jaar/@year">Vorige week</a></li>
+            <li style="padding-left:10px"><a href="/cursussen/week/@nextWeek/jaar/@year">Volgende week</a></li>
+            <li class="next"><a href="/cursussen/week/@week/jaar/@nextYear">@nextYear <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </div>
+    @if (Model.Count() == 0)
+    {
+        <p>Deze week zijn er geen cursussen. <a asp-area="" asp-controller="CourseUpload" asp-action="Index">Importeer ze hier!</a></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <th>Startdatum</th>
+                <th>Duur in dagen</th>
+                <th>Titel</th>
+            </thead>
+            <tbody>
+                @foreach (var courseMoment in Model)
+                {
+                    <tr>
+                        <td>@courseMoment.StartDate</td>
+                        <td>@courseMoment.Course.DurationInDays</td>
+                        <td>@courseMoment.Course.Title</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</div>

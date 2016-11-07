@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using FrontEnd.Agents.CourseAgent;
 using FrontEnd.Services;
 using Frontend.Agents.Models;
+using Services;
+using FrontEnd.Factories;
 
 namespace FrontEnd
 {
@@ -36,7 +38,10 @@ namespace FrontEnd
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddScoped<ICourseAgent, CourseAgent>();
-            services.AddScoped<IFileService<Course>, CourseFileService>();
+            services.AddScoped<IFileService<CourseMoment>, CourseFileService>();
+            services.AddScoped<ICourseValidator, CourseValidator>();
+            services.AddScoped<ICourseMomentFactory, CourseMomentFactory>();
+            services.AddScoped<IDateScheduler, DateScheduler>();
 
             services.AddMvc();
         }
@@ -67,7 +72,7 @@ namespace FrontEnd
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=CourseOverview}/{action=Index}");
             });
         }
     }

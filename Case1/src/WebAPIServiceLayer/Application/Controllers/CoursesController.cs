@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using WebAPIServiceLayer.Domain.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using WebAPIServiceLayer.Domain.Comparer;
 using System;
+using System.Globalization;
+using Swashbuckle.SwaggerGen.Annotations;
+using WebAPIServiceLayer.Domain.Comparer;
 
 namespace WebAPIServiceLayer.Application.Controllers
 {
@@ -19,46 +21,34 @@ namespace WebAPIServiceLayer.Application.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Course>), 200)]
-        public IEnumerable<Course> All()
+        [SwaggerOperation("FindAllCourseMoments")]
+        [ProducesResponseType(typeof(IEnumerable<CourseMoment>), 200)]
+        public IEnumerable<CourseMoment> FindAll()
         {
-            return _repository.FindAll();;
+            return _repository.FindAll();
         }
-        
-        [HttpPost]
-        [ProducesResponseType(typeof(string), 200)]
-        public string AddRange([FromBody] IEnumerable<Course> courses)
+
+        [HttpGet("week/{week}/year/{year}")]
+        [SwaggerOperation("FindCourseMomentsInWeek")]
+        [ProducesResponseType(typeof(IEnumerable<CourseMoment>), 200)]
+        public IEnumerable<CourseMoment> FindInWeek(int week, int year)
         {
-            IEnumerable<Course> newCourses = courses.Except(All(), new CourseComparer());
-            int newCoursesCount = newCourses.Count();
+            return _repository.FindByWeek(week, year);
+        }
+
+        [HttpPost]
+        [SwaggerOperation("AddMultipleCourseMoments")]
+        [ProducesResponseType(typeof(UploadReport), 200)]
+        public UploadReport AddMultipleCourseMoments([FromBody] IEnumerable<CourseMoment> courseMoments)
+        {
+            IEnumerable<CourseMoment> newCourseMoments = courseMoments.Except(FindAll(), new CourseMomentComparer());
+            int newCoursesCount = newCourseMoments.Count();
 
             if (newCoursesCount > 0) {
-                _repository.InsertRange(newCourses);
+                _repository.InsertRange(newCourseMoments);
             }
 
-            return ProvideInsertionReport(newCoursesCount, courses.Count());
-        }
-
-        private string ProvideInsertionReport(int insertedCount, int allCount)
-        {
-            int duplicateCount = allCount - insertedCount;
-
-            if (allCount == 0)
-            {
-                return "Dit bestand bevat geen cursussen, controleer of het goede bestand is geselecteerd.";
-            }
-
-            if (insertedCount == 0)
-            {
-                return $"Geen nieuwe cursussen gevonden. Alle {allCount} cursussen waren al aanwezig. Controleer of het goede bestand is geselecteerd.";
-            }
-
-            if (duplicateCount == 0)
-            {
-                return $"Alle {insertedCount} cursussen zijn nieuw toegevoegd!";
-            }
-
-            return $"{insertedCount} cursussen toegevoegd! {duplicateCount} cursussen niet toegevoegd, omdat ze al aanwezig waren.";
+            return new UploadReport(newCoursesCount, courseMoments.Count());
         }
     }
 }
