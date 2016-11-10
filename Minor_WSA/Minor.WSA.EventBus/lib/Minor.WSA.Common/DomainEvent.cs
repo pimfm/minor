@@ -1,6 +1,6 @@
 ﻿namespace Minor.WSA.Common
 {
-    public class DomainEvent
+    public abstract class DomainEvent
     {
         public DomainEvent()
         {

@@ -1,6 +1,8 @@
-﻿namespace Minor.WSA.Common
+﻿using System;
+
+namespace Minor.WSA.Common
 {
-    public interface IEventPublisher
+    public interface IEventPublisher : IDisposable
     {
         void Publish(DomainEvent domainEvent);
     }
