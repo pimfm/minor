@@ -2,14 +2,10 @@
 
 namespace Minor.WSA.Common
 {
-    public abstract class DomainEventHandler<TEvent> : IEventHandler
-        where TEvent : DomainEvent
+    public abstract class DomainEventHandler<T>
+        where T : DomainEvent
     {
         [EventHandler]
-        public abstract void Handle(TEvent domainEvent);
-    }
-
-    public interface IEventHandler
-    {
+        public abstract void Handle(T domainEvent);
     }
 }

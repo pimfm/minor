@@ -8,18 +8,13 @@ namespace Minor.WSA.EventBus.Publish
 {
     public class EventPublisher : IEventPublisher
     {
-        private IChannel _channel;
+        private Channel _channel;
         private readonly EventBusOptions _options;
 
-        public EventPublisher(EventBusOptions options)
+        public EventPublisher(EventBusOptions options = null)
         {
-            _options = options;
+            _options = options ?? new EventBusOptions();
             _channel = new Channel(options.Host);
-        }
-
-        public EventPublisher() : this(new EventBusOptions("localhost", "BKEEventBus"))
-        {
-
         }
         
         public void Publish(DomainEvent domainEvent)
