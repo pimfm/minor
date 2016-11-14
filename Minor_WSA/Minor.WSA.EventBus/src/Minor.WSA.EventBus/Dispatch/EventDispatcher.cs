@@ -8,32 +8,41 @@ namespace Minor.WSA.EventBus.Dispatch
 {
     public class EventDispatcher
     {
-        public Dictionary<string, object> Handlers { get; private set; }
+        public HandlerCollection _handlerCollection;
 
         public EventDispatcher()
         {
-            Handlers = new Dictionary<string, object>();
+            _handlerCollection = new HandlerCollection();
         }
-
+     
         public void Activate()
         {
             Assembly assembly = Assembly.Load(new AssemblyName("Minor.WSA.EventBus.Test"));
             foreach (Type type in assembly.GetTypes())
             {
-                foreach (MethodInfo method in type.GetMethods())
+                foreach (MethodInfo method in FindMethodsWithHandlerAttribute(type))
                 {
-                    if (method.GetCustomAttributes<EventHandlerAttribute>().Count() > 0)
-                    {
-                        Type eventType = method.GetParameters().First().ParameterType;
+                    // ---------------------------------------------------------------------
 
-                        Handlers.Add(eventType.Name, Activator.CreateInstance(type));
-                    }
+                    Type eventParameterType  = method.GetParameters().First().ParameterType;
+
+                    _handlerCollection.Add(eventParameterType.Name, (DomainEventHandler) Activator.CreateInstance(type));
+
+                    //----------------------------------------------------------------------
                 }
             }
+
             // Find all handlers
             // Store in internal dictionary/list
             // Consume events
             // Fire right handler
+        }
+
+        private IEnumerable<MethodInfo> FindMethodsWithHandlerAttribute(Type type)
+        {
+            MethodInfo[] methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+
+            return methods.Where(method => method.GetCustomAttributes<EventHandlerAttribute>().Any());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Minor.WSA.EventBus.Shared
 {
-    public struct EventBusOptions
+    public class EventBusOptions
     {
         public readonly string Host;
         public readonly string ExchangeName;
@@ -9,6 +9,12 @@
         {
             Host = host;
             ExchangeName = exchangeName;
+        }
+
+        public EventBusOptions()
+        {
+            Host = "localhost";
+            ExchangeName = "Minor.WSA.BKEEventBus";
         }
     }
 }

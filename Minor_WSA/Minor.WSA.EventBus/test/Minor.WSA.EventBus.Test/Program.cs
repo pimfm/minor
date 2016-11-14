@@ -10,7 +10,7 @@ namespace Minor.WSA.EventBus.Test
             EventDispatcher dispatcher = new EventDispatcher();
             dispatcher.Activate();
 
-            foreach (var pair in dispatcher.Handlers)
+            foreach (var pair in dispatcher._handlerCollection)
             {
                 System.Console.WriteLine($"{pair.Value.GetType()}({pair.Key})");
             }

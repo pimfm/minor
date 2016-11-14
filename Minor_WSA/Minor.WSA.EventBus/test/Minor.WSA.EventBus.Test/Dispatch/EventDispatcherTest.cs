@@ -15,7 +15,7 @@ namespace Minor.WSA.EventBus.Test.Dispatch
             EventDispatcher dispatcher = new EventDispatcher();
 
             // Act
-            //dispatcher.Activate();
+            dispatcher.Activate();
 
             // Assert
             //Assert.IsTrue(dispatcher.Handlers.Count > 0);

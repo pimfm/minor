@@ -2,7 +2,7 @@
 
 namespace Minor.WSA.EventBus.Shared
 {
-    internal class Channel : IChannel
+    internal class Channel
     {
         private IModel _model;
 
