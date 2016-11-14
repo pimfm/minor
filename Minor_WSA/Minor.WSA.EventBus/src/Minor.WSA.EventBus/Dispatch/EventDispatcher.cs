@@ -15,7 +15,7 @@ namespace Minor.WSA.EventBus.Dispatch
             _handlerCollection = new HandlerCollection();
         }
      
-        public void Subscribe()
+        public void Activate()
         {
             Assembly assembly = Assembly.Load(new AssemblyName("Minor.WSA.EventBus.Test"));
             foreach (Type type in assembly.GetTypes())
