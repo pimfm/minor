@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MessengerProject", "src\MessengerProject\MessengerProject.xproj", "{C9D7DE37-FF0D-40A6-A66D-4092ED1CEC2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EBF4DBA1-B5E5-4A30-8B7D-E218EF9EF266}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BB7698F5-9EA7-47CD-BE6F-9551400E1DB3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MessengerProject.Test", "test\MessengerProject.Test\MessengerProject.Test.xproj", "{38550A7F-AB49-4FC3-9D9E-285BA9BA1B41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9D7DE37-FF0D-40A6-A66D-4092ED1CEC2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9D7DE37-FF0D-40A6-A66D-4092ED1CEC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9D7DE37-FF0D-40A6-A66D-4092ED1CEC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9D7DE37-FF0D-40A6-A66D-4092ED1CEC2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38550A7F-AB49-4FC3-9D9E-285BA9BA1B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38550A7F-AB49-4FC3-9D9E-285BA9BA1B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38550A7F-AB49-4FC3-9D9E-285BA9BA1B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38550A7F-AB49-4FC3-9D9E-285BA9BA1B41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C9D7DE37-FF0D-40A6-A66D-4092ED1CEC2E} = {EBF4DBA1-B5E5-4A30-8B7D-E218EF9EF266}
+		{38550A7F-AB49-4FC3-9D9E-285BA9BA1B41} = {BB7698F5-9EA7-47CD-BE6F-9551400E1DB3}
+	EndGlobalSection
+EndGlobal
