@@ -11,7 +11,7 @@ namespace Minor.WSA.EventBus.Dispatch
         public HandlerCollection()
         {
             _dictionary = new Dictionary<string, List<IEventHandler<DomainEvent>>>();
-        }
+        } 
 
         public void Add<TEvent>(IEventHandler<TEvent> handler) where TEvent : DomainEvent
         {
