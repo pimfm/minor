@@ -14,7 +14,7 @@ namespace Minor.WSA.EventBus.Publish
         public EventPublisher(EventBusOptions options = null)
         {
             _options = options ?? new EventBusOptions();
-            _channel = new Channel(options.Host);
+            _channel = new Channel(_options);
         }
         
         public void Publish(DomainEvent domainEvent)
@@ -24,7 +24,7 @@ namespace Minor.WSA.EventBus.Publish
             string json = JsonConvert.SerializeObject(domainEvent);
             byte[] body = Encoding.UTF8.GetBytes(json);
 
-            _channel.Publish(_options.ExchangeName, routingKey, body);
+            _channel.Send(routingKey, body);
         }
 
         public void Dispose()
