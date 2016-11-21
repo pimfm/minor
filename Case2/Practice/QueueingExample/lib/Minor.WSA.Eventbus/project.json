@@ -1,0 +1,32 @@
+﻿{
+  "id":  "Minor.WSA.Eventbus.0.1.0",
+  "name": "Minor.WSA.Eventbus",
+  "version": "0.1.0",
+  "description": "An eventbus implementation using RawRabbit on top of RabbitMQ",
+  "title": "WSA Eventbus",
+
+  "packOptions": {
+    "summary": "An eventbus implementation using RawRabbit on top of RabbitMQ",
+    "tags": [ "WSA", "Eventbus", "Web Scale Architecture", "RabbitMQ", "RawRabbit" ],
+    "owners": [ "Pim van Gurp" ]
+  },
+
+  "dependencies": {
+    "Minor.WSA.Common": "0.1.0",
+    "NETStandard.Library": "1.6.0",
+    "RawRabbit": "1.10.0",
+    "RawRabbit.vNext": "1.10.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack -o C:\\_localNugetFeed --no-build --configuration %compile:Configuration%"
+    ]
+  }
+}

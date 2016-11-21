@@ -74,18 +74,5 @@ namespace BinaryTreeDemo
 
             return _value;
         }
-
-        public override T this[int index]
-        {
-            get
-            {
-                return default(T);
-            }
-        }
-        
-        public override IEnumerator<T> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

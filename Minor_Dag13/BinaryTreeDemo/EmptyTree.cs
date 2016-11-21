@@ -37,23 +37,5 @@ namespace BinaryTreeDemo
         {
             return false;
         }
-
-        public override T this[int index]
-        {
-            get
-            {
-                throw new ItemNotFoundException();
-            }
-        }
-
-        public override T Find(T value)
-        {
-            throw new ItemNotFoundException();
-        }
-
-        public override IEnumerator<T> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace BinaryTreeDemo
 {
-    public abstract class Tree<T> : IEnumerable<T>
+    public abstract class Tree<T>
         where T : IComparable
     {
         public abstract int Depth { get; }
@@ -19,15 +17,6 @@ namespace BinaryTreeDemo
 
         public abstract bool Contains(T value);
 
-        public abstract T this[int index] { get; }
-
         public abstract T Find(T value);
-
-        public abstract IEnumerator<T> GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
     }
 }
