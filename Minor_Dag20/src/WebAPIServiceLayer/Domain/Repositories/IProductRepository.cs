@@ -2,7 +2,7 @@
 
 namespace WebAPIServiceLayer.Domain.Repositories
 {
-    public interface IProductRepository<ProductDbContext> : IFullRepository<Product, int>
+    public interface IProductRepository : IFullRepository<Product, int>
     {
     }
 }

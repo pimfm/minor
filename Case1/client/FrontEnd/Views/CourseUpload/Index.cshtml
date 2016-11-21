@@ -1,0 +1,38 @@
+﻿@model List<FrontEnd.ViewModel.UploadReportViewModel>
+@{
+    ViewData["Title"] = "Cursussen importeren";
+}
+<br />
+<form method="post" asp-action="Upload" asp-controller="CourseUpload" enctype="multipart/form-data">
+    <h1>Cursussen Importeren</h1>
+    <input type="file" name="files" multiple required />
+    <br />
+    <div style="display: inline-block">
+        Importeer vanaf:
+        <br />
+        Importeer tot:
+    </div>
+    <div style="display: inline-block">
+        <input type="date" id="datepicker1" name="from" />
+        <br />
+        <input type="date" id="datepicker2" name="to" />
+    </div>
+    <br />
+    <br />
+    <input class="btn-success" type="submit" value="Importeren" />
+    <br />
+    <br />
+
+    @if (Model != null)
+    {
+        @foreach (var report in Model)
+        {
+            <div class="panel panel-@report.Label">
+                <div class="panel-heading">@report.FileName</div>
+                <div class="panel-body">
+                    @report.Message
+                </div>
+            </div>
+        }
+    }
+</form>

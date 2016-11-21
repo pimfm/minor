@@ -8,6 +8,7 @@ namespace WebAPIServiceLayer.Domain.Repositories
     {
         IEnumerable<TEntity> FindAll();
         IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> filter);
+        TEntity FindOneBy(Expression<Func<TEntity, bool>> filter);
 
         int Count();
         void Insert(TEntity item);

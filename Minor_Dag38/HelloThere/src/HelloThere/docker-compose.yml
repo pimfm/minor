@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  hellothere:
+    image: user/hellothere${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
