@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebAPIServiceLayer.Domain.Entities
 {
     public class Course : IEquatable<Course>
     {
-        public int ID { get; set; }
         public string Title { get; set; }
+        [Key]
         public string Code { get; set; }
         public int DurationInDays { get; set; }
 
@@ -28,14 +29,12 @@ namespace WebAPIServiceLayer.Domain.Entities
 
         public bool Equals(Course other)
         {
-            return Title == other.Title
-                && Code == other.Code
-                && DurationInDays == other.DurationInDays;
+            return Code == other.Code;
         }
 
         public override int GetHashCode()
         {
-            return Title.GetHashCode() ^ Code.GetHashCode() ^ DurationInDays.GetHashCode();
+            return Code.GetHashCode();
         }
     }
 }

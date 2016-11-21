@@ -18,7 +18,7 @@ namespace FrontEnd.ViewModel
             Message = message;
         }
 
-        public static UploadReportViewModel fromUploadReport(string fileName, UploadReport report)
+        public static UploadReportViewModel fromUploadReport(UploadReport report)
         {
             string label = "success";
             string message = $"{report.AmountInserted} cursussen toegevoegd! {report.AmountOfDuplicates} cursussen niet toegevoegd, omdat ze al aanwezig waren.";
@@ -37,7 +37,7 @@ namespace FrontEnd.ViewModel
                 message = $"Alle {report.AmountInserted} cursussen zijn nieuw toegevoegd!";
             }
 
-            return new UploadReportViewModel(fileName, label, message);
+            return new UploadReportViewModel(report.FileName, label, message);
         }
 
         public static UploadReportViewModel fromException(InvalidLineException exception)

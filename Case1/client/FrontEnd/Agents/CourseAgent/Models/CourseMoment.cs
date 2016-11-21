@@ -21,9 +21,10 @@ namespace Frontend.Agents.Models
         /// <summary>
         /// Initializes a new instance of the CourseMoment class.
         /// </summary>
-        public CourseMoment(int? id = default(int?), Course course = default(Course), DateTime? startDate = default(DateTime?))
+        public CourseMoment(int? id = default(int?), int? courseID = default(int?), Course course = default(Course), DateTime? startDate = default(DateTime?))
         {
             Id = id;
+            CourseID = courseID;
             Course = course;
             StartDate = startDate;
         }
@@ -32,6 +33,11 @@ namespace Frontend.Agents.Models
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public int? Id { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "courseID")]
+        public int? CourseID { get; set; }
 
         /// <summary>
         /// </summary>

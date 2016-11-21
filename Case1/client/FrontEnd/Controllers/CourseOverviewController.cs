@@ -2,6 +2,8 @@
 using FrontEnd.Agents.CourseAgent;
 using System;
 using System.Globalization;
+using FrontEnd.Services;
+using System.Linq;
 
 namespace Frontend.Controllers
 {
@@ -9,33 +11,36 @@ namespace Frontend.Controllers
     public class CourseOverviewController : Controller
     {
         private ICourseAgent _agent;
-        private DateTimeFormatInfo _info;
+        private IDateScheduler _scheduler;
 
-        public CourseOverviewController(ICourseAgent agent)
+        public CourseOverviewController(ICourseAgent agent, IDateScheduler scheduler)
         {
             _agent = agent;
-
-            _info = new DateTimeFormatInfo();
-            _info.FirstDayOfWeek = DayOfWeek.Monday;
+            _scheduler = scheduler;
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public RedirectToActionResult Index()
         {
             DateTime now = DateTime.Now;
-            
-            Calendar calendar = _info.Calendar;
 
-            int week = calendar.GetWeekOfYear(now, _info.CalendarWeekRule, _info.FirstDayOfWeek);
-            int year = calendar.GetYear(now);
+            var routeParameters = new {
+                week = _scheduler.Week(now),
+                year = _scheduler.Year(now)
+            };
 
-            return RedirectToAction("Week", "CourseOverview", new { week = week, year = year });
+            return RedirectToAction("Week", "CourseOverview", routeParameters);
         }
 
         [HttpGet("week/{week}/jaar/{year}")]
         public ViewResult Week(int week, int year)
         {
-            return View(_agent.FindInWeek(week, year));
+            if (week > 52 || week < 1)
+            {
+                week = 1;
+            }
+
+            return View(_agent.FindInWeek(week, year).OrderBy(moment => moment.StartDate));
         }
     }
 }

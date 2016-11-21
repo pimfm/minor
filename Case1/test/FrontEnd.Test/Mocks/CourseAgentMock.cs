@@ -1,38 +1,41 @@
-﻿//using FrontEnd.Agents.CourseAgent;
-//using System.Collections.Generic;
-//using Frontend.Agents.Models;
-//using System;
+﻿using FrontEnd.Agents.CourseAgent;
+using System.Collections.Generic;
+using Frontend.Agents.Models;
+using System;
 
-//namespace FrontEnd.Test.Mocks
-//{
-//    public class CourseAgentMock : ICourseAgent
-//    {
-//        public bool FindAllCoursesCalled { get; private set; }
-//        public bool SaveCoursesCalled { get; private set; }
-//        public IList<Course> SaveCoursesParameter { get; private set; }
+namespace FrontEnd.Test.Mocks
+{
+    public class CourseAgentMock : ICourseAgent
+    {
+        public bool FindAllCalled { get; private set; }
+        public bool FindInWeekCalled { get; private set; }
+        public int FindParameterWeek { get; private set; }
+        public int FindParameterYear { get; private set; }
+        public bool UploadCalled { get; private set; }
+        public IList<CourseMoment> UploadParameter { get; private set; }
 
-//        public IEnumerable<Course> FindAll()
-//        {
-//            FindAllCoursesCalled = true;
-           
-//            return new List<Course>()
-//            {
-//                new Course(12, "Title"),
-//                new Course(13, "Kitle"),
-//            };
-//        }
+        public IEnumerable<CourseMoment> FindAll()
+        {
+            FindAllCalled = true;
 
-//        public IEnumerable<Course> FindInWeek(int week, int year)
-//        {
-//            throw new NotImplementedException();
-//        }
+            return null;
+        }
 
-//        public UploadReport Upload(IList<Course> courses)
-//        {
-//            SaveCoursesCalled = true;
-//            SaveCoursesParameter = courses;
+        public IEnumerable<CourseMoment> FindInWeek(int week, int year)
+        {
+            FindInWeekCalled = true;
+            FindParameterWeek = week;
+            FindParameterYear = year;
 
-//            return new UploadReport();
-//        }
-//    }
-//}
+            return null;
+        }
+
+        public UploadReport Upload(IList<CourseMoment> courseMoments)
+        {
+            UploadCalled = true;
+            UploadParameter = courseMoments;
+
+            return null;
+        }
+    }
+}

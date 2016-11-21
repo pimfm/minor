@@ -35,12 +35,13 @@ namespace WebAPIServiceLayer
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IManufacturesContext<CourseAdministrationDbContext>, CourseAdministrationDbContextFactory>();
             services.AddScoped<IServiceLocator, ServiceLocator>();
+            services.AddScoped<IDateScheduler, DateScheduler>();
 
             services.AddEntityFrameworkInMemoryDatabase();
 
             services.AddDbContext<CourseAdministrationDbContext>(options => {
-                options.UseInMemoryDatabase();
-                //options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CourseAdministration;Trusted_Connection=True;");
+                //options.UseInMemoryDatabase();
+                options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CourseAdministration;Trusted_Connection=True;");
             }, ServiceLifetime.Transient);
 
             services.AddSwaggerGen();

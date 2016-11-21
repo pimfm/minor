@@ -5,6 +5,7 @@ namespace FrontEnd.Factories
 {
     public interface ICourseMomentFactory
     {
-        CourseMoment MakeCourseMoment(string title, string code, int duration, DateTime startDate);
+        Course Manufacture(string title, string code, int duration);
+        CourseMoment Manufacture(string title, string code, int duration, DateTime startDate);
     }
 }

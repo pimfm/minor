@@ -6,6 +6,7 @@ namespace WebAPIServiceLayer.Infrastructure.DataAccessLayer
     public class CourseAdministrationDbContext : DbContext
     {
         public DbSet<CourseMoment> CourseMoments { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         public CourseAdministrationDbContext(DbContextOptions options) : base(options)
         {

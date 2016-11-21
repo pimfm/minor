@@ -14,11 +14,13 @@ namespace FrontEnd.Services
     {
         private ICourseMomentFactory _factory;
         private ICourseValidator _validator;
+        private IDateScheduler _scheduler;
 
-        public CourseFileService(ICourseMomentFactory factory, ICourseValidator validator)
+        public CourseFileService(ICourseMomentFactory factory, ICourseValidator validator, IDateScheduler scheduler)
         {
             _factory = factory;
             _validator = validator;
+            _scheduler = scheduler;
         }
 
         public IList<CourseMoment> ExtractCoursesFromFile(IFormFile file, DateTime? from, DateTime? to)
@@ -35,7 +37,10 @@ namespace FrontEnd.Services
                         CourseMoment courseMoment = ValidateBlock(reader);
                         lineNumber += 5;
 
-                        if (MomentInRange(courseMoment, from, to) == true)
+                        DateTime startDate = (DateTime) courseMoment.StartDate;
+                        int duration = (int) courseMoment.Course.DurationInDays;
+
+                        if (_scheduler.CanScheduleEvent(startDate, duration, from, to))
                         {
                             courseMoments.Add(courseMoment);
                         }
@@ -49,14 +54,6 @@ namespace FrontEnd.Services
             return courseMoments;
         }
 
-        private bool MomentInRange(CourseMoment courseMoment, DateTime? from, DateTime? to)
-        {
-            DateTime startDate = (DateTime) courseMoment.StartDate;
-            int days = (int) courseMoment.Course.DurationInDays;
-
-            return _validator.ValidateDateInRange(startDate, startDate.AddDays(days), from, to);
-        }
-
         private CourseMoment ValidateBlock(StreamReader reader)
         {
             string title = _validator.ValidateTitle(reader.ReadLine());
@@ -65,7 +62,7 @@ namespace FrontEnd.Services
             DateTime startDate = _validator.ValidateStartDate(reader.ReadLine());
             _validator.ValidateEmptyLine(reader.ReadLine());
 
-            return _factory.MakeCourseMoment(title, code, days, startDate);
+            return _factory.Manufacture(title, code, days, startDate);
         }
     }
 }

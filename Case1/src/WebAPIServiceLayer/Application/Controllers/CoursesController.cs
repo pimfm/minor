@@ -14,17 +14,10 @@ namespace WebAPIServiceLayer.Application.Controllers
     public class CoursesController
     {
         private ICourseRepository _repository;
-        private DateTimeFormatInfo _info;
-        private Calendar _calendar;
 
         public CoursesController(ICourseRepository repository)
         {
             _repository = repository;
-
-            _info = new DateTimeFormatInfo();
-            _info.FirstDayOfWeek = DayOfWeek.Monday;
-
-            _calendar = _info.Calendar;
         }
 
         [HttpGet]

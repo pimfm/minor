@@ -21,18 +21,12 @@ namespace Frontend.Agents.Models
         /// <summary>
         /// Initializes a new instance of the Course class.
         /// </summary>
-        public Course(int? id = default(int?), string title = default(string), string code = default(string), int? durationInDays = default(int?))
+        public Course(string title = default(string), string code = default(string), int? durationInDays = default(int?))
         {
-            Id = id;
             Title = title;
             Code = code;
             DurationInDays = durationInDays;
         }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public int? Id { get; set; }
 
         /// <summary>
         /// </summary>

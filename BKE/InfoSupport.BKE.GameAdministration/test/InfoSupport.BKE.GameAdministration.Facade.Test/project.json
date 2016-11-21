@@ -1,0 +1,19 @@
+﻿{
+  "version": "1.0.0-*",
+  "testRunner": "mstest",
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    },
+    "dotnet-test-mstest": "1.1.1-preview",
+    "MSTest.TestFramework": "1.0.5-preview",
+    "InfoSupport.BKE.GameAdministration.Facade": "1.0.0-*"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  }
+}
