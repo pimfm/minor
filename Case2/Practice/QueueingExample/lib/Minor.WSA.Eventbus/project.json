@@ -1,6 +1,6 @@
 ﻿{
-  "id":  "Minor.WSA.Eventbus.0.1.0",
-  "name": "Minor.WSA.Eventbus",
+  "id":  "Minor.WSA.WSAEventbus.0.1.0",
+  "name": "Minor.WSA.WSAEventbus",
   "version": "0.1.0",
   "description": "An eventbus implementation using RawRabbit on top of RabbitMQ",
   "title": "WSA Eventbus",

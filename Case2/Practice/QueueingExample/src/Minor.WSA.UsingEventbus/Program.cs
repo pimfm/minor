@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+using Minor.WSA.Common.Contracts;
 
 namespace Minor.WSA.UsingEventbus
 {
@@ -9,6 +7,7 @@ namespace Minor.WSA.UsingEventbus
     {
         public static void Main(string[] args)
         {
+            IEventbus eventBus = new Eventbus();
         }
     }
 }

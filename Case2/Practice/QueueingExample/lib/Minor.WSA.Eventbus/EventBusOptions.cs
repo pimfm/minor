@@ -10,6 +10,8 @@ namespace Minor.WSA.Eventbus
     /// </summary>
     public class EventBusOptions : RawRabbitConfiguration
     {
+        public readonly string ExchangeName;
+
         /// <summary>
         /// A default implementation of the bus options
         /// it contains the standard values to
@@ -22,6 +24,7 @@ namespace Minor.WSA.Eventbus
             Port = 5672;
             Hostnames = new List<string>(){ "localhost" };
             VirtualHost = "/";
+            ExchangeName = "Minor.WSA.Eventbus";
         }
 
         /// <summary>
@@ -39,7 +42,8 @@ namespace Minor.WSA.Eventbus
             string password = "guest",
             int port = 5672,
             string hostName = "localhost",
-            string virtualHost = "/"
+            string virtualHost = "/",
+            string exchangeName = "Minor.WSA.Eventbus"
         )
         {
             Username = username;
@@ -47,6 +51,7 @@ namespace Minor.WSA.Eventbus
             Port = port;
             VirtualHost = virtualHost;
             Hostnames = new List<string>() { hostName };
+            ExchangeName = exchangeName;
         }
     }
 }

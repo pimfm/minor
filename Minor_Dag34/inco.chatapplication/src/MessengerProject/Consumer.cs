@@ -11,8 +11,8 @@ public class Consumer
     {
         _consumer = new EventingBasicConsumer(channel);
         channel.BasicConsume(queue: queueName,
-                             noAck: true,
-                             consumer: _consumer);
+                                noAck: true,
+                                consumer: _consumer);
     }
 
     public void Consume(EventHandler<BasicDeliverEventArgs> receiveMessage)

@@ -18,8 +18,8 @@ namespace MessengerProject
                 Producer producer = new Producer(channel, ExchangeName.Messages, Encoding.UTF8);
 
                 consumer.Consume(WriteToConsole);
-                
-                while (true)
+
+                for (int i = 0; i < 3; i++)
                 {
                     producer.Produce(Console.ReadLine());
                 }
