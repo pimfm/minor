@@ -1,0 +1,29 @@
+﻿{
+  "id": "Minor.WSA.Common.0.1.0",
+  "name": "Minor.WSA.Common",
+  "version": "0.1.0",
+  "description": "Commonly used classes and contracts",
+  "title": "WSA Common",
+
+  "packOptions": {
+    "summary": "Commonly used classes and contracts",
+    "tags": [ "WSA", "Common", "Web Scale Architecture", "Contracts" ],
+    "owners": [ "Pim van Gurp" ]
+  },
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack -o C:\\_localNugetFeed --no-build --configuration %compile:Configuration%"
+    ]
+  }
+}
