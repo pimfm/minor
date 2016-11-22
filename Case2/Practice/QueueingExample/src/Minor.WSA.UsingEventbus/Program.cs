@@ -1,5 +1,7 @@
-﻿
-using Minor.WSA.Common.Contracts;
+﻿using Minor.WSA.Common.Contracts;
+using Minor.WSA.UsingEventbus.Events;
+using Minor.WSA.UsingEventbus.Events.Handlers;
+using Minor.WSA.WSAEventbus;
 
 namespace Minor.WSA.UsingEventbus
 {
@@ -8,6 +10,8 @@ namespace Minor.WSA.UsingEventbus
         public static void Main(string[] args)
         {
             IEventbus eventBus = new Eventbus();
+            eventBus.Subscribe(new RoomCreatedHandler());
+            eventBus.PublishEvent(new RoomCreatedEvent());
         }
     }
 }

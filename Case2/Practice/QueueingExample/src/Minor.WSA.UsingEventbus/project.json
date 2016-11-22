@@ -9,7 +9,7 @@
       "type": "platform",
       "version": "1.0.1"
     },
-    "Minor.WSA.Eventbus": "0.1.0",
+    "Minor.WSA.WSAEventbus": "0.1.0"
   },
 
   "frameworks": {

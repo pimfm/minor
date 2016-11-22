@@ -1,14 +1,14 @@
 ﻿using RawRabbit.Configuration;
 using System.Collections.Generic;
 
-namespace Minor.WSA.Eventbus
+namespace Minor.WSA.WSAEventbus
 {
     /// <summary>
     /// A value object containing all configuration shared by 
     /// event publishers and subscribers. It allows for 
     /// easy injection of correct configuration.
     /// </summary>
-    public class EventBusOptions : RawRabbitConfiguration
+    public class EventbusOptions : RawRabbitConfiguration
     {
         public readonly string ExchangeName;
 
@@ -17,12 +17,12 @@ namespace Minor.WSA.Eventbus
         /// it contains the standard values to
         /// allow using the queue without manual configuration
         /// </summary>
-        public EventBusOptions()
+        public EventbusOptions()
         {
             Username = "guest";
             Password = "guest";
             Port = 5672;
-            Hostnames = new List<string>(){ "localhost" };
+            Hostnames = new List<string>() { "localhost" };
             VirtualHost = "/";
             ExchangeName = "Minor.WSA.Eventbus";
         }
@@ -37,7 +37,7 @@ namespace Minor.WSA.Eventbus
         /// <param name="port"></param>
         /// <param name="hostName"></param>
         /// <param name="virtualHost">namespace for objects like Exchanges, Queues and Bindings</param>
-        public EventBusOptions(
+        public EventbusOptions(
             string username = "guest",
             string password = "guest",
             int port = 5672,

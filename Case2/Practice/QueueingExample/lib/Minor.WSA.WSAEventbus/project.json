@@ -1,4 +1,4 @@
-﻿{
+{
   "id":  "Minor.WSA.WSAEventbus.0.1.0",
   "name": "Minor.WSA.WSAEventbus",
   "version": "0.1.0",
@@ -12,6 +12,7 @@
   },
 
   "dependencies": {
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Minor.WSA.Common": "0.1.0",
     "NETStandard.Library": "1.6.0",
     "RawRabbit": "1.10.0",

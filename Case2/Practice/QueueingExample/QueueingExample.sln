@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{D1845521-B7CA-4A5F-B189-9B712AFE6BBE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Minor.WSA.Eventbus", "lib\Minor.WSA.Eventbus\Minor.WSA.Eventbus.xproj", "{5CAF1FF9-FEEE-44D2-83B7-74227D86756B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Minor.WSA.WSAEventbus", "lib\Minor.WSA.WSAEventbus\Minor.WSA.WSAEventbus.xproj", "{5CAF1FF9-FEEE-44D2-83B7-74227D86756B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{43262ED7-2CD2-449C-B363-CBC96E293DE9}"
 EndProject
