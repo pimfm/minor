@@ -13,6 +13,15 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Minor.WSA.UsingEventbus", "
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Minor.WSA.Common", "lib\Minor.WSA.Common\Minor.WSA.Common.xproj", "{D3FDBCCF-0C3C-48A5-8856-2749EB86BB5B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F789BBCD-1E0D-4714-98F7-DE900C193242}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Minor.WSA.WSAEventbus.Test", "test\Minor.WSA.WSAEventbus.Test\Minor.WSA.WSAEventbus.Test.xproj", "{93985B75-7002-4E13-A48D-29768C5470D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D220A075-6731-4CA8-A01F-31A96B56CE8E}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +40,10 @@ Global
 		{D3FDBCCF-0C3C-48A5-8856-2749EB86BB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3FDBCCF-0C3C-48A5-8856-2749EB86BB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3FDBCCF-0C3C-48A5-8856-2749EB86BB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93985B75-7002-4E13-A48D-29768C5470D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93985B75-7002-4E13-A48D-29768C5470D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93985B75-7002-4E13-A48D-29768C5470D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93985B75-7002-4E13-A48D-29768C5470D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,5 +52,6 @@ Global
 		{5CAF1FF9-FEEE-44D2-83B7-74227D86756B} = {D1845521-B7CA-4A5F-B189-9B712AFE6BBE}
 		{66772FA7-4B71-4D31-ADAD-B6A1D84F8451} = {43262ED7-2CD2-449C-B363-CBC96E293DE9}
 		{D3FDBCCF-0C3C-48A5-8856-2749EB86BB5B} = {D1845521-B7CA-4A5F-B189-9B712AFE6BBE}
+		{93985B75-7002-4E13-A48D-29768C5470D4} = {F789BBCD-1E0D-4714-98F7-DE900C193242}
 	EndGlobalSection
 EndGlobal

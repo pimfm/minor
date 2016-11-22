@@ -6,7 +6,7 @@ namespace Minor.WSA.UsingEventbus.Commands.Handlers
 {
     public class CreateRoomHandler : ICommandHandler<CreateRoomCommand>
     {
-        public Task Handle(CreateRoomCommand domainCommand)
+        public void Handle(CreateRoomCommand domainCommand)
         {
             throw new NotImplementedException();
         }

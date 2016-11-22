@@ -6,6 +6,7 @@ using RawRabbit.vNext.Disposable;
 using System.Threading.Tasks;
 using RawRabbit.Configuration.Subscribe;
 using RawRabbit.Configuration.Publish;
+using System.Threading;
 
 namespace Minor.WSA.WSAEventbus
 {
@@ -17,7 +18,7 @@ namespace Minor.WSA.WSAEventbus
     ///     related to the message queue.
     /// </summary>
     /// <example>
-    ///     EventbusOptions options = new EventbusOptions(Port = 1337);
+    ///     EventbusOptions options = new EventbusOptions(port : 1337);
     ///     IEventbus eventbus = new Eventbus(options);
     /// </example>
     public class Eventbus : IEventbus
@@ -49,10 +50,12 @@ namespace Minor.WSA.WSAEventbus
         /// </example>
         /// <typeparam name="TEvent"></typeparam>
         /// <param name="domainEvent"></param>
-        /// <returns></returns>
-        public async Task PublishEvent<TEvent>(TEvent domainEvent) where TEvent : DomainEvent
+        public void PublishEvent<TEvent>(TEvent domainEvent) where TEvent : DomainEvent
         {
-            await _busClient.PublishAsync(domainEvent, domainEvent.Guid, ProvidePublisherConfiguration<TEvent>());
+            Task.Factory.StartNew(() =>
+            {
+                _busClient.PublishAsync(domainEvent, domainEvent.Guid, ProvidePublisherConfiguration<TEvent>());
+            });
         }
 
         /// <summary>
@@ -65,10 +68,12 @@ namespace Minor.WSA.WSAEventbus
         /// </example>
         /// <typeparam name="TCommand"></typeparam>
         /// <param name="domainCommand"></param>
-        /// <returns></returns>
-        public async Task PublishCommand<TCommand>(TCommand domainCommand) where TCommand : DomainCommand
+        public void PublishCommand<TCommand>(TCommand domainCommand) where TCommand : DomainCommand
         {
-            await _busClient.PublishAsync(domainCommand, domainCommand.Guid, ProvidePublisherConfiguration<TCommand>());
+            Task.Factory.StartNew(() => 
+            {
+                _busClient.PublishAsync(domainCommand, domainCommand.Guid, ProvidePublisherConfiguration<TCommand>());
+            });
         }
 
         /// <summary>
@@ -81,9 +86,13 @@ namespace Minor.WSA.WSAEventbus
         /// </example>
         /// <typeparam name="TEvent"></typeparam>
         /// <param name="eventHandler"></param>
-        public void Subscribe<TEvent>(IEventHandler<TEvent> eventHandler) where TEvent : DomainEvent
+        public void Subscribe<TEvent>(IEventHandler<TEvent> eventHandler, string customRoutingKey = null) where TEvent : DomainEvent
         {
-            _busClient.SubscribeAsync<TEvent>(async (message, context) => await eventHandler.Handle(message), ProvideSubscriberConfiguration<TEvent>());
+            _busClient.SubscribeAsync<TEvent>((message, context) => 
+            {
+                return Task.Factory.StartNew(() => eventHandler.Handle(message));
+            }, 
+            ProvideSubscriberConfiguration<TEvent>(customRoutingKey));
         }
 
         /// <summary>
@@ -97,9 +106,13 @@ namespace Minor.WSA.WSAEventbus
         /// </example>
         /// <typeparam name="TCommand"></typeparam>
         /// <param name="commandHandler"></param>
-        public void Subscribe<TCommand>(ICommandHandler<TCommand> commandHandler) where TCommand : DomainCommand
+        public void Subscribe<TCommand>(ICommandHandler<TCommand> commandHandler, string customRoutingKey = null) where TCommand : DomainCommand
         {
-            _busClient.SubscribeAsync<TCommand>(async (message, context) => await commandHandler.Handle(message), ProvideSubscriberConfiguration<TCommand>());
+            _busClient.SubscribeAsync<TCommand>((message, context) => 
+            {
+                return Task.Factory.StartNew(() => commandHandler.Handle(message));
+            }, 
+            ProvideSubscriberConfiguration<TCommand>(customRoutingKey));
         }
 
         /// <summary>
@@ -116,12 +129,12 @@ namespace Minor.WSA.WSAEventbus
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private Action<IPublishConfigurationBuilder> ProvidePublisherConfiguration<T>()
+        private Action<IPublishConfigurationBuilder> ProvidePublisherConfiguration<T>(string routingKey = null)
         {
             return configurationBuilder =>
             {
                 configurationBuilder.WithExchange(exchange => exchange.WithName(_options.ExchangeName))
-                                    .WithRoutingKey(GenerateRoutingKey<T>());
+                                    .WithRoutingKey(routingKey ?? GenerateRoutingKey<T>());
             };
         }
 
@@ -131,12 +144,12 @@ namespace Minor.WSA.WSAEventbus
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private Action<ISubscriptionConfigurationBuilder> ProvideSubscriberConfiguration<T>()
+        private Action<ISubscriptionConfigurationBuilder> ProvideSubscriberConfiguration<T>(string routingKey = null)
         {
             return configurationBuilder =>
             {
                 configurationBuilder.WithExchange(exchange => exchange.WithName(_options.ExchangeName))
-                                    .WithRoutingKey(GenerateRoutingKey<T>());
+                                    .WithRoutingKey(routingKey ?? GenerateRoutingKey<T>());
             };
         }
 

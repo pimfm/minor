@@ -24,7 +24,7 @@ namespace Minor.WSA.WSAEventbus
             Port = 5672;
             Hostnames = new List<string>() { "localhost" };
             VirtualHost = "/";
-            ExchangeName = "Minor.WSA.Eventbus";
+            ExchangeName = "Minor.WSA.WSAEventbus";
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Minor.WSA.WSAEventbus
             int port = 5672,
             string hostName = "localhost",
             string virtualHost = "/",
-            string exchangeName = "Minor.WSA.Eventbus"
+            string exchangeName = "Minor.WSA.WSAEventbus"
         )
         {
             Username = username;

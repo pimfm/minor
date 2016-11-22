@@ -37,7 +37,6 @@ namespace AmazingMathAsynchronous
 
         private void AddSquareToTextBox(IAsyncResult result)
         {
-
             SlowMath math = (SlowMath) result.AsyncState;
 
             lock (lockObject) {

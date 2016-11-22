@@ -20,6 +20,6 @@ namespace Minor.WSA.Common.Contracts
         /// </summary>
         /// <param name="domainCommand"></param>
         /// <returns></returns>
-        Task Handle(TEvent domainEvent);
+        void Handle(TEvent domainEvent);
     }
 }

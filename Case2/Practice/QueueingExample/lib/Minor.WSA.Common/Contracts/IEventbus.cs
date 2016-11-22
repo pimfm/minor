@@ -17,7 +17,7 @@ namespace Minor.WSA.Common.Contracts
         /// <typeparam name="TEvent"></typeparam>
         /// <param name="domainEvent"></param>
         /// <returns></returns>
-        Task PublishEvent<TEvent>(TEvent domainEvent) where TEvent : DomainEvent;
+        void PublishEvent<TEvent>(TEvent domainEvent) where TEvent : DomainEvent;
 
         /// <summary>
         ///     Send a command to the exchange 
@@ -30,7 +30,7 @@ namespace Minor.WSA.Common.Contracts
         /// <typeparam name="TCommand"></typeparam>
         /// <param name="domainCommand"></param>
         /// <returns></returns>
-        Task PublishCommand<TCommand>(TCommand domainCommand) where TCommand : DomainCommand;
+        void PublishCommand<TCommand>(TCommand domainCommand) where TCommand : DomainCommand;
 
         /// <summary>
         ///     Listen to a certain event by coupling an event
@@ -42,7 +42,8 @@ namespace Minor.WSA.Common.Contracts
         /// </example>
         /// <typeparam name="TEvent"></typeparam>
         /// <param name="eventHandler"></param>
-        void Subscribe<TEvent>(IEventHandler<TEvent> eventHandler) where TEvent : DomainEvent;
+        /// <param name="customRoutingKey">Optional routingkey for subscribing to multiple events. Recommended to leave default (namespace + event name)</param>
+        void Subscribe<TEvent>(IEventHandler<TEvent> eventHandler, string customRoutingKey = null) where TEvent : DomainEvent;
 
         /// <summary>
         ///     Listen to a command that requires you to 
@@ -55,6 +56,7 @@ namespace Minor.WSA.Common.Contracts
         /// </example>
         /// <typeparam name="TCommand"></typeparam>
         /// <param name="commandHandler"></param>
-        void Subscribe<TCommand>(ICommandHandler<TCommand> commandHandler) where TCommand : DomainCommand;
+        /// <param name="customRoutingKey">Optional routingkey for subscribing to multiple commands. Recommended to leave default (namespace + command name)</param>
+        void Subscribe<TCommand>(ICommandHandler<TCommand> commandHandler, string customRoutingKey = null) where TCommand : DomainCommand;
     }
 }
