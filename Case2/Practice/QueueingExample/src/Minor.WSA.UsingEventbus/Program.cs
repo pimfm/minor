@@ -9,11 +9,7 @@ namespace Minor.WSA.UsingEventbus
     {
         public static void Main(string[] args)
         {
-            using (IEventbus eventBus = new Eventbus())
-            {
-                eventBus.Subscribe(new RoomCreatedHandler());
-                eventBus.PublishEvent(new RoomCreatedEvent());
-            }
+            
         }
     }
 }
