@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+
+  mirovi-onderhoud-db:
+    image: mysql
+    container_name: mirovi-onderhoud-db
+    environment:
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: mirovi-onderhoud-db
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: 12341234
+    networks:
+      - mirovi-onderhoudbeheer-network
+    volumes:
+      - /c/volumes/mirovi-onderhoud-db:/var/lib/mysql
+
+  mirovi.onderhoudbeheerservice.webapi:
+    image: mirovi/mirovi.onderhoudbeheerservice.webapi${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "85:80"
+    depends_on:
+      - mirovi-onderhoud-db
+    environment:
+      'ConnectionStrings:MySQL': 'server=mirovi-onderhoud-db;userid=admin;password=admin;database=mirovi-onderhoud-db;'
+      'ConnectionStrings:RabbitMQ': 'mirovi-rabbitmq'
+    networks:
+      mirovi-eventbus:
+        aliases:
+          - mirovi-onderhoud-service
+      mirovi-onderhoudbeheer-network:
+
+  mirovi-onderhoud-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: mirovi-onderhoud-phpmyadmin
+    ports:
+      - 8085:80
+    environment: 
+      PMA_HOST: mirovi-onderhoud-db
+    networks:
+      - mirovi-onderhoudbeheer-network
+
+networks:
+  mirovi-onderhoudbeheer-network:
+  mirovi-eventbus:
+    external:
+      name: mirovi-eventbus

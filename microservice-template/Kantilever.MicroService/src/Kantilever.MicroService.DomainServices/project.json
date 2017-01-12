@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "Kantilever.MicroService.Domain": "1.0.0-*",
+    "EasyNetQ-dotnet-core": "2.0.2-radicalgeek-netc0001"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+﻿@model CatalogusViews.Controllers.ArtikelBekijkenViewModel
+
+<div role="main" class="main shop">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr class="tall">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="thumbnail">
+                    <img alt="" class="img-responsive img-rounded" src="~/images/products/@Model.HoofdArtikel.FotoUrl">
+                </div>      
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="summary entry-summary">
+
+                    <h1 class="mb-none"><strong>@Model.HoofdArtikel.Naam</strong></h1>
+
+                    <p class="price">
+                        <span class="amount">€@Model.HoofdArtikel.Prijs</span>
+                    </p>
+
+                    <p class="taller">Bacon ipsum dolor amet filet mignon ball tip pastrami andouille, turducken shoulder short ribs bacon salami landjaeger spare ribs strip steak. Filet mignon flank venison t-bone tongue rump. Pig strip steak picanha, drumstick sausage filet mignon doner. Landjaeger ribeye filet mignon, drumstick kielbasa short ribs chicken alcatra.</p>
+                    <p>Capicola pastrami ham hock, shoulder shank tail turducken meatball. Corned beef tenderloin rump sirloin flank short loin venison. Drumstick flank hamburger, pork kielbasa rump andouille prosciutto doner picanha ball tip tenderloin ham hock. Venison ham biltong doner tongue strip steak landjaeger.</p>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr class="tall">
+
+                <h4 class="mb-md text-uppercase">Gerelateerde <strong>Artikellen</strong></h4>
+
+                <div class="row">
+
+                    <ul class="products product-thumb-info-list">
+                        @foreach (var artikel in Model.GerelateerdeArtikelen)
+                        {
+                            <li class="col-sm-3 col-xs-12 product">
+                                <span class="product-thumb-info">
+                                    <a href="shop-product-sidebar.html">
+                                        <span class="product-thumb-info-image">
+                                            <span class="product-thumb-info-act">
+                                                <span class="product-thumb-info-act-left"><em>Bekijk</em></span>
+                                                <span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Artikel</em></span>
+                                            </span>
+                                            <img alt="" class="img-responsive" src="~/images/products/@artikel.FotoUrl">
+                                        </span>
+                                    </a>
+                                    <span class="product-thumb-info-content">
+                                        <a href="shop-product-sidebar.html">
+                                            <h4>@artikel.Naam</h4>
+                                            <span class="price">
+                                                <span class="amount">€@artikel.Prijs</span>
+                                            </span>
+                                        </a>
+                                    </span>
+                                </span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

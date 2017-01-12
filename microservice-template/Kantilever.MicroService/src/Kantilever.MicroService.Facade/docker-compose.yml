@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  kantilever.microservice.facade:
+    image: user/kantilever.microservice.facade${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+networks:
+  kantilever_eventbus_network:
+    external:
+      name: kantilever_eventbus_network

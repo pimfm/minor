@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  kantilever.microservice.facade:
+    image: minorbagagedragers/kantilever-microservice-facade
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      'ConnectionStrings:MySQL': 'server=kantilever-webshop-db;userid=admin;password=admin;database=kantilever-webshop-db;'
+      'ConnectionStrings:RabbitMQ': 'host=kantilever-eventbus;username=Kantilever;password=Kant1lever'
+    networks:
+      - kantilever_eventbus_network
+      - kantilever-webshopbeheer-network
+
+  kantilever-microservice-db:
+    image: mysql:8.0.0
+    container_name: kantilever-microservice-db
+    environment:
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: kantilever-microservice-db
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: 12341234
+    networks:
+      - kantilever-webshopbeheer-network
+    volumes:
+      - /c/volumes/kantilever-webshop-db:/var/lib/mysql
+
+  kantilever-microservice-phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.6
+    container_name: kantilever-microservice-phpmyadmin
+    ports:
+      - 11003:80
+    environment: 
+      PMA_HOST: kantilever-microservice-db
+    networks:
+      - kantilever-webshopbeheer-network
+      - kantilever_eventbus_network
+
+networks:
+  kantilever-webshopbeheer-network:
+  kantilever_eventbus_network:
+    external:
+      name: kantilever_eventbus_network
